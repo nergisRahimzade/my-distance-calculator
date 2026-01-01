@@ -1,0 +1,29 @@
+{
+  "cities": [
+    { "name": "Paris" },
+    { "name": "London" },
+    { "name": "Rome" },
+    { "name": "Barcelona" },
+    { "name": "Amsterdam" },
+    { "name": "Istanbul" },
+    { "name": "Prague" },
+    { "name": "Vienna" },
+    { "name": "Milan" },
+    { "name": "Venice" },
+    { "name": "Berlin" },
+    { "name": "Madrid" },
+    { "name": "Florence" },
+    { "name": "Munich" },
+    { "name": "Athens" },
+    { "name": "Budapest" },
+    { "name": "Lisbon" },
+    { "name": "Dublin" },
+    { "name": "Brussels" },
+    { "name": "Copenhagen" },
+    { "name": "Stockholm" },
+    { "name": "Edinburgh" },
+    { "name": "Nice" },
+    { "name": "Zurich" },
+    { "name": "Geneva" }
+  ]
+}
