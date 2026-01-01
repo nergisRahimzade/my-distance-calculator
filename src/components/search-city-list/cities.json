@@ -1,29 +1,548 @@
 {
   "cities": [
-    { "name": "Paris" },
-    { "name": "London" },
-    { "name": "Rome" },
-    { "name": "Barcelona" },
-    { "name": "Amsterdam" },
-    { "name": "Istanbul" },
-    { "name": "Prague" },
-    { "name": "Vienna" },
-    { "name": "Milan" },
-    { "name": "Venice" },
-    { "name": "Berlin" },
-    { "name": "Madrid" },
-    { "name": "Florence" },
-    { "name": "Munich" },
-    { "name": "Athens" },
-    { "name": "Budapest" },
-    { "name": "Lisbon" },
-    { "name": "Dublin" },
-    { "name": "Brussels" },
-    { "name": "Copenhagen" },
-    { "name": "Stockholm" },
-    { "name": "Edinburgh" },
-    { "name": "Nice" },
-    { "name": "Zurich" },
-    { "name": "Geneva" }
+    {
+      "cityName": "Istanbul",
+      "country": "Türkiye",
+      "attractions": [
+        "Hagia Sophia",
+        "Blue Mosque",
+        "Topkapi Palace",
+        "Grand Bazaar",
+        "Basilica Cistern",
+        "Galata Tower",
+        "Dolmabahçe Palace",
+        "Bosphorus Strait",
+        "Süleymaniye Mosque",
+        "Spice Bazaar"
+      ]
+    },
+    {
+      "cityName": "Paris",
+      "country": "France",
+      "attractions": [
+        "Eiffel Tower",
+        "Louvre Museum",
+        "Notre-Dame Cathedral",
+        "Arc de Triomphe",
+        "Sacré-Cœur",
+        "Versailles Palace",
+        "Champs-Élysées",
+        "Musée d'Orsay",
+        "Sainte-Chapelle",
+        "Luxembourg Gardens"
+      ]
+    },
+    {
+      "cityName": "London",
+      "country": "United Kingdom",
+      "attractions": [
+        "Big Ben",
+        "Tower of London",
+        "Buckingham Palace",
+        "British Museum",
+        "London Eye",
+        "Tower Bridge",
+        "Westminster Abbey",
+        "Trafalgar Square",
+        "St Paul's Cathedral",
+        "Hyde Park"
+      ]
+    },
+    {
+      "cityName": "Rome",
+      "country": "Italy",
+      "attractions": [
+        "Colosseum",
+        "Vatican Museums",
+        "Sistine Chapel",
+        "Trevi Fountain",
+        "Pantheon",
+        "Roman Forum",
+        "St. Peter's Basilica",
+        "Spanish Steps",
+        "Piazza Navona",
+        "Castel Sant'Angelo"
+      ]
+    },
+    {
+      "cityName": "Barcelona",
+      "country": "Spain",
+      "attractions": [
+        "Sagrada Familia",
+        "Park Güell",
+        "Casa Batlló",
+        "La Rambla",
+        "Gothic Quarter",
+        "Camp Nou",
+        "Casa Milà",
+        "Magic Fountain",
+        "Barcelona Cathedral",
+        "Montjuïc"
+      ]
+    },
+    {
+      "cityName": "Madrid",
+      "country": "Spain",
+      "attractions": [
+        "Prado Museum",
+        "Royal Palace of Madrid",
+        "Retiro Park",
+        "Plaza Mayor",
+        "Reina Sofía Museum",
+        "Puerta del Sol",
+        "Gran Vía",
+        "Temple of Debod",
+        "Thyssen-Bornemisza Museum",
+        "Santiago Bernabéu Stadium"
+      ]
+    },
+    {
+      "cityName": "Amsterdam",
+      "country": "Netherlands",
+      "attractions": [
+        "Rijksmuseum",
+        "Van Gogh Museum",
+        "Anne Frank House",
+        "Canal Ring",
+        "Vondelpark",
+        "Dam Square",
+        "Royal Palace Amsterdam",
+        "Jordaan District",
+        "Heineken Experience",
+        "Bloemenmarkt"
+      ]
+    },
+    {
+      "cityName": "Berlin",
+      "country": "Germany",
+      "attractions": [
+        "Brandenburg Gate",
+        "Berlin Wall Memorial",
+        "Reichstag Building",
+        "Museum Island",
+        "Pergamon Museum",
+        "Checkpoint Charlie",
+        "Memorial to the Murdered Jews",
+        "Berlin Cathedral",
+        "Charlottenburg Palace",
+        "East Side Gallery"
+      ]
+    },
+    {
+      "cityName": "Vienna",
+      "country": "Austria",
+      "attractions": [
+        "Schönbrunn Palace",
+        "St. Stephen's Cathedral",
+        "Hofburg Palace",
+        "Belvedere Palace",
+        "Vienna State Opera",
+        "Prater",
+        "Kunsthistorisches Museum",
+        "Ringstrasse",
+        "Naschmarkt",
+        "Karlskirche"
+      ]
+    },
+    {
+      "cityName": "Prague",
+      "country": "Czech Republic",
+      "attractions": [
+        "Prague Castle",
+        "Charles Bridge",
+        "Old Town Square",
+        "Astronomical Clock",
+        "St. Vitus Cathedral",
+        "Jewish Quarter",
+        "Wenceslas Square",
+        "Petřín Tower",
+        "Vyšehrad",
+        "Dancing House"
+      ]
+    },
+    {
+      "cityName": "New York City",
+      "country": "United States",
+      "attractions": [
+        "Statue of Liberty",
+        "Central Park",
+        "Times Square",
+        "Empire State Building",
+        "Brooklyn Bridge",
+        "Metropolitan Museum of Art",
+        "One World Trade Center",
+        "Rockefeller Center",
+        "Broadway",
+        "9/11 Memorial"
+      ]
+    },
+    {
+      "cityName": "Los Angeles",
+      "country": "United States",
+      "attractions": [
+        "Hollywood Sign",
+        "Universal Studios",
+        "Griffith Observatory",
+        "Getty Center",
+        "Santa Monica Pier",
+        "Venice Beach",
+        "Rodeo Drive",
+        "Hollywood Walk of Fame",
+        "Disneyland",
+        "The Grove"
+      ]
+    },
+    {
+      "cityName": "San Francisco",
+      "country": "United States",
+      "attractions": [
+        "Golden Gate Bridge",
+        "Alcatraz Island",
+        "Fisherman's Wharf",
+        "Cable Cars",
+        "Lombard Street",
+        "Golden Gate Park",
+        "Pier 39",
+        "Chinatown",
+        "Palace of Fine Arts",
+        "Twin Peaks"
+      ]
+    },
+    {
+      "cityName": "Chicago",
+      "country": "United States",
+      "attractions": [
+        "Millennium Park",
+        "Navy Pier",
+        "Willis Tower",
+        "Art Institute of Chicago",
+        "Cloud Gate",
+        "Magnificent Mile",
+        "Museum of Science and Industry",
+        "Shedd Aquarium",
+        "Grant Park",
+        "360 Chicago"
+      ]
+    },
+    {
+      "cityName": "Miami",
+      "country": "United States",
+      "attractions": [
+        "South Beach",
+        "Art Deco District",
+        "Vizcaya Museum",
+        "Wynwood Walls",
+        "Everglades National Park",
+        "Bayside Marketplace",
+        "Little Havana",
+        "Miami Seaquarium",
+        "Jungle Island",
+        "Pérez Art Museum"
+      ]
+    },
+    {
+      "cityName": "Tokyo",
+      "country": "Japan",
+      "attractions": [
+        "Senso-ji Temple",
+        "Tokyo Skytree",
+        "Meiji Shrine",
+        "Shibuya Crossing",
+        "Tokyo Tower",
+        "Imperial Palace",
+        "Tsukiji Outer Market",
+        "Akihabara",
+        "Ueno Park",
+        "Harajuku"
+      ]
+    },
+    {
+      "cityName": "Osaka",
+      "country": "Japan",
+      "attractions": [
+        "Osaka Castle",
+        "Dotonbori",
+        "Universal Studios Japan",
+        "Shitennō-ji Temple",
+        "Osaka Aquarium",
+        "Sumiyoshi Taisha",
+        "Umeda Sky Building",
+        "Kuromon Market",
+        "Tsūtenkaku Tower",
+        "Namba"
+      ]
+    },
+    {
+      "cityName": "Seoul",
+      "country": "South Korea",
+      "attractions": [
+        "Gyeongbokgung Palace",
+        "N Seoul Tower",
+        "Bukchon Hanok Village",
+        "Myeongdong",
+        "Changdeokgung Palace",
+        "Dongdaemun Design Plaza",
+        "Insadong",
+        "Lotte World",
+        "Jogyesa Temple",
+        "Han River"
+      ]
+    },
+    {
+      "cityName": "Beijing",
+      "country": "China",
+      "attractions": [
+        "Great Wall of China",
+        "Forbidden City",
+        "Temple of Heaven",
+        "Summer Palace",
+        "Tiananmen Square",
+        "Beihai Park",
+        "Lama Temple",
+        "798 Art District",
+        "Jingshan Park",
+        "Ming Tombs"
+      ]
+    },
+    {
+      "cityName": "Shanghai",
+      "country": "China",
+      "attractions": [
+        "The Bund",
+        "Yu Garden",
+        "Oriental Pearl Tower",
+        "Shanghai Tower",
+        "Nanjing Road",
+        "Jade Buddha Temple",
+        "French Concession",
+        "People's Square",
+        "Zhujiajiao Water Town",
+        "Shanghai Museum"
+      ]
+    },
+    {
+      "cityName": "Hong Kong",
+      "country": "China",
+      "attractions": [
+        "Victoria Peak",
+        "Hong Kong Disneyland",
+        "Tian Tan Buddha",
+        "Victoria Harbour",
+        "Temple Street Night Market",
+        "Star Ferry",
+        "Wong Tai Sin Temple",
+        "Tsim Sha Tsui Promenade",
+        "Ocean Park",
+        "Lantau Island"
+      ]
+    },
+    {
+      "cityName": "Bangkok",
+      "country": "Thailand",
+      "attractions": [
+        "Grand Palace",
+        "Wat Arun",
+        "Wat Pho",
+        "Chatuchak Market",
+        "Khao San Road",
+        "Jim Thompson House",
+        "Lumpini Park",
+        "Wat Saket",
+        "Asiatique",
+        "Chao Phraya River"
+      ]
+    },
+    {
+      "cityName": "Singapore",
+      "country": "Singapore",
+      "attractions": [
+        "Marina Bay Sands",
+        "Gardens by the Bay",
+        "Sentosa Island",
+        "Universal Studios Singapore",
+        "Merlion Park",
+        "Singapore Zoo",
+        "Chinatown",
+        "Little India",
+        "Orchard Road",
+        "Singapore Flyer"
+      ]
+    },
+    {
+      "cityName": "Dubai",
+      "country": "United Arab Emirates",
+      "attractions": [
+        "Burj Khalifa",
+        "Dubai Mall",
+        "Palm Jumeirah",
+        "Dubai Marina",
+        "Burj Al Arab",
+        "Dubai Fountain",
+        "Gold Souk",
+        "Dubai Frame",
+        "Jumeirah Beach",
+        "Dubai Creek"
+      ]
+    },
+    {
+      "cityName": "Abu Dhabi",
+      "country": "United Arab Emirates",
+      "attractions": [
+        "Sheikh Zayed Grand Mosque",
+        "Louvre Abu Dhabi",
+        "Emirates Palace",
+        "Yas Island",
+        "Ferrari World",
+        "Corniche Beach",
+        "Qasr Al Watan",
+        "Warner Bros. World",
+        "Mangrove National Park",
+        "Heritage Village"
+      ]
+    },
+    {
+      "cityName": "Doha",
+      "country": "Qatar",
+      "attractions": [
+        "Museum of Islamic Art",
+        "Souq Waqif",
+        "The Pearl-Qatar",
+        "Katara Cultural Village",
+        "Corniche Doha",
+        "National Museum of Qatar",
+        "Al Zubarah Fort",
+        "Aspire Park",
+        "Villaggio Mall",
+        "Doha Fort"
+      ]
+    },
+    {
+      "cityName": "Sydney",
+      "country": "Australia",
+      "attractions": [
+        "Sydney Opera House",
+        "Sydney Harbour Bridge",
+        "Bondi Beach",
+        "Darling Harbour",
+        "The Rocks",
+        "Royal Botanic Garden",
+        "Taronga Zoo",
+        "Manly Beach",
+        "SEA LIFE Sydney Aquarium",
+        "Luna Park"
+      ]
+    },
+    {
+      "cityName": "Melbourne",
+      "country": "Australia",
+      "attractions": [
+        "Federation Square",
+        "Royal Botanic Gardens",
+        "Queen Victoria Market",
+        "Melbourne Cricket Ground",
+        "St Kilda Beach",
+        "National Gallery of Victoria",
+        "Eureka Tower",
+        "Flinders Street Station",
+        "Brighton Beach",
+        "Great Ocean Road"
+      ]
+    },
+    {
+      "cityName": "Rio de Janeiro",
+      "country": "Brazil",
+      "attractions": [
+        "Christ the Redeemer",
+        "Sugarloaf Mountain",
+        "Copacabana Beach",
+        "Ipanema Beach",
+        "Maracanã Stadium",
+        "Tijuca National Park",
+        "Lapa Arches",
+        "Santa Teresa",
+        "Botanical Garden",
+        "Escadaria Selarón"
+      ]
+    },
+    {
+      "cityName": "São Paulo",
+      "country": "Brazil",
+      "attractions": [
+        "Ibirapuera Park",
+        "São Paulo Museum of Art",
+        "Paulista Avenue",
+        "Municipal Market",
+        "São Paulo Cathedral",
+        "Football Museum",
+        "Pinacoteca",
+        "Jardins District",
+        "Batman Alley",
+        "Latin America Memorial"
+      ]
+    },
+    {
+      "cityName": "Buenos Aires",
+      "country": "Argentina",
+      "attractions": [
+        "Recoleta Cemetery",
+        "Casa Rosada",
+        "Plaza de Mayo",
+        "La Boca",
+        "Teatro Colón",
+        "Palermo",
+        "San Telmo Market",
+        "Obelisco",
+        "Puerto Madero",
+        "Ateneo Grand Splendid"
+      ]
+    },
+    {
+      "cityName": "Cairo",
+      "country": "Egypt",
+      "attractions": [
+        "Pyramids of Giza",
+        "Great Sphinx",
+        "Egyptian Museum",
+        "Khan el-Khalili",
+        "Citadel of Cairo",
+        "Mosque of Muhammad Ali",
+        "Al-Azhar Mosque",
+        "Coptic Cairo",
+        "Cairo Tower",
+        "Nile River Cruise"
+      ]
+    },
+    {
+      "cityName": "Cape Town",
+      "country": "South Africa",
+      "attractions": [
+        "Table Mountain",
+        "Robben Island",
+        "V&A Waterfront",
+        "Cape Point",
+        "Kirstenbosch Gardens",
+        "Boulders Beach",
+        "Bo-Kaap",
+        "Chapman's Peak Drive",
+        "Castle of Good Hope",
+        "Signal Hill"
+      ]
+    },
+    {
+      "cityName": "Marrakesh",
+      "country": "Morocco",
+      "attractions": [
+        "Jemaa el-Fnaa",
+        "Majorelle Garden",
+        "Bahia Palace",
+        "Koutoubia Mosque",
+        "Saadian Tombs",
+        "Marrakesh Souk",
+        "Ben Youssef Madrasa",
+        "El Badi Palace",
+        "Menara Gardens",
+        "Marrakesh Museum"
+      ]
+    }
   ]
 }
