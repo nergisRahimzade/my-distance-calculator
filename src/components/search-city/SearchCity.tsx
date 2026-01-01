@@ -42,7 +42,7 @@ export function SearchCity() {
         >
           {cities.map((city) => {
             return (
-              <MenuItem key={city.name} value={city.name}>{city.name}</MenuItem>
+              <MenuItem key={city.cityName} value={city.cityName}>{city.cityName}</MenuItem>
             );
           })}
         </Select>
@@ -59,7 +59,7 @@ export function SearchCity() {
           onChange={handleDestinationChange}
         >
           {cities.map((city) => (
-            <MenuItem key={city.name} value={city.name}>{city.name}</MenuItem>
+            <MenuItem key={city.cityName} value={city.cityName}>{city.cityName}</MenuItem>
           ))}
         </Select>
       </FormControl>
