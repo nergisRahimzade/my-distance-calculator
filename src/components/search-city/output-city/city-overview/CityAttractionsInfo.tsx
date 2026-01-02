@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import './CityAttractionInfo.css';
 import citiesData from '../../../search-city-list/cities.json';
+import './CityAttractionsInfo.css';
 
 type CityAttractionInfoProps = {
   city: string
