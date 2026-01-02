@@ -1,0 +1,10 @@
+.city-weather-info {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.weather-icon {
+  height: 40px;
+  width: 40px;
+}

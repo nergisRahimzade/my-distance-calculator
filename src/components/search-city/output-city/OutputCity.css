@@ -1,4 +1,50 @@
 .cities-container {
   color: black;
   background-color: yellow;
+  margin-top: 20px;
+}
+
+.display-container {
+  background-color: gray;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.distance-duration-display-container {
+  background-color: lightpink;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.distance-display-item {
+  background-color: bisque;
+  padding: 40px 60px;
+  border-radius: 20px;
+}
+
+.duration-display-item {
+  background-color: bisque;
+  padding: 40px 60px;
+  border-radius: 20px;
+}
+
+.weather-display-container {
+  background-color: lightblue;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.weather-item {
+  background-color: bisque;
+  padding: 30px 60px;
+  border-radius: 20px;
 }
