@@ -1,8 +1,16 @@
 import { FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
-import { useState } from 'react';
+import { useState, type SyntheticEvent } from 'react';
 import citiesData from '../search-city-list/cities.json';
 import './SearchCity.css';
 import { OutputCity } from './output-city/OutputCity';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+import TabPanel from '@mui/lab/TabPanel';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import { CityOverviewInfo } from './output-city/city-overview/CityOverviewInfo';
+import { CityAttractionInfo } from './output-city/city-overview/CityAttractionsInfo';
 
 export function SearchCity() {
   const [origin, setOrigin] = useState('');
@@ -10,6 +18,8 @@ export function SearchCity() {
   const [mode, setMode] = useState('');
   const [showOutput, setShowOutput] = useState(false);
   const cities = citiesData.cities;
+  const [tabValue, setTabValue] = useState('overview');
+  const [showCityInfo, setShowCityInfo] = useState(false);
 
   const handleOriginChange = (event: any) => {
     setOrigin(event?.target.value)
@@ -25,14 +35,20 @@ export function SearchCity() {
 
   const handleClick = () => {
     setShowOutput(true);
+    setShowCityInfo(true);
     //const html = use(<OutputCity origin={origin} destination={destination} />);
   };
 
   const handleReset = () => {
     setShowOutput(false);
+    setShowCityInfo(false);
     setOrigin('');
     setDestination('');
     setMode('');
+  };
+
+  const handleTabChange = (event: SyntheticEvent, newValue: string) => {
+    setTabValue(newValue);
   };
 
   return (
@@ -109,9 +125,26 @@ export function SearchCity() {
         )}
       </div>
 
-      <div>
-
-      </div>
+      {showCityInfo && (
+        <div className='city-info-container'>
+          <Box>
+            <TabContext value={tabValue}>
+              <Box>
+                <TabList onChange={handleTabChange}>
+                  <Tab label='Overview' value='overview' />
+                  <Tab label='Attractions' value='attractions' />
+                </TabList>
+              </Box>
+              <TabPanel value='overview'>
+                <CityOverviewInfo city={destination} />
+              </TabPanel>
+              <TabPanel value='attractions'> 
+                <CityAttractionInfo city={destination} />
+              </TabPanel>
+            </TabContext>
+          </Box>
+        </div>
+      )}
     </div>
   );
 }

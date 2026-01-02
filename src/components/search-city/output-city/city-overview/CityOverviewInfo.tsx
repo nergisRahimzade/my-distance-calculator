@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './OverviewCityInfo.css';
+import './CityOverviewInfo.css';
 
 type OverviewCityInfoProps = {
   city: string
@@ -18,7 +18,7 @@ const getCityInfo = async (cityName: string) => {
   return `${data.extract}`;
 };
 
-export function OverviewCityInfo({ city }: OverviewCityInfoProps) {
+export function CityOverviewInfo({ city }: OverviewCityInfoProps) {
   const [info, setInfo] = useState<string | null>(null);
 
   useEffect(() => {
