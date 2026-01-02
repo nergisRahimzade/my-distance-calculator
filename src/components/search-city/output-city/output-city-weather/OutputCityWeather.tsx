@@ -1,4 +1,11 @@
 import { useEffect, useState } from "react";
+import '../../../../assets/weather-icons/clear-sky.png';
+import '../../../../assets/weather-icons/few-clouds.png';
+import '../../../../assets/weather-icons/mist.png';
+import '../../../../assets/weather-icons/rain.png';
+import '../../../../assets/weather-icons/scattered-clouds.png';
+import '../../../../assets/weather-icons/snow.png';
+import '../../../../assets/weather-icons/thunderstorm.png';
 import './OutputCityWeather.css';
 
 type OutputCityWeatherProps = {
@@ -32,18 +39,18 @@ function matchWeatherIcon(weatherId: string) {
 }
 
 async function getCityWeather(cityName: string) {
-    const apiKey = import.meta.env.VITE_OPENWEATHER_KEY;
+  const apiKey = import.meta.env.VITE_OPENWEATHERMAP_KEY;
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
-    const response = await fetch(url);
-    const data = await response.json();
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
+  const response = await fetch(url);
+  const data = await response.json();
 
-    return {
-      temp: data.main.temp,
-      feltTemp: data.main.feels_like,
-      icon: data.weather[0].icon
-    };
-  }
+  return {
+    temp: data.main.temp,
+    feltTemp: data.main.feels_like,
+    icon: data.weather[0].icon
+  };
+}
 
 export function OutputCityWeather({ city }: OutputCityWeatherProps) {
   const [result, setResult] = useState<WeatherResult | null>(null);
@@ -53,6 +60,7 @@ export function OutputCityWeather({ city }: OutputCityWeatherProps) {
     getCityWeather(city)
       .then((res) => {
         setResult(res);
+        console.log('weather res: ', res);
         const icon = matchWeatherIcon(res.icon);
         setWeatherIcon(icon);
       })
@@ -65,10 +73,13 @@ export function OutputCityWeather({ city }: OutputCityWeatherProps) {
     <div>
       {result && weatherIcon && (
         <div className="city-weather-info-container">
-          <img className="weather-icon" src={new URL(
-            `../../../assets/weather-icons/${weatherIcon.iconId}.png`,
-            import.meta.url
-          ).href} alt={`${city} weather`} />
+          <div className="city-weather-info">
+            <img className="weather-icon" src={new URL(
+              `../../../../assets/weather-icons/${weatherIcon.iconId}.png`,
+              import.meta.url
+            ).href} alt={`${city} weather`} />
+            <p> {city} </p>
+          </div>
           <p className="temp-info"> Temp.: {result.temp}°C </p>
           <p className="felt-temp-info"> Felt Temp.:  {result.feltTemp}°C </p>
         </div>
