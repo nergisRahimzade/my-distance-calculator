@@ -11,6 +11,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import { CityOverviewInfo } from './output-city/city-overview/CityOverviewInfo';
 import { CityAttractionInfo } from './output-city/city-overview/CityAttractionsInfo';
+import { CityEmergencyNumbersInfo } from './output-city/city-overview/CityEmergencyNumbersInfo';
 
 export function SearchCity() {
   const [origin, setOrigin] = useState('');
@@ -133,6 +134,7 @@ export function SearchCity() {
                 <TabList onChange={handleTabChange}>
                   <Tab label='Overview' value='overview' />
                   <Tab label='Attractions' value='attractions' />
+                  <Tab label='Emergency' value='emergency' />
                 </TabList>
               </Box>
               <TabPanel value='overview'>
@@ -140,6 +142,9 @@ export function SearchCity() {
               </TabPanel>
               <TabPanel value='attractions'> 
                 <CityAttractionInfo city={destination} />
+              </TabPanel>
+              <TabPanel value='emergency'> 
+                <CityEmergencyNumbersInfo city={destination} />
               </TabPanel>
             </TabContext>
           </Box>

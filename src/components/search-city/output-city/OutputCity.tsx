@@ -22,8 +22,6 @@ export function OutputCity({ origin, destination, mode }: OutputCityProps) {
     getDistanceBetweenCities(origin, destination, mode)
       .then((res) => {
         setResult(res);
-        console.log(`result.distanceKm: ${res.distanceKm}`);
-        console.log(`result.durationMinutes: ${res.durationMinutes}`);
         setLoading(false);
       })
       .catch((error) => {
@@ -62,9 +60,6 @@ export function OutputCity({ origin, destination, mode }: OutputCityProps) {
       const origin = await getCoordinates(city1);
       const destination = await getCoordinates(city2);
 
-      console.log('Origin: ', origin);
-      console.log('Destination: ', destination);
-
       let profile = 'driving-car';
       if (mode === 'foot')
         profile = 'foot-walking';
@@ -75,14 +70,12 @@ export function OutputCity({ origin, destination, mode }: OutputCityProps) {
 
       const url = `https://api.openrouteservice.org/v2/directions/${profile}?api_key=${apiKey}&start=${origin.lon},${origin.lat}&end=${destination.lon},${destination.lat}`;
 
-      console.log('Fetching route...');
       const response = await fetch(url);
 
       if (!response.ok)
         throw new Error(`API request failed: ${response.status}`);
 
       const data = await response.json();
-      console.log('Route data: ', data);
 
       const route = data.features[0].properties.segments[0];
 

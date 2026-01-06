@@ -60,7 +60,6 @@ export function OutputCityWeather({ city }: OutputCityWeatherProps) {
     getCityWeather(city)
       .then((res) => {
         setResult(res);
-        console.log('weather res: ', res);
         const icon = matchWeatherIcon(res.icon);
         setWeatherIcon(icon);
       })
