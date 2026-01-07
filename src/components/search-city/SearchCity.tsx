@@ -55,7 +55,15 @@ export function SearchCity() {
   return (
     <div>
       <div className='search-container'>
-        <FormControl className='search-select-container' fullWidth>
+        <FormControl className='search-select-container' sx={{
+          width: 200,
+          '&  .MuiSelect-select': {
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap'
+          },
+          marginRight: 2
+        }}>
           <InputLabel id='origin-select-label'>From...</InputLabel>
           <Select
             className='search-select-item'
@@ -73,7 +81,17 @@ export function SearchCity() {
           </Select>
         </FormControl>
 
-        <FormControl className='search-select-container' fullWidth>
+        <FormControl className='search-select-container'
+          sx={{
+            width: 200,
+            '&  .MuiSelect-select': {
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap'
+            },
+            marginRight: 2
+          }}
+        >
           <InputLabel id='destination-select-label'>To...</InputLabel>
           <Select
             className='search-select-item'
@@ -89,7 +107,16 @@ export function SearchCity() {
           </Select>
         </FormControl>
 
-        <FormControl className='search-select-container' fullWidth>
+        <FormControl className='search-select-container'
+          sx={{
+            width: 200,
+            '&  .MuiSelect-select': {
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap'
+            }
+          }}
+        >
           <InputLabel id='mode-select-label'>By...</InputLabel>
           <Select
             className='search-select-item'
@@ -140,10 +167,10 @@ export function SearchCity() {
               <TabPanel value='overview'>
                 <CityOverviewInfo city={destination} />
               </TabPanel>
-              <TabPanel value='attractions'> 
+              <TabPanel value='attractions'>
                 <CityAttractionInfo city={destination} />
               </TabPanel>
-              <TabPanel value='emergency'> 
+              <TabPanel value='emergency'>
                 <CityEmergencyNumbersInfo city={destination} />
               </TabPanel>
             </TabContext>
