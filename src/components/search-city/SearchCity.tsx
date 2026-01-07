@@ -47,7 +47,7 @@ export function SearchCity() {
     setMode('');
   };
 
-  const handleTabChange = (event: SyntheticEvent, newValue: string) => {
+  const handleTabChange = (_event: SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
 
