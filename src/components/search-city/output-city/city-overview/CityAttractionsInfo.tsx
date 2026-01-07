@@ -1,18 +1,9 @@
 import { useEffect, useState } from "react";
-import citiesData from '../../../search-city-list/cities.json';
 import './CityAttractionsInfo.css';
 
-type CityAttractionInfoProps = {
-  city: string
-};
+import { getAttractionsInfo } from "../../../../utils/getAttractionsInfo";
 
-const getAttractionsInfo = (cityName: string) => {
-  const cities = citiesData.cities;
-
-  const matchingCity = cities.find((city) => city.cityName === cityName);
-
-  return matchingCity?.attractions || [];
-};
+import type { CityAttractionInfoProps } from "../../../../assets/types/CityAttractionInfoProps";
 
 export function CityAttractionInfo({ city }: CityAttractionInfoProps) {
   const [attractionsInfo, setAttractionsInfo] = useState<any[] | null>(null);
