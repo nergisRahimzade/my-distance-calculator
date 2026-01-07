@@ -1,27 +1,8 @@
 import { useEffect, useState } from "react";
-import citiesData from '../../../search-city-list/cities.json';
 
-type CityEmergencyNumbersInfoProps = {
-  city: string
-};
+import { getEmergencyNumber } from "../../../../services/getEmergencyNumber";
 
-const getEmergencyNumber = async (cityName: string) => {
-  const cities = citiesData.cities;
-  const matchingCity = cities.find(city => city.cityName === cityName);
-  const code = matchingCity?.country;
-
-  const response = await fetch(`/api/emergency/${code}`);
-  const result = await response.json();
-  const data = result.data;
-
-  const numbersData = {
-    ambulance: data.ambulance.all[0],
-    fire: data.fire.all[0],
-    police: data.police.all[0]
-  };
-
-  return numbersData;
-};
+import type { CityEmergencyNumbersInfoProps } from "../../../../assets/types/CityEmergencyNumbersInfoProps";
 
 export function CityEmergencyNumbersInfo({ city }: CityEmergencyNumbersInfoProps) {
   const [numbersList, setNumbersList] = useState<any | null>(null);
