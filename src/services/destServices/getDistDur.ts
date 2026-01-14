@@ -1,5 +1,5 @@
-import { findLatLon } from "./findLatLon";
-import { calculateFlightDistance } from "../utils/calculateFlightDistance.tsx";
+import { findLatLon } from "./getLatLon.ts";
+import { calculateFlightDistance } from "../../utils/calculateFlightDistance.tsx";
 
 export async function findDistDur(city1: string, city2: string, mode: string) {
   try {

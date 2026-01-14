@@ -151,14 +151,15 @@ export function SearchCity() {
 
         <Button
           onClick={handleClick}
-          sx={{ fontFamily: 'Poppins' }}
+          sx={{ fontFamily: 'Poppins', fontSize: 20, backgroundColor: 'rgb(25, 118, 210)', color: 'white', padding: 2 }}
         >
           Calculate
         </Button>
 
         <Button
           onClick={handleReset}
-          sx={{ fontFamily: 'Poppins' }}
+          sx={{ fontFamily: 'Poppins', fontSize: 20, padding: 2, borderWidth: 1, borderColor: 'rgb(25, 118, 210)'}}
+          variant='outlined'
         >
           Reset
         </Button>

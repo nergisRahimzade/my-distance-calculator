@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './CityOverviewInfo.css';
 
-import { getCityInfo } from '../../../../services/getCityInfo';
+import { getCityInfo } from '../../../../services/overviewServices/getCityInfo';
 
 import type { OverviewCityInfoProps } from '../../../../assets/types/OverCityInfoProps';
 import type { Activity } from '../../../../assets/types/Activity';

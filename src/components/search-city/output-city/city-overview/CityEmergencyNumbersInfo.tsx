@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getEmergencyNumber } from "../../../../services/getEmergencyNumber";
+import { getEmergencyNumber } from "../../../../services/overviewServices/getEmergencyNumber";
 
 import type { CityEmergencyNumbersInfoProps } from "../../../../assets/types/CityEmergencyNumbersInfoProps";
 

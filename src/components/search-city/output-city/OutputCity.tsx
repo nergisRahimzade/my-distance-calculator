@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import './OutputCity.css';
 import { OutputCityWeather } from "./output-city-weather/OutputCityWeather";
 
-import { findDistDur } from "../../../services/findDistDur";
+import { findDistDur } from "../../../services/destServices/getDistDur";
 
 import type { DistanceResult } from "../../../assets/types/DistanceResult";
 import type { OutputCityProps } from "../../../assets/types/OutputCityProps";

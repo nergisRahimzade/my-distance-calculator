@@ -1,6 +1,6 @@
-import { findLatLon } from "./findLatLon";
-import { calculatePopularityScore } from "../utils/calculatePopularityScore";
-import type { Activity } from "../assets/types/Activity";
+import { findLatLon } from "../destServices/getLatLon";
+import { calculatePopularityScore } from "../../utils/calculatePopularityScore";
+import type { Activity } from "../../assets/types/Activity";
 
 export async function getCityInfo(cityName: string) {
   const res = await generateItinerary(cityName);

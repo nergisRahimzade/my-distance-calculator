@@ -8,7 +8,7 @@ import '../../../../assets/weather-icons/snow.png';
 import '../../../../assets/weather-icons/thunderstorm.png';
 import './OutputCityWeather.css';
 
-import { getCityWeather } from "../../../../services/getCityWeather";
+import { getCityWeather } from "../../../../services/weatherServices/getCityWeather";
 import { matchWeatherIcon } from "../../../../utils/matchWeatherIcon";
 
 import type { OutputCityWeatherProps } from "../../../../assets/types/OutputCityWeatherProps";
