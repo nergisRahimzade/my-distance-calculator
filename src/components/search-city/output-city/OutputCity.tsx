@@ -28,7 +28,7 @@ export function OutputCity({ origin, destination, mode }: OutputCityProps) {
   return (
     <div className="cities-container">
       
-      {loading && <p>Calculating...</p>}
+      {loading && <p className="calculating-text">Calculating...</p>}
       {!loading && result && (
         <div className="display-container">
           <div className="distance-duration-display-container">

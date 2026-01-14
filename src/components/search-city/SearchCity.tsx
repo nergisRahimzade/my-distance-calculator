@@ -52,7 +52,7 @@ export function SearchCity() {
   };
 
   return (
-    <div>
+    <div className='container'>
       <div className='search-container'>
         <FormControl className='search-select-container' sx={{
           width: 200,
@@ -61,9 +61,14 @@ export function SearchCity() {
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap'
           },
-          marginRight: 2
+          marginRight: 2,
         }}>
-          <InputLabel id='origin-select-label'>From...</InputLabel>
+          <InputLabel
+            id='origin-select-label'
+            sx={{ fontFamily: 'Poppins' }}
+          >
+            From...
+          </InputLabel>
           <Select
             className='search-select-item'
             labelId='simple-select-label'
@@ -71,6 +76,7 @@ export function SearchCity() {
             value={origin}
             label='Select City'
             onChange={handleOriginChange}
+            sx={{ fontFamily: 'Poppins' }}
           >
             {cities.map((city) => {
               return (
@@ -91,7 +97,12 @@ export function SearchCity() {
             marginRight: 2
           }}
         >
-          <InputLabel id='destination-select-label'>To...</InputLabel>
+          <InputLabel
+            id='destination-select-label'
+            sx={{ fontFamily: 'Poppins' }}
+          >
+            To...
+          </InputLabel>
           <Select
             className='search-select-item'
             labelId='simple-select-label'
@@ -99,6 +110,7 @@ export function SearchCity() {
             value={destination}
             label='Select City'
             onChange={handleDestinationChange}
+            sx={{ fontFamily: 'Poppins' }}
           >
             {cities.map((city) => (
               <MenuItem key={city.cityName} value={city.cityName}>{city.cityName}</MenuItem>
@@ -116,7 +128,12 @@ export function SearchCity() {
             }
           }}
         >
-          <InputLabel id='mode-select-label'>By...</InputLabel>
+          <InputLabel
+            id='mode-select-label'
+            sx={{ fontFamily: 'Poppins' }}
+          >
+            By...
+          </InputLabel>
           <Select
             className='search-select-item'
             labelId='simple-select-label'
@@ -124,6 +141,7 @@ export function SearchCity() {
             value={mode}
             label='Select Mode'
             onChange={handleModeChange}
+            sx={{ fontFamily: 'Poppins' }}
           >
             <MenuItem value='foot'>Foot</MenuItem>
             <MenuItem value='car'>Car</MenuItem>
@@ -133,12 +151,14 @@ export function SearchCity() {
 
         <Button
           onClick={handleClick}
+          sx={{ fontFamily: 'Poppins' }}
         >
           Calculate
         </Button>
 
         <Button
           onClick={handleReset}
+          sx={{ fontFamily: 'Poppins' }}
         >
           Reset
         </Button>
@@ -158,9 +178,9 @@ export function SearchCity() {
             <TabContext value={tabValue}>
               <Box>
                 <TabList onChange={handleTabChange}>
-                  <Tab label='Overview' value='overview' />
-                  <Tab label='Attractions' value='attractions' />
-                  <Tab label='Emergency' value='emergency' />
+                  <Tab sx={{ fontFamily: 'Poppins' }} label='Overview' value='overview' />
+                  <Tab sx={{ fontFamily: 'Poppins' }} label='Attractions' value='attractions' />
+                  <Tab sx={{ fontFamily: 'Poppins' }} label='Emergency' value='emergency' />
                 </TabList>
               </Box>
               <TabPanel value='overview'>

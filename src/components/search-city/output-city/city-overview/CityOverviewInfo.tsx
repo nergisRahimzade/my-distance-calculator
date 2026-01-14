@@ -1,4 +1,4 @@
-import { act, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './CityOverviewInfo.css';
 
 import { getCityInfo } from '../../../../services/getCityInfo';
