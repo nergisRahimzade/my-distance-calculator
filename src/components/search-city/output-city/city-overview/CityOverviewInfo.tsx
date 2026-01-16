@@ -20,21 +20,21 @@ export function CityOverviewInfo({ city }: OverviewCityInfoProps) {
   }, [city]);
 
   const findCurrencyIcon = (currencyCode: string) => {
-    if(currencyCode === 'USD') return '$';
+    if (currencyCode === 'USD') return '$';
 
-    else if(currencyCode === 'EUR') return '€';
+    else if (currencyCode === 'EUR') return '€';
 
-    else if(currencyCode === 'GBP') return '£';
-    
-    else if(currencyCode === 'JPY') return '¥';
+    else if (currencyCode === 'GBP') return '£';
 
-    else if(currencyCode === 'INR') return '₹';
+    else if (currencyCode === 'JPY') return '¥';
 
-    else if(currencyCode === 'AUD') return 'A$';
+    else if (currencyCode === 'INR') return '₹';
 
-    else if(currencyCode === 'CAD') return 'C$';
+    else if (currencyCode === 'AUD') return 'A$';
 
-    else if(currencyCode === 'TRY') return '₺';
+    else if (currencyCode === 'CAD') return 'C$';
+
+    else if (currencyCode === 'TRY') return '₺';
 
     else return currencyCode;
   };
@@ -45,21 +45,46 @@ export function CityOverviewInfo({ city }: OverviewCityInfoProps) {
         <p className='overview-info'>
           {info.map((activity) => (
             <div className='activity-container' key={activity.id}>
-              <p className='activity-name' key={activity.id}>
-                <span className='activity-span-title'>&#127919; Activity</span> {activity.name}
-              </p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>
+                      <span className='activity-span-title'>&#127919; Activity</span>
+                    </th>
 
-              <p className='activity-short-desc' key={activity.id}>
-                <span className='activity-span-title'>&#128204; Description</span> {activity.shortDescription}
-              </p>
+                    <th>
+                      <span className='activity-span-title'>&#128204; Description</span>
+                    </th>
 
-              <p className='activity-price' key={activity.id}>
-                <span className='activity-span-title'>&#128181; Price</span> {activity.price?.amount} {findCurrencyIcon(activity.price?.currencyCode || '')}
-              </p>
+                    <th>
+                      <span className='activity-span-title'>&#128181; Price</span>
+                    </th>
 
-              <p className='activity-booking-link' key={activity.id}>
-                <span className='activity-span-title'>&#127915; Booking Link</span> {activity.bookingLink}
-              </p>
+                    <th>
+                      <span className='activity-span-title'>&#127915; Booking Link</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className='activity-name' key={activity.id}>
+                      {activity.name}
+                    </td>
+
+                    <td className='activity-short-desc' key={activity.id}>
+                      {activity.shortDescription}
+                    </td>
+
+                    <td className='activity-price' key={activity.id}>
+                      {activity.price?.amount} {findCurrencyIcon(activity.price?.currencyCode || '')}
+                    </td>
+
+                    <td className='activity-booking-link' key={activity.id}>
+                      {activity.bookingLink}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           ))}
         </p>
