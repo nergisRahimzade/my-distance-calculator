@@ -5,6 +5,7 @@ import { getCityInfo } from '../../../../services/overviewServices/getCityInfo';
 
 import type { OverviewCityInfoProps } from '../../../../assets/types/OverCityInfoProps';
 import type { Activity } from '../../../../assets/types/Activity';
+import { CopyButton } from '../../CopyButton';
 
 export function CityOverviewInfo({ city }: OverviewCityInfoProps) {
   const [info, setInfo] = useState<Activity[] | null>(null);
@@ -80,7 +81,20 @@ export function CityOverviewInfo({ city }: OverviewCityInfoProps) {
                     </td>
 
                     <td className='activity-booking-link' key={activity.id}>
-                      {activity.bookingLink}
+                      <a
+                        href={activity.bookingLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          color: 'rgb(25, 118, 210)',
+                          textDecoration: 'underline',
+                          marginRight: '8px',
+                          wordBreak: 'break-all'
+                        }}
+                      >
+                        {activity.bookingLink}
+                      </a> 
+                      <CopyButton textToCopy={activity.bookingLink ? activity.bookingLink : ''} />
                     </td>
                   </tr>
                 </tbody>

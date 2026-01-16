@@ -4,6 +4,7 @@ import './CityAttractionsInfo.css';
 import { getAttractionsInfo } from "../../../../utils/getAttractionsInfo";
 
 import type { CityAttractionInfoProps } from "../../../../assets/types/CityAttractionInfoProps";
+import { CopyButton } from "../../CopyButton";
 
 export function CityAttractionInfo({ city }: CityAttractionInfoProps) {
   const [attractionsInfo, setAttractionsInfo] = useState<any[] | null>(null);
@@ -23,7 +24,8 @@ export function CityAttractionInfo({ city }: CityAttractionInfoProps) {
     <div>
       {attractionsInfo && attractionsInfo.map((attraction) => (
         <div key={crypto.randomUUID()} className="attraction-item">
-          <p> {attraction} </p>
+          <p className="attraction-name"> {attraction} </p> 
+          <CopyButton textToCopy={attraction} />
         </div>
       ))}
     </div>
