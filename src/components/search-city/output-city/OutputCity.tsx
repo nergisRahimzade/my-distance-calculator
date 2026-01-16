@@ -23,7 +23,7 @@ export function OutputCity({ origin, destination, mode }: OutputCityProps) {
         setLoading(false);
       });
 
-  }, [origin, destination, mode]);
+  }, []);
 
   return (
     <div className="cities-container">

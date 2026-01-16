@@ -28,7 +28,7 @@ export function OutputCityWeather({ city }: OutputCityWeatherProps) {
       .catch((error) => {
         console.log('Error fetching weather: ', error);
       });
-  }, [city]);
+  }, []);
 
   return (
     <div>
