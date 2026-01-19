@@ -21,6 +21,8 @@ export function SearchCity() {
   const [tabValue, setTabValue] = useState('overview');
   const [showCityInfo, setShowCityInfo] = useState(false);
 
+  const [clicked, setClicked] = useState(false);
+
   const handleOriginChange = (event: any) => {
     setOrigin(event?.target.value)
   };
@@ -36,6 +38,8 @@ export function SearchCity() {
   const handleClick = () => {
     setShowOutput(true);
     setShowCityInfo(true);
+    setClicked(true);
+    setTimeout(() => setClicked(false), 2000);
     //const html = use(<OutputCity origin={origin} destination={destination} />);
   };
 
@@ -169,7 +173,13 @@ export function SearchCity() {
 
       <div className='result-container'>
         {showOutput && (
-          <OutputCity origin={origin} destination={destination} mode={mode} />
+          <OutputCity 
+            origin={origin} 
+            destination={destination} 
+            mode={mode} 
+            clicked={clicked}
+            setClicked={setClicked}
+          />
         )}
       </div>
 
@@ -185,7 +195,7 @@ export function SearchCity() {
                 </TabList>
               </Box>
               <TabPanel value='overview'>
-                <CityOverviewInfo city={destination} />
+                <CityOverviewInfo city={destination} clicked={clicked}/>
               </TabPanel>
               <TabPanel value='attractions'>
                 <CityAttractionInfo city={destination} />

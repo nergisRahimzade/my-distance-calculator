@@ -1,3 +1,4 @@
 export type OverviewCityInfoProps = {
-  city: string
+  city: string,
+  clicked: boolean
 }

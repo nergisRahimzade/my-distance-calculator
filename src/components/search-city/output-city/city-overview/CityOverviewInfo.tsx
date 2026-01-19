@@ -7,7 +7,7 @@ import type { OverviewCityInfoProps } from '../../../../assets/types/OverCityInf
 import type { Activity } from '../../../../assets/types/Activity';
 import { CopyButton } from '../../CopyButton';
 
-export function CityOverviewInfo({ city }: OverviewCityInfoProps) {
+export function CityOverviewInfo({ city, clicked }: OverviewCityInfoProps) {
   const [info, setInfo] = useState<Activity[] | null>(null);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export function CityOverviewInfo({ city }: OverviewCityInfoProps) {
       .catch((error) => {
         console.log('Error fetching overview info: ', error);
       });
-  }, [city]);
+  }, [clicked]);
 
   const findCurrencyIcon = (currencyCode: string) => {
     if (currencyCode === 'USD') return '$';

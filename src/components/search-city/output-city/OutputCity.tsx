@@ -7,7 +7,7 @@ import { findDistDur } from "../../../services/destServices/getDistDur";
 import type { DistanceResult } from "../../../assets/types/DistanceResult";
 import type { OutputCityProps } from "../../../assets/types/OutputCityProps";
 
-export function OutputCity({ origin, destination, mode }: OutputCityProps) {
+export function OutputCity({ origin, destination, mode, clicked, setClicked }: OutputCityProps) {
   const [result, setResult] = useState<DistanceResult | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -23,7 +23,7 @@ export function OutputCity({ origin, destination, mode }: OutputCityProps) {
         setLoading(false);
       });
 
-  }, []);
+  }, [clicked]);
 
   return (
     <div className="cities-container">
