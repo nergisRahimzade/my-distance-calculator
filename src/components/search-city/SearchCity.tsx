@@ -1,6 +1,6 @@
-import { Button, Tab, Box, Autocomplete, TextField } from '@mui/material';
+import { Button, Tab, Box, Autocomplete, TextField, ThemeProvider, CssBaseline, type Theme } from '@mui/material';
 import { TabPanel, TabContext, TabList } from '@mui/lab';
-import { useMemo, useState, type SyntheticEvent } from 'react';
+import { useEffect, useMemo, useState, type SyntheticEvent } from 'react';
 import citiesData from '../search-city-list/cities.json';
 import './SearchCity.css';
 import { OutputCity } from './output-city/OutputCity';
@@ -8,6 +8,8 @@ import { OutputCity } from './output-city/OutputCity';
 import { CityOverviewInfo } from './output-city/city-overview/CityOverviewInfo';
 import { CityAttractionInfo } from './output-city/city-overview/CityAttractionsInfo';
 import { CityEmergencyNumbersInfo } from './output-city/city-overview/CityEmergencyNumbersInfo';
+import { detectDayNight } from '../../services/currentLocation/detectDayNight';
+import { getTheme } from '../../utils/getTheme';
 
 export function SearchCity() {
   const [origin, setOrigin] = useState('');
@@ -23,6 +25,9 @@ export function SearchCity() {
   const [destinationError, setDestinationError] = useState('');
   const [modeError, setModeError] = useState('');
   const [matchingCityError, setMatchingCityError] = useState('');
+  const [isDayTime, setIsDayTime] = useState(true);
+  
+  const theme = useMemo(() => getTheme(isDayTime), [isDayTime]);
 
   const isValid = () => {
     //reset & clear all errors
@@ -48,7 +53,7 @@ export function SearchCity() {
     if (origin === '' || destination === '' || mode === '')
       return true;
 
-    if(origin === destination)
+    if (origin === destination)
       return true;
 
     else
@@ -57,6 +62,10 @@ export function SearchCity() {
 
   const cityList = useMemo(() => {
     return citiesData.cities.map(city => city.cityName);
+  }, []);
+
+  useEffect(() => {
+    detectDayNight(setIsDayTime);
   }, []);
 
   const handleClick = () => {
@@ -83,131 +92,135 @@ export function SearchCity() {
   };
 
   return (
-    <div className='container'>
-      <div className='search-container'>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div className={`container ${isDayTime ? 'day-theme' : 'night-theme'}`}>
+        <div className='search-container'>
 
-        <Autocomplete
-          disablePortal
-          options={cityList}
-          value={origin}
-          onChange={(_, newValue) => setOrigin(newValue || '')}
-          sx={{ width: 300, fontFamily: 'Poppins' }}
-          renderInput={(params: any) =>
-            <TextField
-              sx={{
-                '& .MuiInputBase-root': {
-                  height: '100%',
-                  padding: '16px 14px',
-                  fontFamily: 'Poppins'
-                }
-              }}
-              {...params}
-              label='From'
-              helperText={originError === '' ? '' : originError}
-            />
-          }
-        />
-
-
-        <Autocomplete
-          disablePortal
-          options={cityList}
-          value={destination}
-          onChange={(_, newValue) => setDestination(newValue || '')}
-          sx={{ width: 300, fontFamily: 'Poppins' }}
-          renderInput={(params: any) =>
-            <TextField
-              sx={{
-                '& .MuiInputBase-root': {
-                  height: '100%',
-                  padding: '16px 14px',
-                  fontFamily: 'Poppins'
-                }
-              }}
-              {...params}
-              label='To'
-              helperText={(destinationError === '' ? '' : destinationError) || (matchingCityError === '' ? '' : matchingCityError)}
-            />
-          }
-        />
-
-        <Autocomplete
-          disablePortal
-          options={['Foot', 'Car', 'Plane']}
-          value={mode}
-          onChange={(_, newValue) => setMode(newValue || '')}
-          sx={{ width: 300, fontFamily: 'Poppins' }}
-          renderInput={(params: any) =>
-            <TextField
-              sx={{
-                '& .MuiInputBase-root': {
-                  height: '100%',
-                  padding: '16px 14px',
-                  fontFamily: 'Poppins'
-                }
-              }}
-              {...params}
-              label='By'
-              helperText={modeError === '' ? '' : modeError}
-            />
-          }
-        />
-
-        <Button
-          onClick={handleClick}
-          sx={{ fontFamily: 'Poppins', fontSize: 20, backgroundColor: 'rgb(25, 118, 210)', color: 'white', padding: 2 }}
-          disabled={isDisabled()}
-        >
-          Calculate
-        </Button>
-
-        <Button
-          onClick={handleReset}
-          sx={{ fontFamily: 'Poppins', fontSize: 20, padding: 2, borderWidth: 1, borderColor: 'rgb(25, 118, 210)' }}
-          variant='outlined'
-        >
-          Reset
-        </Button>
-
-
-      </div>
-
-      <div className='result-container'>
-        {showOutput && (
-          <OutputCity
-            origin={origin}
-            destination={destination}
-            mode={mode}
-            clicked={clicked}
-            setClicked={setClicked}
+          <Autocomplete
+            disablePortal
+            options={cityList}
+            value={origin}
+            onChange={(_, newValue) => setOrigin(newValue || '')}
+            sx={{ width: 300, fontFamily: 'Poppins' }}
+            renderInput={(params: any) =>
+              <TextField
+                sx={{
+                  '& .MuiInputBase-root': {
+                    height: '100%',
+                    padding: '16px 14px',
+                    fontFamily: 'Poppins'
+                  }
+                }}
+                {...params}
+                label='From'
+                helperText={originError === '' ? '' : originError}
+              />
+            }
           />
+
+
+          <Autocomplete
+            disablePortal
+            options={cityList}
+            value={destination}
+            onChange={(_, newValue) => setDestination(newValue || '')}
+            sx={{ width: 300, fontFamily: 'Poppins' }}
+            renderInput={(params: any) =>
+              <TextField
+                sx={{
+                  '& .MuiInputBase-root': {
+                    height: '100%',
+                    padding: '16px 14px',
+                    fontFamily: 'Poppins'
+                  }
+                }}
+                {...params}
+                label='To'
+                helperText={(destinationError === '' ? '' : destinationError) || (matchingCityError === '' ? '' : matchingCityError)}
+              />
+            }
+          />
+
+          <Autocomplete
+            disablePortal
+            options={['Foot', 'Car', 'Plane']}
+            value={mode}
+            onChange={(_, newValue) => setMode(newValue || '')}
+            sx={{ width: 300, fontFamily: 'Poppins' }}
+            renderInput={(params: any) =>
+              <TextField
+                sx={{
+                  '& .MuiInputBase-root': {
+                    height: '100%',
+                    padding: '16px 14px',
+                    fontFamily: 'Poppins'
+                  }
+                }}
+                {...params}
+                label='By'
+                helperText={modeError === '' ? '' : modeError}
+              />
+            }
+          />
+
+          <Button
+            onClick={handleClick}
+            sx={{ fontFamily: 'Poppins', fontSize: 20, backgroundColor: 'rgb(25, 118, 210)', color: 'white', padding: 2 }}
+            disabled={isDisabled()}
+          >
+            Calculate
+          </Button>
+
+          <Button
+            onClick={handleReset}
+            sx={{ fontFamily: 'Poppins', fontSize: 20, padding: 2, borderWidth: 1, borderColor: 'rgb(25, 118, 210)' }}
+            variant='outlined'
+          >
+            Reset
+          </Button>
+
+
+        </div>
+
+        <div className='result-container'>
+          {showOutput && (
+            <OutputCity
+              origin={origin}
+              destination={destination}
+              mode={mode}
+              clicked={clicked}
+              setClicked={setClicked}
+            />
+          )}
+        </div>
+
+        {showCityInfo && (
+          <div className='city-info-container'>
+            <Box>
+              <TabContext value={tabValue}>
+                <Box>
+                  <TabList onChange={handleTabChange}>
+                    <Tab sx={{ fontFamily: 'Poppins' }} label='Overview' value='overview' />
+                    <Tab sx={{ fontFamily: 'Poppins' }} label='Attractions' value='attractions' />
+                    <Tab sx={{ fontFamily: 'Poppins' }} label='Emergency' value='emergency' />
+                  </TabList>
+                </Box>
+                <TabPanel value='overview'>
+                  <CityOverviewInfo city={destination} clicked={clicked} />
+                </TabPanel>
+                <TabPanel value='attractions'>
+                  <CityAttractionInfo city={destination} />
+                </TabPanel>
+                <TabPanel value='emergency'>
+                  <CityEmergencyNumbersInfo city={destination} />
+                </TabPanel>
+              </TabContext>
+            </Box>
+          </div>
         )}
       </div>
+    </ThemeProvider>
 
-      {showCityInfo && (
-        <div className='city-info-container'>
-          <Box>
-            <TabContext value={tabValue}>
-              <Box>
-                <TabList onChange={handleTabChange}>
-                  <Tab sx={{ fontFamily: 'Poppins' }} label='Overview' value='overview' />
-                  <Tab sx={{ fontFamily: 'Poppins' }} label='Attractions' value='attractions' />
-                  <Tab sx={{ fontFamily: 'Poppins' }} label='Emergency' value='emergency' />
-                </TabList>
-              </Box>
-              <TabPanel value='overview'>
-                <CityOverviewInfo city={destination} clicked={clicked} />
-              </TabPanel>
-              <TabPanel value='attractions'>
-                <CityAttractionInfo city={destination} />
-              </TabPanel>
-              <TabPanel value='emergency'>
-                <CityEmergencyNumbersInfo city={destination} />
-              </TabPanel>
-            </TabContext>
-          </Box>
-        </div>
-      )}
-    </div>
   );
 }
