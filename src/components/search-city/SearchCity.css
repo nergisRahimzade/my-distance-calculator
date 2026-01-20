@@ -25,8 +25,8 @@ html, body {
 .search-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  align-items: stretch;
+  
   gap: 16px;
   margin: 10px;
   background-color: white;

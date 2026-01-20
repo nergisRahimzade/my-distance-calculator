@@ -1,5 +1,5 @@
 import { FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
-import { useState, type SyntheticEvent } from 'react';
+import { useMemo, useState, type SyntheticEvent } from 'react';
 import citiesData from '../search-city-list/cities.json';
 import './SearchCity.css';
 import { OutputCity } from './output-city/OutputCity';
@@ -8,6 +8,10 @@ import Box from '@mui/material/Box';
 import TabPanel from '@mui/lab/TabPanel';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
+
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+
 import { CityOverviewInfo } from './output-city/city-overview/CityOverviewInfo';
 import { CityAttractionInfo } from './output-city/city-overview/CityAttractionsInfo';
 import { CityEmergencyNumbersInfo } from './output-city/city-overview/CityEmergencyNumbersInfo';
@@ -17,11 +21,14 @@ export function SearchCity() {
   const [destination, setDestination] = useState('');
   const [mode, setMode] = useState('');
   const [showOutput, setShowOutput] = useState(false);
-  const cities = citiesData.cities;
   const [tabValue, setTabValue] = useState('overview');
   const [showCityInfo, setShowCityInfo] = useState(false);
 
   const [clicked, setClicked] = useState(false);
+
+  const cityList = useMemo(() => {
+    return citiesData.cities.map(city => city.cityName);
+  }, []);
 
   const handleOriginChange = (event: any) => {
     setOrigin(event?.target.value)
@@ -58,100 +65,70 @@ export function SearchCity() {
   return (
     <div className='container'>
       <div className='search-container'>
-        <FormControl className='search-select-container' sx={{
-          width: 200,
-          '&  .MuiSelect-select': {
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap'
-          },
-          marginRight: 2,
-        }}>
-          <InputLabel
-            id='origin-select-label'
-            sx={{ fontFamily: 'Poppins' }}
-          >
-            From...
-          </InputLabel>
-          <Select
-            className='search-select-item'
-            labelId='simple-select-label'
-            id='simple-select'
-            value={origin}
-            label='Select City'
-            onChange={handleOriginChange}
-            sx={{ fontFamily: 'Poppins' }}
-          >
-            {cities.map((city) => {
-              return (
-                <MenuItem key={city.cityName} value={city.cityName}>{city.cityName}</MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
 
-        <FormControl className='search-select-container'
-          sx={{
-            width: 200,
-            '&  .MuiSelect-select': {
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap'
-            },
-            marginRight: 2
-          }}
-        >
-          <InputLabel
-            id='destination-select-label'
-            sx={{ fontFamily: 'Poppins' }}
-          >
-            To...
-          </InputLabel>
-          <Select
-            className='search-select-item'
-            labelId='simple-select-label'
-            id='simple-select'
-            value={destination}
-            label='Select City'
-            onChange={handleDestinationChange}
-            sx={{ fontFamily: 'Poppins' }}
-          >
-            {cities.map((city) => (
-              <MenuItem key={city.cityName} value={city.cityName}>{city.cityName}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <Autocomplete
+          disablePortal
+          options={cityList}
+          value={origin}
+          onChange={(_, newValue) => setOrigin(newValue || '')}
+          sx={{ width: 300, fontFamily: 'Poppins' }}
+          renderInput={(params: any) =>
+            <TextField
+              sx={{
+                '& .MuiInputBase-root': {
+                  height: '100%',
+                  padding: '16px 14px',
+                  fontFamily: 'Poppins'
+                }
+              }}
+              {...params}
+              label='From'
+            />
+          }
+        />
 
-        <FormControl className='search-select-container'
-          sx={{
-            width: 200,
-            '&  .MuiSelect-select': {
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap'
-            }
-          }}
-        >
-          <InputLabel
-            id='mode-select-label'
-            sx={{ fontFamily: 'Poppins' }}
-          >
-            By...
-          </InputLabel>
-          <Select
-            className='search-select-item'
-            labelId='simple-select-label'
-            id='simple-select'
-            value={mode}
-            label='Select Mode'
-            onChange={handleModeChange}
-            sx={{ fontFamily: 'Poppins' }}
-          >
-            <MenuItem value='foot'>Foot</MenuItem>
-            <MenuItem value='car'>Car</MenuItem>
-            <MenuItem value='plane'>Plane</MenuItem>
-          </Select>
-        </FormControl>
+
+        <Autocomplete
+          disablePortal
+          options={cityList}
+          value={destination}
+          onChange={(_, newValue) => setDestination(newValue || '')}
+          sx={{ width: 300, fontFamily: 'Poppins' }}
+          renderInput={(params: any) =>
+            <TextField
+              sx={{
+                '& .MuiInputBase-root': {
+                  height: '100%',
+                  padding: '16px 14px',
+                  fontFamily: 'Poppins'
+                }
+              }}
+              {...params}
+              label='To'
+            />
+          }
+        />
+
+        <Autocomplete
+          disablePortal
+          options={['Foot', 'Car', 'Plane']}
+          value={mode}
+          onChange={(event, newValue) => {setMode(newValue || ''); console.log('newValue:  ', newValue)}}
+          sx={{ width: 300, fontFamily: 'Poppins' }}
+          renderInput={(params: any) =>
+            <TextField
+              sx={{
+                '& .MuiInputBase-root': {
+                  height: '100%',
+                  padding: '16px 14px',
+                  fontFamily: 'Poppins'
+                }
+              }}
+              {...params}
+              label='By'
+            />
+          }
+        />
 
         <Button
           onClick={handleClick}
@@ -162,7 +139,7 @@ export function SearchCity() {
 
         <Button
           onClick={handleReset}
-          sx={{ fontFamily: 'Poppins', fontSize: 20, padding: 2, borderWidth: 1, borderColor: 'rgb(25, 118, 210)'}}
+          sx={{ fontFamily: 'Poppins', fontSize: 20, padding: 2, borderWidth: 1, borderColor: 'rgb(25, 118, 210)' }}
           variant='outlined'
         >
           Reset
@@ -173,10 +150,10 @@ export function SearchCity() {
 
       <div className='result-container'>
         {showOutput && (
-          <OutputCity 
-            origin={origin} 
-            destination={destination} 
-            mode={mode} 
+          <OutputCity
+            origin={origin}
+            destination={destination}
+            mode={mode}
             clicked={clicked}
             setClicked={setClicked}
           />
@@ -195,7 +172,7 @@ export function SearchCity() {
                 </TabList>
               </Box>
               <TabPanel value='overview'>
-                <CityOverviewInfo city={destination} clicked={clicked}/>
+                <CityOverviewInfo city={destination} clicked={clicked} />
               </TabPanel>
               <TabPanel value='attractions'>
                 <CityAttractionInfo city={destination} />

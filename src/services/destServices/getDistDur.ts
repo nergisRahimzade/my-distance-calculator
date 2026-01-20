@@ -13,11 +13,11 @@ export async function findDistDur(city1: string, city2: string, mode: string) {
     const destination = await findLatLon(city2);
 
     let profile = 'driving-car';
-    if (mode === 'foot')
+    if (mode === 'Foot')
       profile = 'foot-walking';
-    else if (mode === 'car')
+    else if (mode === 'Car')
       profile = 'driving-car';
-    else if (mode === 'plane')
+    else if (mode === 'Plane')
       return calculateFlightDistance(origin, destination);
 
     const url = import.meta.env.VITE_OPENROUTESERVICE_BASE_URL + `/${profile}?api_key=${apiKey}&start=${origin.lon},${origin.lat}&end=${destination.lon},${destination.lat}`;
