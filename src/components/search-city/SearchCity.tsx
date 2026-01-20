@@ -19,16 +19,55 @@ export function SearchCity() {
 
   const [clicked, setClicked] = useState(false);
 
+  const [originError, setOriginError] = useState('');
+  const [destinationError, setDestinationError] = useState('');
+  const [modeError, setModeError] = useState('');
+  const [matchingCityError, setMatchingCityError] = useState('');
+
+  const isValid = () => {
+    //reset & clear all errors
+    setOriginError('');
+    setDestinationError('');
+    setModeError('');
+    setMatchingCityError('');
+
+    if (origin === '')
+      setOriginError('Please enter an origin.');
+
+    if (destination === '')
+      setDestinationError('Please enter a destination.');
+
+    if (mode === '')
+      setModeError('Please enter a mode.');
+
+    if (destination === origin)
+      setMatchingCityError('Origin and destination cannot be the same.');
+  };
+
+  const isDisabled = () => {
+    if (origin === '' || destination === '' || mode === '')
+      return true;
+
+    if(origin === destination)
+      return true;
+
+    else
+      return false;
+  }
+
   const cityList = useMemo(() => {
     return citiesData.cities.map(city => city.cityName);
   }, []);
 
   const handleClick = () => {
-    setShowOutput(true);
-    setShowCityInfo(true);
-    setClicked(true);
-    setTimeout(() => setClicked(false), 2000);
-    //const html = use(<OutputCity origin={origin} destination={destination} />);
+    isValid();
+
+    if (origin && destination && mode && origin != destination) {
+      setShowOutput(true);
+      setShowCityInfo(true);
+      setClicked(true);
+      setTimeout(() => setClicked(false), 2000);
+    }
   };
 
   const handleReset = () => {
@@ -64,6 +103,7 @@ export function SearchCity() {
               }}
               {...params}
               label='From'
+              helperText={originError === '' ? '' : originError}
             />
           }
         />
@@ -86,6 +126,7 @@ export function SearchCity() {
               }}
               {...params}
               label='To'
+              helperText={(destinationError === '' ? '' : destinationError) || (matchingCityError === '' ? '' : matchingCityError)}
             />
           }
         />
@@ -107,6 +148,7 @@ export function SearchCity() {
               }}
               {...params}
               label='By'
+              helperText={modeError === '' ? '' : modeError}
             />
           }
         />
@@ -114,6 +156,7 @@ export function SearchCity() {
         <Button
           onClick={handleClick}
           sx={{ fontFamily: 'Poppins', fontSize: 20, backgroundColor: 'rgb(25, 118, 210)', color: 'white', padding: 2 }}
+          disabled={isDisabled()}
         >
           Calculate
         </Button>
