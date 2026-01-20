@@ -11,7 +11,6 @@ export function CityEmergencyNumbersInfo({ city }: CityEmergencyNumbersInfoProps
     getEmergencyNumber(city)
       .then((res) => {
         setNumbersList(res);
-        console.log(res);
       })
       .catch((error) => {
         console.log('Error fetching emergency numbers : ', error);

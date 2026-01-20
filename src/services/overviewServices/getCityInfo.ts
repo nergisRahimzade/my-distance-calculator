@@ -20,8 +20,6 @@ async function getAccessToken(apiKey: string, apiSecret: string) {
 
   const data = await response.json();
 
-  console.log('data.access_token: ', data.access_token);
-
   return data.access_token;
 }
 
@@ -35,8 +33,6 @@ async function getActivities(accessToken: string, latitude: number, longitude: n
   });
 
   const data = await response.json();
-
-  console.log('data.data: ', data.data);
 
   return data.data;
 } 
@@ -52,19 +48,6 @@ async function generateItinerary(cityName: string) {
   const token = await getAccessToken(apiKey, apiSecret);
   const activities = await getActivities(token, lat, lon);
   const famousActivities = getTopActivities(activities);
-
-  console.log('reached start of famousActivities');
-  console.log('famousActivities: ', famousActivities);
-
-  famousActivities.forEach((activity: Activity) => {
-    console.log('inside famousActivities forEach');
-    console.log('activity.name: ' ,activity.name);
-    console.log('acitivity.price.amount' ,activity.price?.amount);
-    console.log('activity.rating' ,activity.rating);
-    console.log('activity.bookingLink' ,activity.bookingLink);
-  });
-
-  console.log('reached end of famousActivities');
 
   return famousActivities;
 }

@@ -33,7 +33,7 @@ export function OutputCity({ origin, destination, mode, clicked }: OutputCityPro
         <div className="display-container">
           <div className="distance-duration-display-container">
             <p className="distance-display-item">Distance: {result.distanceKm} km</p>
-            <p className="duration-display-item">Duration: {(result.durationMinutes / 60).toFixed(2)} hours</p>
+            <p className="duration-display-item">Duration: {Math.floor(result.durationMinutes / 60)} hours {result.durationMinutes % 60} minutes </p>
           </div>
 
           <div className="weather-display-container">
