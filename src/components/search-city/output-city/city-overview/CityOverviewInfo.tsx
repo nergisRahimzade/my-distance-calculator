@@ -3,11 +3,11 @@ import './CityOverviewInfo.css';
 
 import { getCityInfo } from '../../../../services/overviewServices/getCityInfo';
 
-import type { OverviewCityInfoProps } from '../../../../assets/types/OverCityInfoProps';
+import type { OverviewCityInfoProps } from '../../../../assets/types/OverviewCityInfoProps';
 import type { Activity } from '../../../../assets/types/Activity';
 import { CopyButton } from '../../CopyButton';
 
-export function CityOverviewInfo({ city, clicked }: OverviewCityInfoProps) {
+export function CityOverviewInfo({ city, clicked, isDayTime }: OverviewCityInfoProps) {
   const [info, setInfo] = useState<Activity[] | null>(null);
 
   useEffect(() => {
@@ -94,7 +94,7 @@ export function CityOverviewInfo({ city, clicked }: OverviewCityInfoProps) {
                       >
                         {activity.bookingLink}
                       </a> 
-                      <CopyButton textToCopy={activity.bookingLink ? activity.bookingLink : ''} />
+                      <CopyButton textToCopy={activity.bookingLink ? activity.bookingLink : ''} isDayTime={isDayTime} />
                     </td>
                   </tr>
                 </tbody>

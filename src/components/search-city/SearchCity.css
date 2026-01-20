@@ -66,4 +66,5 @@ html, body {
   gap: 16px;
   margin: 10px;
   background-color: white; 
+  border-radius: 8px;
 }

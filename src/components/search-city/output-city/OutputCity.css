@@ -12,6 +12,7 @@
   display: grid;
   align-items: center;
   justify-content: center;
+  font-family: Poppins;
 }
 
 .distance-duration-display-container {

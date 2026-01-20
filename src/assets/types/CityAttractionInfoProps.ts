@@ -1,3 +1,4 @@
 export type CityAttractionInfoProps = {
-  city: string
+  city: string,
+  isDayTime: boolean
 };

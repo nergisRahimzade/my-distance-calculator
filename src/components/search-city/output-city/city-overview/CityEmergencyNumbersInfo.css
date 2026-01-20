@@ -1,0 +1,11 @@
+.numbers-container {
+  font-family: Poppins;
+}
+
+.numbers-container.day-theme {
+  color: white;
+}
+
+.numbers-container.night-theme {
+  color: black;
+}

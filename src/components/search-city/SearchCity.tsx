@@ -1,4 +1,4 @@
-import { Button, Tab, Box, Autocomplete, TextField, ThemeProvider, CssBaseline, type Theme } from '@mui/material';
+import { Button, Tab, Box, Autocomplete, TextField, ThemeProvider, CssBaseline } from '@mui/material';
 import { TabPanel, TabContext, TabList } from '@mui/lab';
 import { useEffect, useMemo, useState, type SyntheticEvent } from 'react';
 import citiesData from '../search-city-list/cities.json';
@@ -26,7 +26,7 @@ export function SearchCity() {
   const [modeError, setModeError] = useState('');
   const [matchingCityError, setMatchingCityError] = useState('');
   const [isDayTime, setIsDayTime] = useState(true);
-  
+
   const theme = useMemo(() => getTheme(isDayTime), [isDayTime]);
 
   const isValid = () => {
@@ -197,23 +197,48 @@ export function SearchCity() {
 
         {showCityInfo && (
           <div className='city-info-container'>
-            <Box>
+            <Box
+              sx={{
+                backgroundColor: isDayTime ? '#ffffff' : 'rgba(30, 58, 95, 0.6)', // Semi-transparent dark blue
+                borderRadius: 2,
+                padding: 2,
+                backdropFilter: 'blur(10px)', // Frosted glass effect
+              }}
+            >
               <TabContext value={tabValue}>
-                <Box>
-                  <TabList onChange={handleTabChange}>
+                <Box
+                  sx={{
+                    borderBottom: 1,
+                    borderColor: isDayTime ? '#e0e0e0' : 'rgba(144, 202, 249, 0.2)'
+                  }}
+                >
+                  <TabList onChange={handleTabChange}
+                    sx={{
+                      '& .MuiTab-root': {
+                        fontFamily: 'Poppins',
+                        color: isDayTime ? '#666' : '#90caf9',
+                        '&.Mui-selected': {
+                          color: isDayTime ? '#1976d2' : '#ffffff',
+                        },
+                      },
+                      '& .MuiTabs-indicator': {
+                        backgroundColor: isDayTime ? '#1976d2' : '#90caf9',
+                      }
+                    }}
+                  >
                     <Tab sx={{ fontFamily: 'Poppins' }} label='Overview' value='overview' />
                     <Tab sx={{ fontFamily: 'Poppins' }} label='Attractions' value='attractions' />
                     <Tab sx={{ fontFamily: 'Poppins' }} label='Emergency' value='emergency' />
                   </TabList>
                 </Box>
                 <TabPanel value='overview'>
-                  <CityOverviewInfo city={destination} clicked={clicked} />
+                  <CityOverviewInfo city={destination} clicked={clicked} isDayTime={isDayTime} />
                 </TabPanel>
                 <TabPanel value='attractions'>
-                  <CityAttractionInfo city={destination} />
+                  <CityAttractionInfo city={destination} isDayTime={isDayTime} />
                 </TabPanel>
                 <TabPanel value='emergency'>
-                  <CityEmergencyNumbersInfo city={destination} />
+                  <CityEmergencyNumbersInfo city={destination} isDayTime={isDayTime} />
                 </TabPanel>
               </TabContext>
             </Box>

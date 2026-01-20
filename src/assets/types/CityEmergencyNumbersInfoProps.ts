@@ -1,3 +1,4 @@
 export type CityEmergencyNumbersInfoProps = {
-  city: string
+  city: string,
+  isDayTime: boolean
 };

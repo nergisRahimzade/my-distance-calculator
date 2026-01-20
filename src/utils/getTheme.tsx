@@ -1,5 +1,4 @@
-import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import { useMemo } from "react";
+import { createTheme} from "@mui/material";
 
 export function getTheme(isDayTime: boolean) {
   return createTheme({

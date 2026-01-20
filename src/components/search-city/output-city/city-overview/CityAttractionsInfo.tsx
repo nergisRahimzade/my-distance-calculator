@@ -6,7 +6,7 @@ import { getAttractionsInfo } from "../../../../utils/getAttractionsInfo";
 import type { CityAttractionInfoProps } from "../../../../assets/types/CityAttractionInfoProps";
 import { CopyButton } from "../../CopyButton";
 
-export function CityAttractionInfo({ city }: CityAttractionInfoProps) {
+export function CityAttractionInfo({ city, isDayTime }: CityAttractionInfoProps) {
   const [attractionsInfo, setAttractionsInfo] = useState<any[] | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -24,8 +24,8 @@ export function CityAttractionInfo({ city }: CityAttractionInfoProps) {
     <div>
       {attractionsInfo && attractionsInfo.map((attraction) => (
         <div key={crypto.randomUUID()} className="attraction-item">
-          <p className="attraction-name"> {attraction} </p> 
-          <CopyButton textToCopy={attraction} />
+          <p className={`attraction-name ${isDayTime ? 'day-theme' : 'night-theme'}`}> {attraction} </p> 
+          <CopyButton textToCopy={attraction} isDayTime={isDayTime} />
         </div>
       ))}
     </div>

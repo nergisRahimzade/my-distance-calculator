@@ -4,7 +4,9 @@ import { getEmergencyNumber } from "../../../../services/overviewServices/getEme
 
 import type { CityEmergencyNumbersInfoProps } from "../../../../assets/types/CityEmergencyNumbersInfoProps";
 
-export function CityEmergencyNumbersInfo({ city }: CityEmergencyNumbersInfoProps) {
+import './CityEmergencyNumbersInfo.css';
+
+export function CityEmergencyNumbersInfo({ city, isDayTime }: CityEmergencyNumbersInfoProps) {
   const [numbersList, setNumbersList] = useState<any | null>(null);
 
   useEffect(() => {
@@ -20,7 +22,7 @@ export function CityEmergencyNumbersInfo({ city }: CityEmergencyNumbersInfoProps
   return (
     <div>
       {numbersList && (
-        <div>
+        <div className={`numbers-container ${isDayTime ? 'day-theme' : 'night-theme'}`}>
           <p> Ambulance: {numbersList.ambulance} </p>
           <p> Fire: {numbersList.fire} </p>
           <p> Police: {numbersList.police} </p>

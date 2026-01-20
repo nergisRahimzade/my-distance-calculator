@@ -9,4 +9,13 @@
 .attraction-name {
   display: inline-block;
   margin-right: 10px;
+  font-family: Poppins;
+}
+
+.attraction-name.day-theme {
+  color: white
+}
+
+.attraction-name.night-theme {
+  color: black;
 }

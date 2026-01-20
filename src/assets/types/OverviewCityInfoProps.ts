@@ -1,4 +1,5 @@
 export type OverviewCityInfoProps = {
   city: string,
-  clicked: boolean
+  clicked: boolean,
+  isDayTime: boolean
 }
