@@ -1,16 +1,9 @@
-import { FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
+import { Button, Tab, Box, Autocomplete, TextField } from '@mui/material';
+import { TabPanel, TabContext, TabList } from '@mui/lab';
 import { useMemo, useState, type SyntheticEvent } from 'react';
 import citiesData from '../search-city-list/cities.json';
 import './SearchCity.css';
 import { OutputCity } from './output-city/OutputCity';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import TabPanel from '@mui/lab/TabPanel';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-
-import Autocomplete from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
 
 import { CityOverviewInfo } from './output-city/city-overview/CityOverviewInfo';
 import { CityAttractionInfo } from './output-city/city-overview/CityAttractionsInfo';
@@ -29,18 +22,6 @@ export function SearchCity() {
   const cityList = useMemo(() => {
     return citiesData.cities.map(city => city.cityName);
   }, []);
-
-  const handleOriginChange = (event: any) => {
-    setOrigin(event?.target.value)
-  };
-
-  const handleDestinationChange = (event: any) => {
-    setDestination(event.target.value);
-  };
-
-  const handleModeChange = (event: any) => {
-    setMode(event.target.value);
-  };
 
   const handleClick = () => {
     setShowOutput(true);
@@ -113,7 +94,7 @@ export function SearchCity() {
           disablePortal
           options={['Foot', 'Car', 'Plane']}
           value={mode}
-          onChange={(event, newValue) => {setMode(newValue || ''); console.log('newValue:  ', newValue)}}
+          onChange={(_, newValue) => setMode(newValue || '')}
           sx={{ width: 300, fontFamily: 'Poppins' }}
           renderInput={(params: any) =>
             <TextField
