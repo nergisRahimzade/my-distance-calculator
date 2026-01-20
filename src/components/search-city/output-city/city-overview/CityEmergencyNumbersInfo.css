@@ -3,9 +3,9 @@
 }
 
 .numbers-container.day-theme {
-  color: white;
+  color: black;
 }
 
 .numbers-container.night-theme {
-  color: black;
+  color: white;
 }

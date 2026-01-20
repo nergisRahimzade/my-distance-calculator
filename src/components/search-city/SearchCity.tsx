@@ -196,24 +196,24 @@ export function SearchCity() {
         </div>
 
         {showCityInfo && (
-          <div className='city-info-container'>
+          <div className={`city-info-container ${isDayTime ? 'day-theme' : 'night-theme'}`}>
             <Box
               sx={{
-                backgroundColor: isDayTime ? '#ffffff' : 'rgba(30, 58, 95, 0.6)', // Semi-transparent dark blue
                 borderRadius: 2,
                 padding: 2,
-                backdropFilter: 'blur(10px)', // Frosted glass effect
               }}
             >
+
               <TabContext value={tabValue}>
                 <Box
                   sx={{
                     borderBottom: 1,
-                    borderColor: isDayTime ? '#e0e0e0' : 'rgba(144, 202, 249, 0.2)'
+                    borderColor: isDayTime ? '#e0e0e0' : 'rgba(144, 202, 249, 0.2)',
                   }}
                 >
                   <TabList onChange={handleTabChange}
-                    sx={{
+                    sx={{ // Match the Box background
+                      borderRadius: '8px 8px 0 0', // Optional: rounded top corners
                       '& .MuiTab-root': {
                         fontFamily: 'Poppins',
                         color: isDayTime ? '#666' : '#90caf9',

@@ -1,3 +1,13 @@
+.output-city-container {
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 40px 270px;
+}
+
 .cities-container {
   color: black;
   margin-top: 20px;
