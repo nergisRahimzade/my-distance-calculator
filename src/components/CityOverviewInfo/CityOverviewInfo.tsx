@@ -3,8 +3,8 @@ import './CityOverviewInfo.css';
 
 import { getCityInfo } from '../../services/overviewServices/getCityInfo.tsx';
 
-import type { OverviewCityInfoProps } from '../../assets/types/OverviewCityInfoProps.ts';
-import type { Activity } from '../../assets/types/Activity.ts';
+import type { OverviewCityInfoProps } from '../../types/index.ts';
+import type { Activity } from '../../types/activity.ts';
 import { CopyButton } from '../CopyButton/CopyButton.tsx';
 
 export function CityOverviewInfo({ city, clicked, isDayTime }: OverviewCityInfoProps) {

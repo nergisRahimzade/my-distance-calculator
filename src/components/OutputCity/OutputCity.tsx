@@ -4,8 +4,8 @@ import { OutputCityWeather } from "../OutputCityWeather/OutputCityWeather.tsx";
 
 import { findDistDur } from "../../services/destServices/getDistDur.ts";
 
-import type { DistanceResult } from "../../assets/types/DistanceResult.ts";
-import type { OutputCityProps } from "../../assets/types/OutputCityProps";
+import type { OutputCityProps } from "../../types/index.ts";
+import type { DistanceResult } from '../../types/DistanceResult.ts';
 
 export function OutputCity({ origin, destination, mode, clicked }: OutputCityProps) {
   const [result, setResult] = useState<DistanceResult | null>(null);

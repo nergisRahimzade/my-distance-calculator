@@ -1,4 +1,4 @@
-import type { DistanceResult } from "../assets/types/DistanceResult";
+import type { DistanceResult } from "../types/DistanceResult";
 
 export function calculateFlightDistance(origin: { lat: number, lon: number }, destination: { lat: number, lon: number }): DistanceResult {
     // Haversine formula for great circle distance

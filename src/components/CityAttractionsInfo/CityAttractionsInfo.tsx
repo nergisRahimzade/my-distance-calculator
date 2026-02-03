@@ -3,7 +3,7 @@ import './CityAttractionsInfo.css';
 
 import { getAttractionsInfo } from "../../utils/getAttractionsInfo.tsx";
 
-import type { CityAttractionInfoProps } from "../../assets/types/CityAttractionInfoProps.ts";
+import type { CityAttractionInfoProps } from "../../types/index.ts";
 import { CopyButton } from "../CopyButton/CopyButton.tsx";
 
 export function CityAttractionInfo({ city, isDayTime }: CityAttractionInfoProps) {

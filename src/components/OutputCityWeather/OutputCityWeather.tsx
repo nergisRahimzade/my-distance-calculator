@@ -11,8 +11,8 @@ import './OutputCityWeather.css';
 import { getCityWeather } from "../../services/weatherServices/getCityWeather.ts";
 import { matchWeatherIcon } from "../../utils/matchWeatherIcon.tsx";
 
-import type { OutputCityWeatherProps } from "../../assets/types/OutputCityWeatherProps.ts";
-import type { WeatherResult } from "../../assets/types/WeatherResult.ts";
+import type { OutputCityWeatherProps } from "../../types/index.ts";
+import type { WeatherResult } from "../../types/WeatherResult.ts";
 
 export function OutputCityWeather({ city }: OutputCityWeatherProps) {
   const [result, setResult] = useState<WeatherResult | null>(null);

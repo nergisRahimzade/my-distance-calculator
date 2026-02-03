@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { getEmergencyNumber } from "../../services/overviewServices/getEmergencyNumber.tsx";
 
-import type { CityEmergencyNumbersInfoProps } from "../../assets/types/CityEmergencyNumbersInfoProps.ts";
+import type { CityEmergencyNumbersInfoProps } from "../../types/index.ts";
 
 import './CityEmergencyNumbersInfo.css';
 
