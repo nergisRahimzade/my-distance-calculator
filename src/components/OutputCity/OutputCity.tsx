@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import './OutputCity.css';
-import { OutputCityWeather } from "./output-city-weather/OutputCityWeather";
+import { OutputCityWeather } from "../OutputCityWeather/OutputCityWeather.tsx";
 
-import { findDistDur } from "../../../services/destServices/getDistDur";
+import { findDistDur } from "../../services/destServices/getDistDur.ts";
 
-import type { DistanceResult } from "../../../assets/types/DistanceResult";
-import type { OutputCityProps } from "../../../assets/types/OutputCityProps";
+import type { DistanceResult } from "../../assets/types/DistanceResult.ts";
+import type { OutputCityProps } from "../../assets/types/OutputCityProps";
 
 export function OutputCity({ origin, destination, mode, clicked }: OutputCityProps) {
   const [result, setResult] = useState<DistanceResult | null>(null);

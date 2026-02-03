@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import './CityOverviewInfo.css';
 
-import { getCityInfo } from '../../../../services/overviewServices/getCityInfo';
+import { getCityInfo } from '../../services/overviewServices/getCityInfo.tsx';
 
-import type { OverviewCityInfoProps } from '../../../../assets/types/OverviewCityInfoProps';
-import type { Activity } from '../../../../assets/types/Activity';
-import { CopyButton } from '../../CopyButton';
+import type { OverviewCityInfoProps } from '../../assets/types/OverviewCityInfoProps.ts';
+import type { Activity } from '../../assets/types/Activity.ts';
+import { CopyButton } from '../CopyButton/CopyButton.tsx';
 
 export function CityOverviewInfo({ city, clicked, isDayTime }: OverviewCityInfoProps) {
   const [info, setInfo] = useState<Activity[] | null>(null);

@@ -1,13 +1,13 @@
 import { Button, Tab, Box, Autocomplete, TextField, ThemeProvider, CssBaseline } from '@mui/material';
 import { TabPanel, TabContext, TabList } from '@mui/lab';
 import { useEffect, useMemo, useState, type SyntheticEvent } from 'react';
-import citiesData from '../search-city-list/cities.json';
+import citiesData from '../../constants/cities.json';
 import './SearchCity.css';
-import { OutputCity } from './output-city/OutputCity';
+import { OutputCity } from '../OutputCity/OutputCity.tsx';
 
-import { CityOverviewInfo } from './output-city/city-overview/CityOverviewInfo';
-import { CityAttractionInfo } from './output-city/city-overview/CityAttractionsInfo';
-import { CityEmergencyNumbersInfo } from './output-city/city-overview/CityEmergencyNumbersInfo';
+import { CityOverviewInfo } from '../CityOverviewInfo/CityOverviewInfo.tsx';
+import { CityAttractionInfo } from '../CityAttractionsInfo/CityAttractionsInfo.tsx';
+import { CityEmergencyNumbersInfo } from '../CityEmergencyNumbersInfo/CityEmergencyNumbersInfo.tsx';
 import { detectDayNight } from '../../services/currentLocation/detectDayNight';
 import { getTheme } from '../../utils/getTheme';
 

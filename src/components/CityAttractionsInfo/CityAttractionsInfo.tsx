@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import './CityAttractionsInfo.css';
 
-import { getAttractionsInfo } from "../../../../utils/getAttractionsInfo";
+import { getAttractionsInfo } from "../../utils/getAttractionsInfo.tsx";
 
-import type { CityAttractionInfoProps } from "../../../../assets/types/CityAttractionInfoProps";
-import { CopyButton } from "../../CopyButton";
+import type { CityAttractionInfoProps } from "../../assets/types/CityAttractionInfoProps.ts";
+import { CopyButton } from "../CopyButton/CopyButton.tsx";
 
 export function CityAttractionInfo({ city, isDayTime }: CityAttractionInfoProps) {
   const [attractionsInfo, setAttractionsInfo] = useState<any[] | null>(null);

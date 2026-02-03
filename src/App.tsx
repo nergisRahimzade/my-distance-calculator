@@ -1,5 +1,5 @@
 import './App.css';
-import { SearchCity } from './components/search-city/SearchCity';
+import { SearchCity } from './components/SearchCity/SearchCity';
 
 function App() {
 
