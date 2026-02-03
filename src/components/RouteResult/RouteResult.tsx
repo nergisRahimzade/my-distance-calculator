@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import './RouteResult.css';
 import { WeatherCard } from "../WeatherCard/WeatherCard.tsx";
 
-import { findDistDur } from "../../services/destServices/getDistDur.ts";
+import { apiCall } from '../../services/apiCalls.ts';
 
 import type { RouteResultProps } from "../../types/index.ts";
-import type { DistanceResult } from '../../types/distanceResult.ts';
+import type { DistanceResult } from "../../types/DistanceResult.ts";
 
 export function RouteResult({ origin, destination, mode, clicked }: RouteResultProps) {
   const [result, setResult] = useState<DistanceResult | null>(null);
@@ -13,7 +13,7 @@ export function RouteResult({ origin, destination, mode, clicked }: RouteResultP
 
   useEffect(() => {
     setLoading(true);
-    findDistDur(origin, destination, mode)
+    apiCall.getDistDur(origin, destination, mode)
       .then((res) => {
         setResult(res);
         setLoading(false);

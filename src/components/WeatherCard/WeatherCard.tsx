@@ -8,7 +8,7 @@ import '../../../../assets/weather-icons/snow.png';
 import '../../../../assets/weather-icons/thunderstorm.png';
 import './WeatherCard.css';
 
-import { getCityWeather } from "../../services/weatherServices/getCityWeather.ts";
+import { apiCall } from "../../services/apiCalls.ts";
 import { matchWeatherIcon } from "../../utils/matchWeatherIcon.tsx";
 
 import type { WeatherCardProps } from "../../types/index.ts";
@@ -19,7 +19,7 @@ export function WeatherCard({ city }: WeatherCardProps) {
   const [weatherIcon, setWeatherIcon] = useState<{ iconId: string } | null>(null);
 
   useEffect(() => {
-    getCityWeather(city)
+    apiCall.getCityWeather(city)
       .then((res) => {
         setResult(res);
         const icon = matchWeatherIcon(res.icon);

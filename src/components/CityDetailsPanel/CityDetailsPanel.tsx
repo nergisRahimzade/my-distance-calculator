@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './CityDetailsPanel.css';
 
-import { getCityInfo } from '../../services/overviewServices/getCityInfo.ts';
+import { apiCall } from '../../services/apiCalls.ts';
 
 import type { CityDetailsPanelProps } from '../../types/index.ts';
 import type { Activity } from '../../types/activity.ts';
@@ -11,7 +11,7 @@ export function CityDetailsPanel({ city, clicked, isDayTime }: CityDetailsPanelP
   const [info, setInfo] = useState<Activity[] | null>(null);
 
   useEffect(() => {
-    getCityInfo(city)
+    apiCall.getCityInfo(city)
       .then((res) => {
         setInfo(res);
       })

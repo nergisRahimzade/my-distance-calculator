@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getEmergencyNumber } from "../../services/overviewServices/getEmergencyNumber.tsx";
+import { apiCall } from "../../services/apiCalls.ts";
 
 import type { EmergencyContactsProps } from "../../types/index.ts";
 
@@ -10,7 +10,7 @@ export function EmergencyContacts({ city, isDayTime }: EmergencyContactsProps) {
   const [numbersList, setNumbersList] = useState<any | null>(null);
 
   useEffect(() => {
-    getEmergencyNumber(city)
+    apiCall.getEmergencyNumber(city)
       .then((res) => {
         setNumbersList(res);
       })
