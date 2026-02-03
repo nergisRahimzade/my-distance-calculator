@@ -6,15 +6,15 @@ import '../../../../assets/weather-icons/rain.png';
 import '../../../../assets/weather-icons/scattered-clouds.png';
 import '../../../../assets/weather-icons/snow.png';
 import '../../../../assets/weather-icons/thunderstorm.png';
-import './OutputCityWeather.css';
+import './WeatherCard.css';
 
 import { getCityWeather } from "../../services/weatherServices/getCityWeather.ts";
 import { matchWeatherIcon } from "../../utils/matchWeatherIcon.tsx";
 
-import type { OutputCityWeatherProps } from "../../types/index.ts";
-import type { WeatherResult } from "../../types/WeatherResult.ts";
+import type { WeatherCardProps } from "../../types/index.ts";
+import type { WeatherResult } from "../../types/weatherResult.ts";
 
-export function OutputCityWeather({ city }: OutputCityWeatherProps) {
+export function WeatherCard({ city }: WeatherCardProps) {
   const [result, setResult] = useState<WeatherResult | null>(null);
   const [weatherIcon, setWeatherIcon] = useState<{ iconId: string } | null>(null);
 

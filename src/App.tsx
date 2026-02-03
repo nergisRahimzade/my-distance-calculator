@@ -1,11 +1,11 @@
 import './App.css';
-import { SearchCity } from './components/SearchCity/SearchCity';
+import { DestinationCalculator } from './components/DestinationCalculator/DestinationCalculator';
 
 function App() {
 
   return (
     <>
-     <SearchCity />
+     <DestinationCalculator />
     </>
   )
 }

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import './CityOverviewInfo.css';
+import './CityDetailsPanel.css';
 
-import { getCityInfo } from '../../services/overviewServices/getCityInfo.tsx';
+import { getCityInfo } from '../../services/overviewServices/getCityInfo.ts';
 
-import type { OverviewCityInfoProps } from '../../types/index.ts';
+import type { CityDetailsPanelProps } from '../../types/index.ts';
 import type { Activity } from '../../types/activity.ts';
 import { CopyButton } from '../CopyButton/CopyButton.tsx';
 
-export function CityOverviewInfo({ city, clicked, isDayTime }: OverviewCityInfoProps) {
+export function CityDetailsPanel({ city, clicked, isDayTime }: CityDetailsPanelProps) {
   const [info, setInfo] = useState<Activity[] | null>(null);
 
   useEffect(() => {

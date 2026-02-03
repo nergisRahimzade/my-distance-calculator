@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 
 import { getEmergencyNumber } from "../../services/overviewServices/getEmergencyNumber.tsx";
 
-import type { CityEmergencyNumbersInfoProps } from "../../types/index.ts";
+import type { EmergencyContactsProps } from "../../types/index.ts";
 
-import './CityEmergencyNumbersInfo.css';
+import './EmergencyContacts.css';
 
-export function CityEmergencyNumbersInfo({ city, isDayTime }: CityEmergencyNumbersInfoProps) {
+export function EmergencyContacts({ city, isDayTime }: EmergencyContactsProps) {
   const [numbersList, setNumbersList] = useState<any | null>(null);
 
   useEffect(() => {

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import './CityAttractionsInfo.css';
+import './AttractionsList.css';
 
 import { getAttractionsInfo } from "../../utils/getAttractionsInfo.tsx";
 
-import type { CityAttractionInfoProps } from "../../types/index.ts";
+import type { AttractionsListProps } from "../../types/index.ts";
 import { CopyButton } from "../CopyButton/CopyButton.tsx";
 
-export function CityAttractionInfo({ city, isDayTime }: CityAttractionInfoProps) {
+export function AttractionsList({ city, isDayTime }: AttractionsListProps) {
   const [attractionsInfo, setAttractionsInfo] = useState<any[] | null>(null);
   const [loading, setLoading] = useState(true);
 

@@ -2,16 +2,16 @@ import { Button, Tab, Box, Autocomplete, TextField, ThemeProvider, CssBaseline }
 import { TabPanel, TabContext, TabList } from '@mui/lab';
 import { useEffect, useMemo, useState, type SyntheticEvent } from 'react';
 import citiesData from '../../constants/cities.json';
-import './SearchCity.css';
-import { OutputCity } from '../OutputCity/OutputCity.tsx';
+import './DestinationCalculator.css';
+import { RouteResult } from '../RouteResult/RouteResult.tsx';
 
-import { CityOverviewInfo } from '../CityOverviewInfo/CityOverviewInfo.tsx';
-import { CityAttractionInfo } from '../CityAttractionsInfo/CityAttractionsInfo.tsx';
-import { CityEmergencyNumbersInfo } from '../CityEmergencyNumbersInfo/CityEmergencyNumbersInfo.tsx';
-import { detectDayNight } from '../../services/currentLocation/detectDayNight';
-import { getTheme } from '../../utils/getTheme';
+import { CityDetailsPanel } from '../CityDetailsPanel/CityDetailsPanel.tsx';
+import { AttractionsList } from '../AttractionsList/AttractionsList.tsx';
+import { EmergencyContacts } from '../EmergencyContacts/EmergencyContacts.tsx';
+import { detectDayNight } from '../../services/currentLocation/detectDayNight.tsx';
+import { getTheme } from '../../utils/getTheme.tsx';
 
-export function SearchCity() {
+export function DestinationCalculator() {
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
   const [mode, setMode] = useState('');
@@ -185,7 +185,7 @@ export function SearchCity() {
 
         <div className='result-container'>
           {showOutput && (
-            <OutputCity
+            <RouteResult
               origin={origin}
               destination={destination}
               mode={mode}
@@ -232,13 +232,13 @@ export function SearchCity() {
                   </TabList>
                 </Box>
                 <TabPanel value='overview'>
-                  <CityOverviewInfo city={destination} clicked={clicked} isDayTime={isDayTime} />
+                  <CityDetailsPanel city={destination} clicked={clicked} isDayTime={isDayTime} />
                 </TabPanel>
                 <TabPanel value='attractions'>
-                  <CityAttractionInfo city={destination} isDayTime={isDayTime} />
+                  <AttractionsList city={destination} isDayTime={isDayTime} />
                 </TabPanel>
                 <TabPanel value='emergency'>
-                  <CityEmergencyNumbersInfo city={destination} isDayTime={isDayTime} />
+                  <EmergencyContacts city={destination} isDayTime={isDayTime} />
                 </TabPanel>
               </TabContext>
             </Box>

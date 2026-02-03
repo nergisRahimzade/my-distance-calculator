@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import './OutputCity.css';
-import { OutputCityWeather } from "../OutputCityWeather/OutputCityWeather.tsx";
+import './RouteResult.css';
+import { WeatherCard } from "../WeatherCard/WeatherCard.tsx";
 
 import { findDistDur } from "../../services/destServices/getDistDur.ts";
 
-import type { OutputCityProps } from "../../types/index.ts";
-import type { DistanceResult } from '../../types/DistanceResult.ts';
+import type { RouteResultProps } from "../../types/index.ts";
+import type { DistanceResult } from '../../types/distanceResult.ts';
 
-export function OutputCity({ origin, destination, mode, clicked }: OutputCityProps) {
+export function RouteResult({ origin, destination, mode, clicked }: RouteResultProps) {
   const [result, setResult] = useState<DistanceResult | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -39,10 +39,10 @@ export function OutputCity({ origin, destination, mode, clicked }: OutputCityPro
 
             <div className="weather-display-container">
               <div className="weather-item">
-                <OutputCityWeather city={origin} />
+                <WeatherCard city={origin} />
               </div>
               <div className="weather-item">
-                <OutputCityWeather city={destination} />
+                <WeatherCard city={destination} />
               </div>
             </div>
 

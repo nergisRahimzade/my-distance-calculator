@@ -1,27 +1,27 @@
-export type CityAttractionInfoProps = {
+export type AttractionsListProps = {
   city: string,
   isDayTime: boolean
 };
 
-export type CityEmergencyNumbersInfoProps = {
+export type EmergencyContactsProps = {
   city: string,
   isDayTime: boolean
 };
 
-export type OutputCityProps = {
+export type CityDetailsPanelProps = {
+  city: string,
+  clicked: boolean,
+  isDayTime: boolean
+};
+
+export type RouteResultProps = {
   origin: string,
   destination: string,
   mode: string,
   clicked: boolean,
   setClicked: (value: React.SetStateAction<boolean>) => void
-}
+};
 
-export type OutputCityWeatherProps = {
+export type WeatherCardProps = {
   city: string
-}
-
-export type OverviewCityInfoProps = {
-  city: string,
-  clicked: boolean,
-  isDayTime: boolean
-}
+};
