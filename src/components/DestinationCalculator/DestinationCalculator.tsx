@@ -100,6 +100,7 @@ export function DestinationCalculator() {
         <div className='search-container'>
 
           <Autocomplete
+            aria-label='Choose origin city'
             disablePortal
             options={cityList}
             value={origin}
@@ -115,7 +116,7 @@ export function DestinationCalculator() {
                   }
                 }}
                 {...params}
-                label='From'
+                label='Origin city name'
                 helperText={originError === '' ? '' : originError}
               />
             }
@@ -123,6 +124,7 @@ export function DestinationCalculator() {
 
 
           <Autocomplete
+            aria-label='Choose destination city'
             disablePortal
             options={cityList}
             value={destination}
@@ -138,13 +140,14 @@ export function DestinationCalculator() {
                   }
                 }}
                 {...params}
-                label='To'
+                label='Destination city name'
                 helperText={(destinationError === '' ? '' : destinationError) || (matchingCityError === '' ? '' : matchingCityError)}
               />
             }
           />
 
           <Autocomplete
+            aria-label='Choose mode of transportation'
             disablePortal
             options={['Foot', 'Car', 'Plane']}
             value={mode}
@@ -160,7 +163,7 @@ export function DestinationCalculator() {
                   }
                 }}
                 {...params}
-                label='By'
+                label='Mode of transportation'
                 helperText={modeError === '' ? '' : modeError}
               />
             }

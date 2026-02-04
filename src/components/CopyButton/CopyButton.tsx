@@ -15,7 +15,12 @@ export function CopyButton({textToCopy, isDayTime}: {textToCopy: string, isDayTi
   return (
     <>
       <Tooltip title={copied ? 'Copied!' : 'Copy'}>
-        <IconButton sx={{ color: isDayTime ? 'white' : 'black' }} onClick={handleCopy} size='small'>
+        <IconButton 
+          aria-label='Copy to clipboard'
+          sx={{ color: isDayTime ? 'white' : 'black' }} 
+          onClick={handleCopy} 
+          size='small'
+        >
           {copied ? <CheckIcon color='success' /> : <ContentCopyIcon />}
         </IconButton>
       </Tooltip>

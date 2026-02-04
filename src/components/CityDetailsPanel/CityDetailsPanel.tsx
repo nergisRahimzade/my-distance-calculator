@@ -43,26 +43,26 @@ export function CityDetailsPanel({ city, clicked, isDayTime }: CityDetailsPanelP
   return (
     <div>
       {info && (
-        <p className='overview-info'>
+        <section className='overview-info'>
           {info.map((activity) => (
             <div className='activity-container' key={activity.id}>
               <table>
                 <thead>
                   <tr>
                     <th>
-                      <span className='activity-span-title'>&#127919; Activity</span>
+                      <span className='activity-span-title' aria-label='activity-emoji'>&#127919; Activity</span>
                     </th>
 
                     <th>
-                      <span className='activity-span-title'>&#128204; Description</span>
+                      <span className='activity-span-title' aria-label='destination-emoji'>&#128204; Description</span>
                     </th>
 
                     <th>
-                      <span className='activity-span-title'>&#128181; Price</span>
+                      <span className='activity-span-title' aria-label='price-emoji'>&#128181; Price</span>
                     </th>
 
                     <th>
-                      <span className='activity-span-title'>&#127915; Booking Link</span>
+                      <span className='activity-span-title' aria-label='booking-link-emoji'>&#127915; Booking Link</span>
                     </th>
                   </tr>
                 </thead>
@@ -101,7 +101,7 @@ export function CityDetailsPanel({ city, clicked, isDayTime }: CityDetailsPanelP
               </table>
             </div>
           ))}
-        </p>
+        </section>
       )}
     </div>
   );

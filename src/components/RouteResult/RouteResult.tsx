@@ -5,7 +5,7 @@ import { WeatherCard } from "../WeatherCard/WeatherCard.tsx";
 import { apiCall } from '../../services/apiCalls.ts';
 
 import type { RouteResultProps } from "../../types/index.ts";
-import type { DistanceResult } from "../../types/DistanceResult.ts";
+import type { DistanceResult } from "../../types/distanceResult.ts";
 
 export function RouteResult({ origin, destination, mode, clicked }: RouteResultProps) {
   const [result, setResult] = useState<DistanceResult | null>(null);
@@ -28,7 +28,7 @@ export function RouteResult({ origin, destination, mode, clicked }: RouteResultP
   return (
     <div className="cities-container">
 
-      {loading && <p className="calculating-text">Calculating...</p>}
+      {loading && <p aria-label='calculating' className="calculating-text">Calculating...</p>}
       {!loading && result && (
         <div className="output-city-container">
           <div className="display-container">
