@@ -14,10 +14,11 @@ import { matchWeatherIcon } from "../../utils/matchWeatherIcon.tsx";
 import type { WeatherCardProps } from "../../types/index.ts";
 import type { WeatherResult } from "../../types/weatherResult.ts";
 
-export function WeatherCard({ city }: WeatherCardProps) {
+export function WeatherCard({ city, clicked }: WeatherCardProps) {
   const [result, setResult] = useState<WeatherResult | null>(null);
   const [weatherIcon, setWeatherIcon] = useState<{ iconId: string } | null>(null);
 
+  //fetches weather data every time clicked changes
   useEffect(() => {
     apiCall.getCityWeather(city)
       .then((res) => {
@@ -28,7 +29,7 @@ export function WeatherCard({ city }: WeatherCardProps) {
       .catch((error) => {
         console.error('Error fetching weather: ', error);
       });
-  }, []);
+  }, [clicked]);
 
   return (
     <div>

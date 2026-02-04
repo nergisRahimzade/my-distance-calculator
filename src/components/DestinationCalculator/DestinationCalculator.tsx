@@ -31,6 +31,7 @@ export function DestinationCalculator() {
 
   const theme = useMemo(() => getTheme(isDayTime), [isDayTime]);
 
+  //validation of inputs
   const isValid = () => {
     //reset & clear all errors
     setOriginError('');
@@ -70,6 +71,7 @@ export function DestinationCalculator() {
     detectDayNight(setIsDayTime);
   }, []);
 
+  //setting showOutput to true opens RouteResult component
   const handleClick = () => {
     isValid();
 
@@ -81,6 +83,7 @@ export function DestinationCalculator() {
     }
   };
 
+  //resetting all states to empty autocomplete fields and hiding output
   const handleReset = () => {
     setShowOutput(false);
     setShowCityInfo(false);
@@ -240,10 +243,10 @@ export function DestinationCalculator() {
                   <CityDetailsPanel city={destination} clicked={clicked} isDayTime={isDayTime} />
                 </TabPanel>
                 <TabPanel value='attractions'>
-                  <AttractionsList city={destination} isDayTime={isDayTime} />
+                  <AttractionsList city={destination} isDayTime={isDayTime} clicked={clicked} />
                 </TabPanel>
                 <TabPanel value='emergency'>
-                  <EmergencyContacts city={destination} isDayTime={isDayTime} />
+                  <EmergencyContacts city={destination} isDayTime={isDayTime} clicked={clicked} />
                 </TabPanel>
               </TabContext>
             </Box>

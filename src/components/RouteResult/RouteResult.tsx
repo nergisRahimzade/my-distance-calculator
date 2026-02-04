@@ -11,6 +11,7 @@ export function RouteResult({ origin, destination, mode, clicked }: RouteResultP
   const [result, setResult] = useState<DistanceResult | null>(null);
   const [loading, setLoading] = useState(false);
 
+  //fethces distance and duration whenever clicked changes
   useEffect(() => {
     setLoading(true);
     apiCall.getDistDur(origin, destination, mode)
@@ -39,10 +40,10 @@ export function RouteResult({ origin, destination, mode, clicked }: RouteResultP
 
             <div className="weather-display-container">
               <div className="weather-item">
-                <WeatherCard city={origin} />
+                <WeatherCard city={origin} clicked={clicked} />
               </div>
               <div className="weather-item">
-                <WeatherCard city={destination} />
+                <WeatherCard city={destination} clicked={clicked} />
               </div>
             </div>
 

@@ -5,6 +5,7 @@ import { calculatePopularityScore } from "../utils/calculatePopularityScore.ts";
 import { calculateFlightDistance } from "../utils/calculateFlightDistance.ts";
 
 export const apiCall = {
+  //returns weather data for given city
   getCityWeather: async (cityName: string) => {
     const data = await fetchCityWeather(cityName);
 
@@ -15,6 +16,7 @@ export const apiCall = {
     };
   },
 
+  //returns emergency contact numbers for given city
   getEmergencyNumber: async (cityName: string) => {
     const cities = citiesData.cities;
     const matchingCity = cities.find((city: any) => city.cityName === cityName);
@@ -36,7 +38,9 @@ export const apiCall = {
     return numbersData;
   },
 
+  //returns top 5 attractions for given city
   getCityInfo: async (cityName: string) => {
+    //filters out activities without booking links and ranks by popularity
     function getTopActivities(activities: Activity[]) {
       //rank by popularity
       const ranked = activities
@@ -51,7 +55,7 @@ export const apiCall = {
       return ranked;
     }
 
-
+    //returns list of top 5 activities for a city
     async function generateItinerary(cityName: string) {
       const coord = await fetchLocationCoordinates(cityName);
 
@@ -67,6 +71,7 @@ export const apiCall = {
 
   },
 
+  //returns the distance and duration between two cities based on selected mode
   getDistDur: async (city1: string, city2: string, mode: string) => {
     const startCoord = await fetchLocationCoordinates(city1);
     const endCoord = await fetchLocationCoordinates(city2);

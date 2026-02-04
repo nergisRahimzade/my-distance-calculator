@@ -6,9 +6,10 @@ import type { EmergencyContactsProps } from "../../types/index.ts";
 
 import './EmergencyContacts.css';
 
-export function EmergencyContacts({ city, isDayTime }: EmergencyContactsProps) {
+export function EmergencyContacts({ city, isDayTime, clicked }: EmergencyContactsProps) {
   const [numbersList, setNumbersList] = useState<any | null>(null);
 
+  //fetches emergency contact numbers every time clicked changes
   useEffect(() => {
     apiCall.getEmergencyNumber(city)
       .then((res) => {
@@ -17,7 +18,7 @@ export function EmergencyContacts({ city, isDayTime }: EmergencyContactsProps) {
       .catch((error) => {
         console.error('Error fetching emergency numbers : ', error);
       });
-  }, [city]);
+  }, [clicked]);
 
   return (
     <div>

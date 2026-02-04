@@ -1,11 +1,13 @@
 export type AttractionsListProps = {
   city: string,
-  isDayTime: boolean
+  isDayTime: boolean,
+  clicked: boolean
 };
 
 export type EmergencyContactsProps = {
   city: string,
-  isDayTime: boolean
+  isDayTime: boolean,
+  clicked: boolean
 };
 
 export type CityDetailsPanelProps = {
@@ -23,5 +25,6 @@ export type RouteResultProps = {
 };
 
 export type WeatherCardProps = {
-  city: string
+  city: string,
+  clicked: boolean
 };

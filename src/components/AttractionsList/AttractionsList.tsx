@@ -6,16 +6,17 @@ import { getAttractionsInfo } from "../../utils/getAttractionsInfo.tsx";
 import type { AttractionsListProps } from "../../types/index.ts";
 import { CopyButton } from "../CopyButton/CopyButton.tsx";
 
-export function AttractionsList({ city, isDayTime }: AttractionsListProps) {
+export function AttractionsList({ city, isDayTime, clicked }: AttractionsListProps) {
   const [attractionsInfo, setAttractionsInfo] = useState<any[] | null>(null);
   const [loading, setLoading] = useState(true);
 
+  //fetches attractions info every time clicked changes
   useEffect(() => {
     setLoading(true);
     const res = getAttractionsInfo(city);
     setAttractionsInfo(res);
     setLoading(false);
-  }, [city]);
+  }, [clicked]);
 
   if (loading) return <p>Loading attractions...</p>;
   if (!attractionsInfo?.length) return <p>No attractions found.</p>;

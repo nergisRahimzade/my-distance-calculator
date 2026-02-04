@@ -10,6 +10,7 @@ import { CopyButton } from '../CopyButton/CopyButton.tsx';
 export function CityDetailsPanel({ city, clicked, isDayTime }: CityDetailsPanelProps) {
   const [info, setInfo] = useState<Activity[] | null>(null);
 
+  //fetches city info (top 5 attractions) every time clicked changes
   useEffect(() => {
     apiCall.getCityInfo(city)
       .then((res) => {
