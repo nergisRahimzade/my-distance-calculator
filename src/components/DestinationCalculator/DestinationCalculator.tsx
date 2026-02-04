@@ -27,6 +27,8 @@ export function DestinationCalculator() {
   const [matchingCityError, setMatchingCityError] = useState('');
   const [isDayTime, setIsDayTime] = useState(true);
 
+  const autoCompleteStyle = { width: 300, fontFamily: 'Poppins' };
+
   const theme = useMemo(() => getTheme(isDayTime), [isDayTime]);
 
   const isValid = () => {
@@ -102,7 +104,7 @@ export function DestinationCalculator() {
             options={cityList}
             value={origin}
             onChange={(_, newValue) => setOrigin(newValue || '')}
-            sx={{ width: 300, fontFamily: 'Poppins' }}
+            sx={{ autoCompleteStyle }}
             renderInput={(params: any) =>
               <TextField
                 sx={{
@@ -125,7 +127,7 @@ export function DestinationCalculator() {
             options={cityList}
             value={destination}
             onChange={(_, newValue) => setDestination(newValue || '')}
-            sx={{ width: 300, fontFamily: 'Poppins' }}
+            sx={{ autoCompleteStyle }}
             renderInput={(params: any) =>
               <TextField
                 sx={{
@@ -147,7 +149,7 @@ export function DestinationCalculator() {
             options={['Foot', 'Car', 'Plane']}
             value={mode}
             onChange={(_, newValue) => setMode(newValue || '')}
-            sx={{ width: 300, fontFamily: 'Poppins' }}
+            sx={{ autoCompleteStyle }}
             renderInput={(params: any) =>
               <TextField
                 sx={{

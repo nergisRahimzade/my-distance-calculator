@@ -23,7 +23,7 @@ export function AttractionsList({ city, isDayTime }: AttractionsListProps) {
   return (
     <div>
       {attractionsInfo && attractionsInfo.map((attraction) => (
-        <div key={crypto.randomUUID()} className="attraction-item">
+        <div key={attraction.index} className="attraction-item">
           <p className={`attraction-name ${isDayTime ? 'day-theme' : 'night-theme'}`}> {attraction} </p> 
           <CopyButton textToCopy={attraction} isDayTime={isDayTime} />
         </div>
