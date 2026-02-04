@@ -16,7 +16,7 @@ export function detectDayNight(setIsDayTime: (value: React.SetStateAction<boolea
     }, 
     (error) => {
       //If location access denied, use browser's local time
-      console.log('Location access denied, using local time: ', error);
+      console.error('Location access denied, using local time: ', error);
       const hour = new Date().getHours();
       setIsDayTime(hour >= 6 && hour < 18);
     }

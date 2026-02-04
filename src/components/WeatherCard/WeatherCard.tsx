@@ -26,7 +26,7 @@ export function WeatherCard({ city }: WeatherCardProps) {
         setWeatherIcon(icon);
       })
       .catch((error) => {
-        console.log('Error fetching weather: ', error);
+        console.error('Error fetching weather: ', error);
       });
   }, []);
 

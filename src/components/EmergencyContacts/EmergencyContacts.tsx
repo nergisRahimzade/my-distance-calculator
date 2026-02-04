@@ -15,7 +15,7 @@ export function EmergencyContacts({ city, isDayTime }: EmergencyContactsProps) {
         setNumbersList(res);
       })
       .catch((error) => {
-        console.log('Error fetching emergency numbers : ', error);
+        console.error('Error fetching emergency numbers : ', error);
       });
   }, [city]);
 

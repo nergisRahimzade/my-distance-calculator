@@ -16,7 +16,7 @@ export function CityDetailsPanel({ city, clicked, isDayTime }: CityDetailsPanelP
         setInfo(res);
       })
       .catch((error) => {
-        console.log('Error fetching overview info: ', error);
+        console.error('Error fetching overview info: ', error);
       });
   }, [clicked]);
 
