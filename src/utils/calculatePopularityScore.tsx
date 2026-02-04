@@ -1,4 +1,4 @@
-import type { Activity } from "../types/activity";
+import type { Activity } from "../types/activity.ts";
 
 export function calculatePopularityScore(activity: Activity): number {
   const rating = parseFloat(activity.rating || '0');

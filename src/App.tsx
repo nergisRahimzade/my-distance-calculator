@@ -1,5 +1,5 @@
 import './App.css';
-import { DestinationCalculator } from './components/DestinationCalculator/DestinationCalculator';
+import { DestinationCalculator } from './components/DestinationCalculator/DestinationCalculator.tsx';
 
 function App() {
 
