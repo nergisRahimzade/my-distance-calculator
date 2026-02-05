@@ -44,6 +44,14 @@ html, body {
   box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
 }
 
+.search-container, 
+.result-container, 
+.city-info-container {
+  align-self: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
 .search-container {
   display: flex;
   flex-direction: row;
@@ -55,11 +63,16 @@ html, body {
   border-radius: 20px;
 }
 
+.search-container > div {
+  flex: 1;
+}
+
 .search-select-item {
   padding: 10px 60px;
 }
 
 .result-container {
+  margin: 10px;
   margin-bottom: 40px;
 }
 
@@ -72,7 +85,7 @@ html, body {
   margin: 10px;
   background-color: white; 
   border-radius: 20px;
-  padding: 20px 440px;
+  padding: 20px;
 }
 
 .city-guide-item {
