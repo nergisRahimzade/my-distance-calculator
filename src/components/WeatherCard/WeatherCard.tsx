@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import '../../../../assets/weather-icons/clear-sky.png';
-import '../../../../assets/weather-icons/few-clouds.png';
-import '../../../../assets/weather-icons/mist.png';
-import '../../../../assets/weather-icons/rain.png';
-import '../../../../assets/weather-icons/scattered-clouds.png';
-import '../../../../assets/weather-icons/snow.png';
-import '../../../../assets/weather-icons/thunderstorm.png';
+import '../../assets/weather-icons/clear-sky.png';
+import '../../assets/weather-icons/few-clouds.png';
+import '../../assets/weather-icons/mist.png';
+import '../../assets/weather-icons/rain.png';
+import '../../assets/weather-icons/scattered-clouds.png';
+import '../../assets/weather-icons/snow.png';
+import '../../assets/weather-icons/thunderstorm.png';
 import './WeatherCard.css';
 
 import { apiCall } from "../../services/apiCalls.ts";

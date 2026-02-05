@@ -119,12 +119,11 @@ export function DestinationCalculator() {
                   }
                 }}
                 {...params}
-                label='Origin city name'
+                label='From'
                 helperText={originError === '' ? '' : originError}
               />
             }
           />
-
 
           <Autocomplete
             aria-label='Choose destination city'
@@ -143,7 +142,7 @@ export function DestinationCalculator() {
                   }
                 }}
                 {...params}
-                label='Destination city name'
+                label='To'
                 helperText={(destinationError === '' ? '' : destinationError) || (matchingCityError === '' ? '' : matchingCityError)}
               />
             }
@@ -166,7 +165,7 @@ export function DestinationCalculator() {
                   }
                 }}
                 {...params}
-                label='Mode of transportation'
+                label='Mode'
                 helperText={modeError === '' ? '' : modeError}
               />
             }

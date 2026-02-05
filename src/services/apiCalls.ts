@@ -1,8 +1,8 @@
 import { fetchCityWeather, fetchEmergencyNumbers, fetchAmadeusAccessToken, fetchAmadeusActivities, fetchLocationCoordinates, fetchRouteDirections } from "./apiClient.ts";
 import citiesData from '../constants/cities.json';
 import type { Activity } from "../types/activity.ts";
-import { calculatePopularityScore } from "../utils/calculatePopularityScore.ts";
-import { calculateFlightDistance } from "../utils/calculateFlightDistance.ts";
+import { calculatePopularityScore } from "../utils/calculatePopularityScore.tsx";
+import { calculateFlightDistance } from "../utils/calculateFlightDistance.tsx";
 
 export const apiCall = {
   //returns weather data for given city
