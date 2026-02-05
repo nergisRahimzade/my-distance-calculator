@@ -37,7 +37,7 @@ export function WeatherCard({ city, clicked }: WeatherCardProps) {
         <div className="city-weather-info-container">
           <div className="city-weather-info">
             <img className="weather-icon" aria-label='weather-icon' src={new URL(
-              `../../../../assets/weather-icons/${weatherIcon.iconId}.png`,
+              `../../assets/weather-icons/${weatherIcon.iconId}.png`,
               import.meta.url
             ).href} alt={`${city} weather`} />
             <p> {city} </p>
