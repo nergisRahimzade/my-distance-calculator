@@ -198,6 +198,7 @@ export function DestinationCalculator() {
               mode={mode}
               clicked={clicked}
               setClicked={setClicked}
+              isDayTime={isDayTime}
             />
           )}
         </div>

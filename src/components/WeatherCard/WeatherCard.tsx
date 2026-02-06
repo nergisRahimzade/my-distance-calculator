@@ -14,7 +14,7 @@ import { matchWeatherIcon } from "../../utils/matchWeatherIcon.tsx";
 import type { WeatherCardProps } from "../../types/index.ts";
 import type { WeatherResult } from "../../types/weatherResult.ts";
 
-export function WeatherCard({ city, clicked }: WeatherCardProps) {
+export function WeatherCard({ city, clicked, isDayTime }: WeatherCardProps) {
   const [result, setResult] = useState<WeatherResult | null>(null);
   const [weatherIcon, setWeatherIcon] = useState<{ iconId: string } | null>(null);
 
@@ -35,7 +35,7 @@ export function WeatherCard({ city, clicked }: WeatherCardProps) {
     <div>
       {result && weatherIcon && (
         <div className="city-weather-info-container">
-          <div className="city-weather-info">
+          <div className={"city-weather-info" + (isDayTime ? 'day-theme' : 'night-theme')}>
             <img className="weather-icon" aria-label='weather-icon' src={new URL(
               `../../assets/weather-icons/${weatherIcon.iconId}.png`,
               import.meta.url

@@ -7,7 +7,7 @@ import { apiCall } from '../../services/apiCalls.ts';
 import type { RouteResultProps } from "../../types/index.ts";
 import type { DistanceResult } from "../../types/distanceResult.ts";
 
-export function RouteResult({ origin, destination, mode, clicked }: RouteResultProps) {
+export function RouteResult({ origin, destination, mode, clicked, isDayTime }: RouteResultProps) {
   const [result, setResult] = useState<DistanceResult | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -33,17 +33,17 @@ export function RouteResult({ origin, destination, mode, clicked }: RouteResultP
       {!loading && result && (
         <div className="output-city-container">
           <div className="display-container">
-            <div className="distance-duration-display-container">
-              <p className="distance-display-item">Distance: {result.distanceKm} km</p>
-              <p className="duration-display-item">Duration: {Math.floor(result.durationMinutes / 60)} hours {result.durationMinutes % 60} minutes </p>
+            <div className={"distance-duration-display-container" + (isDayTime ? ' day-theme' : ' night-theme')}>
+              <p className={"distance-display-item" + (isDayTime ? 'day-theme' : 'night-theme')}>Distance: {result.distanceKm} km</p>
+              <p className={"duration-display-item" + (isDayTime ? 'day-theme' : 'night-theme')}>Duration: {Math.floor(result.durationMinutes / 60)} h {result.durationMinutes % 60} min </p>
             </div>
 
-            <div className="weather-display-container">
+            <div className={"weather-display-container" + (isDayTime ? ' day-theme' : ' night-theme')}>
               <div className="weather-item">
-                <WeatherCard city={origin} clicked={clicked} />
+                <WeatherCard city={origin} clicked={clicked} isDayTime={isDayTime} />
               </div>
               <div className="weather-item">
-                <WeatherCard city={destination} clicked={clicked} />
+                <WeatherCard city={destination} clicked={clicked} isDayTime={isDayTime} />
               </div>
             </div>
 

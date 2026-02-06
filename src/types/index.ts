@@ -21,10 +21,12 @@ export type RouteResultProps = {
   destination: string,
   mode: string,
   clicked: boolean,
-  setClicked: (value: React.SetStateAction<boolean>) => void
+  setClicked: (value: React.SetStateAction<boolean>) => void,
+  isDayTime: boolean
 };
 
 export type WeatherCardProps = {
   city: string,
-  clicked: boolean
+  clicked: boolean,
+  isDayTime: boolean
 };

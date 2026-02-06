@@ -4,6 +4,15 @@
   gap: 10px;
 }
 
+.city-weather-info .day-theme {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.city-weather-info .night-theme {
+  background-color: rgba(13, 27, 42, 0.5);
+  color: #fff;
+}
+
 .weather-icon {
   height: 40px;
   width: 40px;

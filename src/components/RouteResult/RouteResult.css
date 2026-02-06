@@ -34,6 +34,17 @@
   gap: 20px;
 }
 
+.distance-display-item .day-theme,
+.duration-display-item .day-theme {
+  background-color: rgba(255, 245, 230, 0.9); /* Warm cream */
+}
+
+.distance-display-item .night-theme,
+.duration-display-item .night-theme {
+  background-color: rgba(30, 58, 95, 0.6); /* Dark blue matching theme */
+  color: #fff;
+}
+
 .distance-display-item {
   background-color: rgb(255, 221, 249);
   padding: 40px 60px;
