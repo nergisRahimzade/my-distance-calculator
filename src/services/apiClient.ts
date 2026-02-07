@@ -15,6 +15,9 @@ const API_BASE_URLS = {
   emergencyNumbers: '/api/emergency'
 };
 
+// Cache for location coordinates to prevent duplicate API calls
+const locationCache: Map<string, { lat: number; lon: number }> = new Map();
+
 export const fetchCityWeather = async (cityName: string) => {
   try {
     const url = `${API_BASE_URLS.openweathermap}/data/2.5/weather?q=${cityName}&appid=${API_KEYS.openweathermap}&units=metric`;
@@ -94,10 +97,35 @@ export const fetchAmadeusActivities = async (lat: number, lon: number, accessTok
   }
 };
 
+//AI---
+
 export const fetchLocationCoordinates = async (city: string) => {
+  // Check in-memory cache first
+  if (locationCache.has(city)) {
+    return locationCache.get(city)!;
+  }
+
+  // Check localStorage cache
+  const localStorageKey = 'locationCoordinatesCache';
+  let localCache: Record<string, { lat: number; lon: number }> = {};
+  try {
+    const stored = localStorage.getItem(localStorageKey);
+    if (stored) {
+      localCache = JSON.parse(stored);
+      if (localCache[city]) {
+        // Update in-memory cache for faster future access
+        locationCache.set(city, localCache[city]);
+        return localCache[city];
+      }
+    }
+  } catch (e) {
+    // Ignore JSON parse errors
+  }
+
+  //---
+
   try {
     const url = `${API_BASE_URLS.openstreetmap}/search?q=${encodeURIComponent(city)}&format=json&limit=1`;
-
     const response = await fetch(url, {
       headers: {
         'User-Agent': 'TravelDistanceApp/1.0'
@@ -113,10 +141,27 @@ export const fetchLocationCoordinates = async (city: string) => {
     if (!data || data.length === 0)
       throw new Error(`City not found: ${city}`);
 
-    return {
+    const coordinates = {
       lat: parseFloat(data[0].lat),
       lon: parseFloat(data[0].lon)
     };
+
+    //AI---
+
+    // Cache in memory
+    locationCache.set(city, coordinates);
+    // Cache in localStorage
+    localCache[city] = coordinates;
+    try {
+      localStorage.setItem(localStorageKey, JSON.stringify(localCache));
+    } catch (e) {
+      // Ignore localStorage errors
+    }
+
+    return coordinates;
+
+    //---
+    
   } catch (error) {
     console.error('Error fetching lat lon from openstreetmap: ', error);
     throw error;
