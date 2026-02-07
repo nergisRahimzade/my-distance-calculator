@@ -17,6 +17,8 @@ const API_BASE_URLS = {
 
 // Cache for location coordinates to prevent duplicate API calls
 const locationCache: Map<string, { lat: number; lon: number }> = new Map();
+// Promise cache for in-progress coordinate fetches
+const locationPromiseCache: Map<string, Promise<{ lat: number; lon: number }>> = new Map();
 
 export const fetchCityWeather = async (cityName: string) => {
   try {
@@ -122,70 +124,108 @@ export const fetchLocationCoordinates = async (city: string) => {
     // Ignore JSON parse errors
   }
 
-  //---
-
-  try {
-    const url = `${API_BASE_URLS.openstreetmap}/search?q=${encodeURIComponent(city)}&format=json&limit=1`;
-    const response = await fetch(url, {
-      headers: {
-        'User-Agent': 'TravelDistanceApp/1.0'
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch coordinates for ${city}`);
-    }
-
-    const data = await response.json();
-
-    if (!data || data.length === 0)
-      throw new Error(`City not found: ${city}`);
-
-    const coordinates = {
-      lat: parseFloat(data[0].lat),
-      lon: parseFloat(data[0].lon)
-    };
-
-    //AI---
-
-    // Cache in memory
-    locationCache.set(city, coordinates);
-    // Cache in localStorage
-    localCache[city] = coordinates;
-    try {
-      localStorage.setItem(localStorageKey, JSON.stringify(localCache));
-    } catch (e) {
-      // Ignore localStorage errors
-    }
-
-    return coordinates;
-
-    //---
-    
-  } catch (error) {
-    console.error('Error fetching lat lon from openstreetmap: ', error);
-    throw error;
+  // If a fetch is already in progress for this city, return the promise
+  if (locationPromiseCache.has(city)) {
+    return locationPromiseCache.get(city)!;
   }
+
+  // Start a new fetch and cache the promise
+  const fetchPromise = (async () => {
+    try {
+      const url = `${API_BASE_URLS.openstreetmap}/search?q=${encodeURIComponent(city)}&format=json&limit=1`;
+      const response = await fetch(url, {
+        headers: {
+          'User-Agent': 'TravelDistanceApp/1.0'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch coordinates for ${city}`);
+      }
+
+      const data = await response.json();
+
+      if (!data || data.length === 0)
+        throw new Error(`City not found: ${city}`);
+
+      const coordinates = {
+        lat: parseFloat(data[0].lat),
+        lon: parseFloat(data[0].lon)
+      };
+
+      // Cache in memory
+      locationCache.set(city, coordinates);
+      // Cache in localStorage
+      localCache[city] = coordinates;
+      try {
+        localStorage.setItem(localStorageKey, JSON.stringify(localCache));
+      } catch (e) {
+        // Ignore localStorage errors
+      }
+
+      return coordinates;
+    } catch (error) {
+      console.error('Error fetching lat lon from openstreetmap: ', error);
+      throw error;
+    } finally {
+      // Remove promise from cache after completion
+      locationPromiseCache.delete(city);
+    }
+  })();
+  locationPromiseCache.set(city, fetchPromise);
+  return fetchPromise;
 };
 
-export const fetchRouteDirections = async (
+//---
+
+// AI---
+
+
+type FetchRouteDirectionsType = ((
   startLon: number,
   startLat: number,
   endLon: number,
   endLat: number,
   profile: string
+) => Promise<any>) & { _promiseCache?: Map<string, Promise<any>> };
+
+export const fetchRouteDirections: FetchRouteDirectionsType = async (
+  startLon,
+  startLat,
+  endLon,
+  endLat,
+  profile
 ) => {
-  try {
-    const url = `${API_BASE_URLS.openrouteservice}/${profile}?api_key=${API_KEYS.openroute}&start=${startLon},${startLat}&end=${endLon},${endLat}`;
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      throw new Error(`OpenRouteService error: ${response.status}`);
-    }
-
-    return response.json();
-  } catch (error) {
-    console.error('Error fetching route directions from OpenRouteService: ', error);
-    throw error;
+  // Promise cache for in-progress route fetches
+  const routeKey = `${profile}:${startLon},${startLat}->${endLon},${endLat}`;
+  if (!fetchRouteDirections._promiseCache) {
+    fetchRouteDirections._promiseCache = new Map();
   }
+  const promiseCache: Map<string, Promise<any>> = fetchRouteDirections._promiseCache;
+
+  if (promiseCache.has(routeKey)) {
+    return promiseCache.get(routeKey)!;
+  }
+
+  const fetchPromise = (async () => {
+    try {
+      const url = `${API_BASE_URLS.openrouteservice}/${profile}?api_key=${API_KEYS.openroute}&start=${startLon},${startLat}&end=${endLon},${endLat}`;
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`OpenRouteService error: ${response.status}`);
+      }
+
+      return response.json();
+    } catch (error) {
+      console.error('Error fetching route directions from OpenRouteService: ', error);
+      throw error;
+    } finally {
+      promiseCache.delete(routeKey);
+    }
+  })();
+  promiseCache.set(routeKey, fetchPromise);
+  return fetchPromise;
 };
+
+//---

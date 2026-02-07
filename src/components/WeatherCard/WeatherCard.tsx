@@ -18,18 +18,43 @@ export function WeatherCard({ city, clicked, isDayTime }: WeatherCardProps) {
   const [result, setResult] = useState<WeatherResult | null>(null);
   const [weatherIcon, setWeatherIcon] = useState<{ iconId: string } | null>(null);
 
-  //fetches weather data every time clicked changes
+  //AI---
+
   useEffect(() => {
+    const localStorageKey = 'weatherResultsCache';
+    let weatherCache: Record<string, WeatherResult> = {};
+    try {
+      const stored = localStorage.getItem(localStorageKey);
+      if (stored) {
+        weatherCache = JSON.parse(stored);
+        if (weatherCache[city]) {
+          setResult(weatherCache[city]);
+          setWeatherIcon(matchWeatherIcon(weatherCache[city].icon));
+          return;
+        }
+      }
+    } catch (e) {
+      // Ignore JSON parse errors
+    }
+
     apiCall.getCityWeather(city)
       .then((res) => {
         setResult(res);
-        const icon = matchWeatherIcon(res.icon);
-        setWeatherIcon(icon);
+        setWeatherIcon(matchWeatherIcon(res.icon));
+        // Cache result in localStorage
+        weatherCache[city] = res;
+        try {
+          localStorage.setItem(localStorageKey, JSON.stringify(weatherCache));
+        } catch (e) {
+          // Ignore localStorage errors
+        }
       })
       .catch((error) => {
         console.error('Error fetching weather: ', error);
       });
-  }, [clicked]);
+  }, [clicked, city]);
+
+  //---
 
   return (
     <div>
