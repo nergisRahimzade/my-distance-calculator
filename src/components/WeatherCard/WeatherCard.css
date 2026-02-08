@@ -1,3 +1,7 @@
+.city-weather-info-container {
+  width: 300px;
+}
+
 .city-weather-info {
   display: flex;
   flex-direction: row;
@@ -13,7 +17,26 @@
   color: #fff;
 }
 
+.weather-icon-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 25px;
+}
+
+.local-time-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
 .weather-icon {
   height: 40px;
   width: 40px;
+}
+
+.calendar-icon {
+  height: 30px;
+  width: 30px;
 }

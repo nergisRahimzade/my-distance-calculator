@@ -28,5 +28,5 @@ export type RouteResultProps = {
 export type WeatherCardProps = {
   city: string,
   clicked: boolean,
-  isDayTime: boolean
+  isDayTime: boolean,
 };

@@ -17,7 +17,7 @@ export function CopyButton({textToCopy, isDayTime}: {textToCopy: string, isDayTi
       <Tooltip title={copied ? 'Copied!' : 'Copy'}>
         <IconButton 
           aria-label='Copy to clipboard'
-          sx={{ color: isDayTime ? 'white' : 'black' }} 
+          sx={{ color: isDayTime ? 'black' : 'white' }} 
           onClick={handleCopy} 
           size='small'
         >

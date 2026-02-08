@@ -7,6 +7,7 @@ import '../../assets/weather-icons/scattered-clouds.png';
 import '../../assets/weather-icons/snow.png';
 import '../../assets/weather-icons/thunderstorm.png';
 import './WeatherCard.css';
+import '../../assets/other-icons/calendar.png';
 
 import { apiCall } from "../../services/apiCalls.ts";
 import { matchWeatherIcon } from "../../utils/matchWeatherIcon.tsx";
@@ -14,9 +15,20 @@ import { matchWeatherIcon } from "../../utils/matchWeatherIcon.tsx";
 import type { WeatherCardProps } from "../../types/index.ts";
 import type { WeatherResult } from "../../types/weatherResult.ts";
 
+import { DateTime } from "luxon";
+import cities from '../../constants/cities.json';
+
 export function WeatherCard({ city, clicked, isDayTime }: WeatherCardProps) {
   const [result, setResult] = useState<WeatherResult | null>(null);
   const [weatherIcon, setWeatherIcon] = useState<{ iconId: string } | null>(null);
+
+  const matchingCity = cities.cities.find((cityItem) => {
+    return cityItem.cityName.toLowerCase() === city.toLowerCase();
+  });
+
+  const timeZone = matchingCity?.timeZone;
+
+  const localTime = getLocalTime(timeZone ? timeZone : '');
 
   //AI---
 
@@ -61,10 +73,16 @@ export function WeatherCard({ city, clicked, isDayTime }: WeatherCardProps) {
       {result && weatherIcon && (
         <div className="city-weather-info-container">
           <div className={"city-weather-info" + (isDayTime ? 'day-theme' : 'night-theme')}>
-            <img className="weather-icon" aria-label='weather-icon' src={new URL(
-              `../../assets/weather-icons/${weatherIcon.iconId}.png`,
-              import.meta.url
-            ).href} alt={`${city} weather`} />
+            <div className="weather-icon-container">
+              <img className="weather-icon" aria-label='weather-icon' src={new URL(
+                `../../assets/weather-icons/${weatherIcon.iconId}.png`,
+                import.meta.url
+              ).href} alt={`${city} weather`} />
+              <div className="local-time-container">
+                <img className="calendar-icon" aria-label='local-time-and-date' src={new URL('../../assets/other-icons/calendar.png', import.meta.url).href} /> <p> {localTime} </p>
+              </div>
+            </div>
+            
             <p> {city} </p>
           </div>
           <p className="temp-info"> Temp.: {result.temp}°C </p>
@@ -73,4 +91,12 @@ export function WeatherCard({ city, clicked, isDayTime }: WeatherCardProps) {
       )}
     </div>
   );
+}
+
+function getLocalTime(timeZone: string) {
+  if (!timeZone) return null;
+
+  return DateTime.now()
+    .setZone(timeZone)
+    .toFormat("EEEE, MMM d yyyy, HH:mm");
 }

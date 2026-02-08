@@ -24,9 +24,9 @@ export function AttractionsList({ city, isDayTime, clicked }: AttractionsListPro
   return (
     <div>
       {attractionsInfo && attractionsInfo.map((attraction) => (
-        <div key={attraction.index} className="attraction-item">
+        <div key={attraction} className="attraction-item">
           <p className={`attraction-name ${isDayTime ? 'day-theme' : 'night-theme'}`}> {attraction} </p> 
-          <CopyButton textToCopy={attraction} isDayTime={isDayTime} />
+          <CopyButton textToCopy={attraction} isDayTime={isDayTime}  />
         </div>
       ))}
     </div>

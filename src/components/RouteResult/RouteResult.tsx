@@ -34,8 +34,8 @@ export function RouteResult({ origin, destination, mode, clicked, isDayTime }: R
         <div className="output-city-container">
           <div className="display-container">
             <div className={"distance-duration-display-container" + (isDayTime ? ' day-theme' : ' night-theme')}>
-              <p className={"distance-display-item" + (isDayTime ? 'day-theme' : 'night-theme')}>Distance: {result.distanceKm} km</p>
-              <p className={"duration-display-item" + (isDayTime ? 'day-theme' : 'night-theme')}>Duration: {Math.floor(result.durationMinutes / 60)} h {result.durationMinutes % 60} min </p>
+              <p className={"distance-display-item" + (isDayTime ? ' day-theme' : ' night-theme')}>Distance: {result.distanceKm} km</p>
+              <p className={"duration-display-item" + (isDayTime ? ' day-theme' : ' night-theme')}>Duration: {Math.floor(result.durationMinutes / 60)} hours {result.durationMinutes % 60} minutes </p>
             </div>
 
             <div className={"weather-display-container" + (isDayTime ? ' day-theme' : ' night-theme')}>
@@ -43,7 +43,7 @@ export function RouteResult({ origin, destination, mode, clicked, isDayTime }: R
                 <WeatherCard city={origin} clicked={clicked} isDayTime={isDayTime} />
               </div>
               <div className="weather-item">
-                <WeatherCard city={destination} clicked={clicked} isDayTime={isDayTime} />
+                <WeatherCard city={destination} clicked={clicked} isDayTime={isDayTime}  />
               </div>
             </div>
 

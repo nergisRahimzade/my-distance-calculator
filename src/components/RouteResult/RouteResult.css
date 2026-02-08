@@ -15,7 +15,8 @@
 
 .calculating-text {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
+  font-family: Poppins;
 }
 
 .display-container {
@@ -32,6 +33,10 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
+}
+
+.distance-duration-display-container .day-theme {
+  background-color: rgba(255, 245, 230, 0.9); /* Warm cream */
 }
 
 .distance-display-item .day-theme,
