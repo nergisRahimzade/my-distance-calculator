@@ -8,10 +8,10 @@ export function detectDayNight(setIsDayTime: (value: React.SetStateAction<boolea
 
   navigator.geolocation.getCurrentPosition(
     (position) => {
-      const { latitude, longitude } = position.coords;
+      const { longitude } = position.coords;
 
       //Calculate if it's day or night based on location
-      const isDay = calculateDayTime(latitude, longitude);
+      const isDay = calculateDayTime(longitude);
       setIsDayTime(isDay);
     }, 
     (error) => {
@@ -23,7 +23,7 @@ export function detectDayNight(setIsDayTime: (value: React.SetStateAction<boolea
   );
 }
 
-function calculateDayTime(lat: number, lon: number) {
+function calculateDayTime( lon: number) {
   const now = new Date();
 
   const utcHour = now.getUTCHours();

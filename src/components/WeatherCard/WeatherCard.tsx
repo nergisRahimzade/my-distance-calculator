@@ -73,6 +73,7 @@ export function WeatherCard({ city, clicked, isDayTime }: WeatherCardProps) {
       {result && weatherIcon && (
         <div className="city-weather-info-container">
           <div className={"city-weather-info" + (isDayTime ? 'day-theme' : 'night-theme')}>
+            <p className="city-name"> {city} </p>
             <div className="weather-icon-container">
               <img className="weather-icon" aria-label='weather-icon' src={new URL(
                 `../../assets/weather-icons/${weatherIcon.iconId}.png`,
@@ -82,8 +83,6 @@ export function WeatherCard({ city, clicked, isDayTime }: WeatherCardProps) {
                 <img className="calendar-icon" aria-label='local-time-and-date' src={new URL('../../assets/other-icons/calendar.png', import.meta.url).href} /> <p> {localTime} </p>
               </div>
             </div>
-            
-            <p> {city} </p>
           </div>
           <p className="temp-info"> Temp.: {result.temp}°C </p>
           <p className="felt-temp-info"> Felt Temp.:  {result.feltTemp}°C </p>

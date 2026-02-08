@@ -14,11 +14,13 @@ export type Activity = {
   price?: Price;
 }
 
+/*
 // Geographic coordinates
 interface GeoCode {
   latitude: number;
   longitude: number;
 }
+*/
 
 // Pricing information
 interface Price {

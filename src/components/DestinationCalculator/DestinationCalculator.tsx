@@ -26,6 +26,7 @@ export function DestinationCalculator() {
   const [modeError, setModeError] = useState('');
   const [matchingCityError, setMatchingCityError] = useState('');
   const [isDayTime, setIsDayTime] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   const autoCompleteStyle = { width: 300, fontFamily: 'Poppins' };
 
@@ -80,6 +81,7 @@ export function DestinationCalculator() {
       setShowCityInfo(true);
       setClicked(true);
       setTimeout(() => setClicked(false), 2000);
+      setIsVisible(true);
     }
   };
 
@@ -90,6 +92,7 @@ export function DestinationCalculator() {
     setOrigin('');
     setDestination('');
     setMode('');
+    setIsVisible(false);
   };
 
   const handleTabChange = (_event: SyntheticEvent, newValue: string) => {
@@ -179,13 +182,16 @@ export function DestinationCalculator() {
             Calculate
           </Button>
 
-          <Button
-            onClick={handleReset}
-            sx={{ fontFamily: 'Poppins', fontSize: 20, padding: 2, borderWidth: 1, borderColor: 'rgb(25, 118, 210)' }}
-            variant='outlined'
-          >
-            Reset
-          </Button>
+          {isVisible && (
+            <Button
+              onClick={handleReset}
+              sx={{ fontFamily: 'Poppins', fontSize: 20, padding: 2, borderWidth: 1, borderColor: 'rgb(25, 118, 210)' }}
+              variant='outlined'
+
+            >
+              Reset
+            </Button>
+          )}
 
 
         </div>
