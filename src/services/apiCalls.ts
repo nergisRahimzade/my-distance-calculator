@@ -57,10 +57,15 @@ export const apiCall = {
 
     //returns list of top 5 activities for a city
     async function generateItinerary(cityName: string) {
-      const coord = await fetchLocationCoordinates(cityName);
+      const result = await fetchLocationCoordinates(cityName);
+      const coord = {
+        lat: parseFloat(result[0].lat),
+        lon: parseFloat(result[0].lon)
+      };
 
       const token = await fetchAmadeusAccessToken();
-      const activities = await fetchAmadeusActivities(coord.lat, coord.lon, token);
+      const data = await fetchAmadeusActivities(coord.lat, coord.lon, token);
+      const activities = data.data;
       const famousActivities = getTopActivities(activities);
 
       return famousActivities;

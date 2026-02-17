@@ -1,6 +1,6 @@
-import type { DistanceResult } from "../types/distanceResult.ts";
+import type { DistanceDataResult } from "../types/apiResults/distanceDataResult.ts";
 
-export function calculateFlightDistance(origin: { lat: number, lon: number }, destination: { lat: number, lon: number }): DistanceResult {
+export function calculateFlightDistance(origin: { lat: number, lon: number }, destination: { lat: number, lon: number }): DistanceDataResult {
     // Haversine formula for great circle distance
     const R = 6371; // Earth's radius in km
     const dLat = (destination.lat - origin.lat) * Math.PI / 180;

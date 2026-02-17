@@ -1,3 +1,5 @@
+import type { Price } from "./price";
+
 export type Activity = {
   score: number;
   id: string;
@@ -12,18 +14,4 @@ export type Activity = {
   pictures?: string[];
   bookingLink?: string;
   price?: Price;
-}
-
-/*
-// Geographic coordinates
-interface GeoCode {
-  latitude: number;
-  longitude: number;
-}
-*/
-
-// Pricing information
-interface Price {
-  currencyCode: string; // e.g., "EUR", "USD", "GBP"
-  amount: string; // String representation of decimal (e.g., "45.00")
 }

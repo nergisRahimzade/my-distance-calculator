@@ -13,13 +13,13 @@ import { apiCall } from "../../services/apiCalls.ts";
 import { matchWeatherIcon } from "../../utils/matchWeatherIcon.tsx";
 
 import type { WeatherCardProps } from "../../types/index.ts";
-import type { WeatherResult } from "../../types/weatherResult.ts";
+import type { WeatherDataResult } from "../../types/apiResults/weatherDataResult.ts";
 
 import { DateTime } from "luxon";
 import cities from '../../constants/cities.json';
 
 export function WeatherCard({ city, clicked, isDayTime }: WeatherCardProps) {
-  const [result, setResult] = useState<WeatherResult | null>(null);
+  const [result, setResult] = useState<WeatherDataResult | null>(null);
   const [weatherIcon, setWeatherIcon] = useState<{ iconId: string } | null>(null);
 
   const matchingCity = cities.cities.find((cityItem) => {
@@ -34,7 +34,7 @@ export function WeatherCard({ city, clicked, isDayTime }: WeatherCardProps) {
 
   useEffect(() => {
     const localStorageKey = 'weatherResultsCache';
-    let weatherCache: Record<string, WeatherResult> = {};
+    let weatherCache: Record<string, WeatherDataResult> = {};
     try {
       const stored = localStorage.getItem(localStorageKey);
       if (stored) {

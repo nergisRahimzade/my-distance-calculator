@@ -1,0 +1,102 @@
+//fetchLocationCoordinates---
+// Cache for location coordinates to prevent duplicate API calls
+const locationCache: Map<string, { lat: number; lon: number }> = new Map();
+// Promise cache for in-progress coordinate fetches
+const locationPromiseCache: Map<string, Promise<{ lat: number; lon: number }>> = new Map();
+
+// Check in-memory cache first
+if (locationCache.has(city)) {
+  return locationCache.get(city)!;
+}
+
+// Check localStorage cache
+const localStorageKey = 'locationCoordinatesCache';
+let localCache: Record<string, { lat: number; lon: number }> = {};
+try {
+  const stored = localStorage.getItem(localStorageKey);
+  if (stored) {
+    localCache = JSON.parse(stored);
+    if (localCache[city]) {
+      // Update in-memory cache for faster future access
+      locationCache.set(city, localCache[city]);
+      return localCache[city];
+    }
+  }
+} catch (e) {
+  // Ignore JSON parse errors
+}
+
+// If a fetch is already in progress for this city, return the promise
+if (locationPromiseCache.has(city)) {
+  return locationPromiseCache.get(city)!;
+}
+
+// Start a new fetch and cache the promise
+
+// Cache in memory
+locationCache.set(city, coordinates);
+// Cache in localStorage
+localCache[city] = coordinates;
+try {
+  localStorage.setItem(localStorageKey, JSON.stringify(localCache));
+} catch (e) {
+  // Ignore localStorage errors
+}
+
+finally {
+  // Remove promise from cache after completion
+  locationPromiseCache.delete(city);
+}
+
+locationPromiseCache.set(city, fetchPromise);
+//---
+
+//AI---
+type FetchRouteDirectionsType = ((
+  startLon: number,
+  startLat: number,
+  endLon: number,
+  endLat: number,
+  profile: string
+) => Promise<any>) & { _promiseCache?: Map<string, Promise<any>> };
+
+export const fetchRouteDirections: FetchRouteDirectionsType = async (
+  startLon,
+  startLat,
+  endLon,
+  endLat,
+  profile
+) => {
+  // Promise cache for in-progress route fetches
+  const routeKey = `${profile}:${startLon},${startLat}->${endLon},${endLat}`;
+  if (!fetchRouteDirections._promiseCache) {
+    fetchRouteDirections._promiseCache = new Map();
+  }
+  const promiseCache: Map<string, Promise<any>> = fetchRouteDirections._promiseCache;
+
+  if (promiseCache.has(routeKey)) {
+    return promiseCache.get(routeKey)!;
+  }
+
+  const fetchPromise = (async () => {
+    try {
+      const url = `${API_BASE_URLS.openrouteservice}/${profile}?api_key=${API_KEYS.openroute}&start=${startLon},${startLat}&end=${endLon},${endLat}`;
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`OpenRouteService error: ${response.status}`);
+      }
+
+      return response.json();
+    } catch (error) {
+      console.error('Error fetching route directions from OpenRouteService: ', error);
+      throw error;
+    } finally {
+      promiseCache.delete(routeKey);
+    }
+  })();
+  promiseCache.set(routeKey, fetchPromise);
+  return fetchPromise;
+};
+
+//----

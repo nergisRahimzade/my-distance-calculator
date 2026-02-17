@@ -1,24 +1,4 @@
-const API_KEYS = {
-  openroute: import.meta.env.VITE_OPENROUTE_KEY,
-  openweathermap: import.meta.env.VITE_OPENWEATHERMAP_KEY,
-  amadeus: {
-    key: import.meta.env.VITE_AMADEUS_API_KEY,
-    secret: import.meta.env.VITE_AMADEUS_API_SECRET
-  }
-};
-
-const API_BASE_URLS = {
-  openrouteservice: import.meta.env.VITE_OPENROUTESERVICE_BASE_URL,
-  openstreetmap: import.meta.env.VITE_OPENSTREETMAP_BASE_URL,
-  openweathermap: 'https://api.openweathermap.org',
-  amadeus: 'https://test.api.amadeus.com',
-  emergencyNumbers: '/api/emergency'
-};
-
-// Cache for location coordinates to prevent duplicate API calls
-const locationCache: Map<string, { lat: number; lon: number }> = new Map();
-// Promise cache for in-progress coordinate fetches
-const locationPromiseCache: Map<string, Promise<{ lat: number; lon: number }>> = new Map();
+import { API_BASE_URLS, API_KEYS } from "../types/constants/apiConstants.ts";
 
 export const fetchCityWeather = async (cityName: string) => {
   try {
@@ -92,44 +72,16 @@ export const fetchAmadeusActivities = async (lat: number, lon: number, accessTok
 
     const data = await response.json();
 
-    return data.data;
+    return data;
   } catch (error) {
     console.error('Error fetching amadeus activities: ', error);
     throw error;
   }
 };
 
-//AI---
 
 export const fetchLocationCoordinates = async (city: string) => {
-  // Check in-memory cache first
-  if (locationCache.has(city)) {
-    return locationCache.get(city)!;
-  }
 
-  // Check localStorage cache
-  const localStorageKey = 'locationCoordinatesCache';
-  let localCache: Record<string, { lat: number; lon: number }> = {};
-  try {
-    const stored = localStorage.getItem(localStorageKey);
-    if (stored) {
-      localCache = JSON.parse(stored);
-      if (localCache[city]) {
-        // Update in-memory cache for faster future access
-        locationCache.set(city, localCache[city]);
-        return localCache[city];
-      }
-    }
-  } catch (e) {
-    // Ignore JSON parse errors
-  }
-
-  // If a fetch is already in progress for this city, return the promise
-  if (locationPromiseCache.has(city)) {
-    return locationPromiseCache.get(city)!;
-  }
-
-  // Start a new fetch and cache the promise
   const fetchPromise = (async () => {
     try {
       const url = `${API_BASE_URLS.openstreetmap}/search?q=${encodeURIComponent(city)}&format=json&limit=1`;
@@ -148,84 +100,28 @@ export const fetchLocationCoordinates = async (city: string) => {
       if (!data || data.length === 0)
         throw new Error(`City not found: ${city}`);
 
-      const coordinates = {
-        lat: parseFloat(data[0].lat),
-        lon: parseFloat(data[0].lon)
-      };
-
-      // Cache in memory
-      locationCache.set(city, coordinates);
-      // Cache in localStorage
-      localCache[city] = coordinates;
-      try {
-        localStorage.setItem(localStorageKey, JSON.stringify(localCache));
-      } catch (e) {
-        // Ignore localStorage errors
-      }
-
-      return coordinates;
+      return data;
     } catch (error) {
       console.error('Error fetching lat lon from openstreetmap: ', error);
       throw error;
-    } finally {
-      // Remove promise from cache after completion
-      locationPromiseCache.delete(city);
     }
   })();
-  locationPromiseCache.set(city, fetchPromise);
+
   return fetchPromise;
 };
 
-//---
+export const fetchRouteDirections = async (startLon: number, startLat: number, endLon: number, endLat: number, profile: string) => {
+  try {
+    const url = `${API_BASE_URLS.openrouteservice}/${profile}?api_key=${API_KEYS.openroute}&start=${startLon},${startLat}&end=${endLon},${endLat}`;
+    const response = await fetch(url);
 
-// AI---
-
-
-type FetchRouteDirectionsType = ((
-  startLon: number,
-  startLat: number,
-  endLon: number,
-  endLat: number,
-  profile: string
-) => Promise<any>) & { _promiseCache?: Map<string, Promise<any>> };
-
-export const fetchRouteDirections: FetchRouteDirectionsType = async (
-  startLon,
-  startLat,
-  endLon,
-  endLat,
-  profile
-) => {
-  // Promise cache for in-progress route fetches
-  const routeKey = `${profile}:${startLon},${startLat}->${endLon},${endLat}`;
-  if (!fetchRouteDirections._promiseCache) {
-    fetchRouteDirections._promiseCache = new Map();
-  }
-  const promiseCache: Map<string, Promise<any>> = fetchRouteDirections._promiseCache;
-
-  if (promiseCache.has(routeKey)) {
-    return promiseCache.get(routeKey)!;
-  }
-
-  const fetchPromise = (async () => {
-    try {
-      const url = `${API_BASE_URLS.openrouteservice}/${profile}?api_key=${API_KEYS.openroute}&start=${startLon},${startLat}&end=${endLon},${endLat}`;
-      const response = await fetch(url);
-
-      if (!response.ok) {
-        throw new Error(`OpenRouteService error: ${response.status}`);
-      }
-
-      return response.json();
-    } catch (error) {
-      console.error('Error fetching route directions from OpenRouteService: ', error);
-      throw error;
-    } finally {
-      promiseCache.delete(routeKey);
+    if (!response.ok) {
+      throw new Error(`OpenRouteService error: ${response.status}`);
     }
-  })();
-  promiseCache.set(routeKey, fetchPromise);
-  return fetchPromise;
-};
 
-//---
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching route directions from OpenRouteService: ', error);
+    throw error;
+  }
+};

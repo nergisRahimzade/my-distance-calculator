@@ -5,10 +5,10 @@ import { WeatherCard } from "../WeatherCard/WeatherCard.tsx";
 import { apiCall } from '../../services/apiCalls.ts';
 
 import type { RouteResultProps } from "../../types/index.ts";
-import type { DistanceResult } from "../../types/distanceResult.ts";
+import type { DistanceDataResult } from "../../types/apiResults/distanceDataResult.ts";
 
 export function RouteResult({ origin, destination, mode, clicked, isDayTime }: RouteResultProps) {
-  const [result, setResult] = useState<DistanceResult | null>(null);
+  const [result, setResult] = useState<DistanceDataResult | null>(null);
   const [loading, setLoading] = useState(false);
 
   //fethces distance and duration whenever clicked changes
