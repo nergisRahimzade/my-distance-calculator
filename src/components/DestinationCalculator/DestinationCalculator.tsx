@@ -1,14 +1,13 @@
-import { Button, Tab, Box, Autocomplete, TextField, ThemeProvider, CssBaseline } from '@mui/material';
+import { Button, Tab, Box, Autocomplete, TextField, ThemeProvider, CssBaseline, Switch, FormControlLabel } from '@mui/material';
 import { TabPanel, TabContext, TabList } from '@mui/lab';
-import { useEffect, useMemo, useState, type SyntheticEvent } from 'react';
-import citiesData from '../../constants/cities.json';
+import { useMemo, useState, type SyntheticEvent } from 'react';
+import citiesData from '../../types/constants/cities.json';
 import './DestinationCalculator.css';
 import { RouteResult } from '../RouteResult/RouteResult.tsx';
 
 import { CityDetailsPanel } from '../CityDetailsPanel/CityDetailsPanel.tsx';
 import { AttractionsList } from '../AttractionsList/AttractionsList.tsx';
 import { EmergencyContacts } from '../EmergencyContacts/EmergencyContacts.tsx';
-import { detectDayNight } from '../../services/currentLocation/detectDayNight.tsx';
 import { getTheme } from '../../utils/getTheme.tsx';
 
 export function DestinationCalculator() {
@@ -25,12 +24,13 @@ export function DestinationCalculator() {
   const [destinationError, setDestinationError] = useState('');
   const [modeError, setModeError] = useState('');
   const [matchingCityError, setMatchingCityError] = useState('');
-  const [isDayTime, setIsDayTime] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
+
+  const [isLightTheme, setIsLightTheme] = useState(true);
 
   const autoCompleteStyle = { width: 300, fontFamily: 'Poppins' };
 
-  const theme = useMemo(() => getTheme(isDayTime), [isDayTime]);
+  const theme = useMemo(() => getTheme(isLightTheme), [isLightTheme]);
 
   //validation of inputs
   const isValid = () => {
@@ -68,10 +68,6 @@ export function DestinationCalculator() {
     return citiesData.cities.map(city => city.cityName);
   }, []);
 
-  useEffect(() => {
-    detectDayNight(setIsDayTime);
-  }, []);
-
   //setting showOutput to true opens RouteResult component
   const handleClick = () => {
     isValid();
@@ -99,10 +95,27 @@ export function DestinationCalculator() {
     setTabValue(newValue);
   };
 
+  const handleSwitchChange = () => {
+    setIsLightTheme(!isLightTheme);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div className={`container ${isDayTime ? 'day-theme' : 'night-theme'}`}>
+      <div className={`container ${isLightTheme ? 'day-theme' : 'night-theme'}`}>
+        <div className='switch-container'>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={isLightTheme}
+                onChange={handleSwitchChange}
+                slotProps={{ input: { 'aria-label': 'Switch theme' } }}
+              />
+            }
+            label={isLightTheme ? 'Light Theme' : 'Dark Theme'}
+          />
+        </div>
+
         <div className='search-container'>
 
           <Autocomplete
@@ -204,13 +217,13 @@ export function DestinationCalculator() {
               mode={mode}
               clicked={clicked}
               setClicked={setClicked}
-              isDayTime={isDayTime}
+              isLightTheme={isLightTheme}
             />
           )}
         </div>
 
         {showCityInfo && (
-          <div className={`city-info-container ${isDayTime ? 'day-theme' : 'night-theme'}`}>
+          <div className={`city-info-container ${isLightTheme ? 'day-theme' : 'night-theme'}`}>
             <Box
               sx={{
                 borderRadius: 2,
@@ -222,7 +235,7 @@ export function DestinationCalculator() {
                 <Box
                   sx={{
                     borderBottom: 1,
-                    borderColor: isDayTime ? '#e0e0e0' : 'rgba(144, 202, 249, 0.2)',
+                    borderColor: isLightTheme ? '#e0e0e0' : 'rgba(144, 202, 249, 0.2)',
                   }}
                 >
                   <TabList onChange={handleTabChange}
@@ -230,13 +243,13 @@ export function DestinationCalculator() {
                       borderRadius: '8px 8px 0 0', // Optional: rounded top corners
                       '& .MuiTab-root': {
                         fontFamily: 'Poppins',
-                        color: isDayTime ? '#666' : '#90caf9',
+                        color: isLightTheme ? '#666' : '#90caf9',
                         '&.Mui-selected': {
-                          color: isDayTime ? '#1976d2' : '#ffffff',
+                          color: isLightTheme ? '#1976d2' : '#ffffff',
                         },
                       },
                       '& .MuiTabs-indicator': {
-                        backgroundColor: isDayTime ? '#1976d2' : '#90caf9',
+                        backgroundColor: isLightTheme ? '#1976d2' : '#90caf9',
                       }
                     }}
                   >
@@ -246,13 +259,13 @@ export function DestinationCalculator() {
                   </TabList>
                 </Box>
                 <TabPanel value='overview'>
-                  <CityDetailsPanel city={destination} clicked={clicked} isDayTime={isDayTime} />
+                  <CityDetailsPanel city={destination} clicked={clicked} isLightTheme={isLightTheme} />
                 </TabPanel>
                 <TabPanel value='attractions'>
-                  <AttractionsList city={destination} isDayTime={isDayTime} clicked={clicked} />
+                  <AttractionsList city={destination} isLightTheme={isLightTheme} clicked={clicked} />
                 </TabPanel>
                 <TabPanel value='emergency'>
-                  <EmergencyContacts city={destination} isDayTime={isDayTime} clicked={clicked} />
+                  <EmergencyContacts city={destination} isLightTheme={isLightTheme} clicked={clicked} />
                 </TabPanel>
               </TabContext>
             </Box>

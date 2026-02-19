@@ -16,9 +16,9 @@ import type { WeatherCardProps } from "../../types/index.ts";
 import type { WeatherDataResult } from "../../types/apiResults/weatherDataResult.ts";
 
 import { DateTime } from "luxon";
-import cities from '../../constants/cities.json';
+import cities from '../../types/constants/cities.json';
 
-export function WeatherCard({ city, clicked, isDayTime }: WeatherCardProps) {
+export function WeatherCard({ city, clicked, isLightTheme }: WeatherCardProps) {
   const [result, setResult] = useState<WeatherDataResult | null>(null);
   const [weatherIcon, setWeatherIcon] = useState<{ iconId: string } | null>(null);
 
@@ -72,7 +72,7 @@ export function WeatherCard({ city, clicked, isDayTime }: WeatherCardProps) {
     <div>
       {result && weatherIcon && (
         <div className="city-weather-info-container">
-          <div className={"city-weather-info" + (isDayTime ? 'day-theme' : 'night-theme')}>
+          <div className={"city-weather-info" + (isLightTheme ? 'day-theme' : 'night-theme')}>
             <p className="city-name"> {city} </p>
             <div className="weather-icon-container">
               <img className="weather-icon" aria-label='weather-icon' src={new URL(

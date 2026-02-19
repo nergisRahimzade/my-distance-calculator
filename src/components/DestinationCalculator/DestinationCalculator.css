@@ -12,6 +12,12 @@ html, body {
   background-color: white;
 }
 
+.switch-container{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .container {
   display: flex;
   flex-direction: column;

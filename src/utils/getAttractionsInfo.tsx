@@ -1,4 +1,4 @@
-import citiesData from '../constants/cities.json';
+import citiesData from '../types/constants/cities.json';
 
 export const getAttractionsInfo = (cityName: string) => {
   const cities = citiesData.cities;

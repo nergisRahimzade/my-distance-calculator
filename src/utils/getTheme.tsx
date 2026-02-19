@@ -1,10 +1,10 @@
 import { createTheme} from "@mui/material";
 
-export function getTheme(isDayTime: boolean) {
+export function getTheme(isLightTheme: boolean) {
   return createTheme({
     palette: {
-      mode: isDayTime ? 'light' : 'dark',
-      ...(isDayTime
+      mode: isLightTheme ? 'light' : 'dark',
+      ...(isLightTheme
         ? {
           // Day theme colors
           primary: {

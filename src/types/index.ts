@@ -1,19 +1,19 @@
 export type AttractionsListProps = {
   city: string,
-  isDayTime: boolean,
+  isLightTheme: boolean,
   clicked: boolean
 };
 
 export type EmergencyContactsProps = {
   city: string,
-  isDayTime: boolean,
+  isLightTheme: boolean,
   clicked: boolean
 };
 
 export type CityDetailsPanelProps = {
   city: string,
   clicked: boolean,
-  isDayTime: boolean
+  isLightTheme: boolean
 };
 
 export type RouteResultProps = {
@@ -22,11 +22,11 @@ export type RouteResultProps = {
   mode: string,
   clicked: boolean,
   setClicked: (value: React.SetStateAction<boolean>) => void,
-  isDayTime: boolean
+  isLightTheme: boolean
 };
 
 export type WeatherCardProps = {
   city: string,
   clicked: boolean,
-  isDayTime: boolean,
+  isLightTheme: boolean,
 };
