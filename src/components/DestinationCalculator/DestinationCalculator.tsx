@@ -1,6 +1,6 @@
 import { Button, Tab, Box, Autocomplete, TextField, ThemeProvider, CssBaseline, Switch, FormControlLabel } from '@mui/material';
 import { TabPanel, TabContext, TabList } from '@mui/lab';
-import { useMemo, useState, type SyntheticEvent } from 'react';
+import { useEffect, useMemo, useState, type SyntheticEvent } from 'react';
 import citiesData from '../../types/constants/cities.json';
 import './DestinationCalculator.css';
 import { RouteResult } from '../RouteResult/RouteResult.tsx';
@@ -9,6 +9,8 @@ import { CityDetailsPanel } from '../CityDetailsPanel/CityDetailsPanel.tsx';
 import { AttractionsList } from '../AttractionsList/AttractionsList.tsx';
 import { EmergencyContacts } from '../EmergencyContacts/EmergencyContacts.tsx';
 import { getTheme } from '../../utils/getTheme.tsx';
+import { getCurrentLocation } from '../../services/getCurrentLocation.ts';
+import { fetchCityName } from '../../services/apiClient.ts';
 
 export function DestinationCalculator() {
   const [origin, setOrigin] = useState('');
@@ -27,8 +29,13 @@ export function DestinationCalculator() {
   const [isVisible, setIsVisible] = useState(false);
 
   const [isLightTheme, setIsLightTheme] = useState(true);
+  const [currentCity, setCurrentCity] = useState('');
 
   const autoCompleteStyle = { width: 300, fontFamily: 'Poppins' };
+
+  useEffect(() => {
+    handleDefaultOrigin();
+  }, []);
 
   const theme = useMemo(() => getTheme(isLightTheme), [isLightTheme]);
 
@@ -98,6 +105,14 @@ export function DestinationCalculator() {
   const handleSwitchChange = () => {
     setIsLightTheme(!isLightTheme);
   };
+  
+  const handleDefaultOrigin = async () => {
+    const current = getCurrentLocation();
+    if (current?.permissionGranted === true) {
+      const city = await fetchCityName(current.lat, current.lon);
+      setCurrentCity(city);
+    }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -123,7 +138,7 @@ export function DestinationCalculator() {
             aria-label='Choose origin city'
             disablePortal
             options={cityList}
-            value={origin}
+            value={currentCity !== '' ? currentCity : origin}
             onChange={(_, newValue) => setOrigin(newValue || '')}
             sx={{ autoCompleteStyle }}
             renderInput={(params: any) =>
