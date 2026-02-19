@@ -102,7 +102,7 @@ export function DestinationCalculator() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div className={`container ${isLightTheme ? 'day-theme' : 'night-theme'}`}>
+      <div className={`container ${isLightTheme ? 'light-theme' : 'dark-theme'}`}>
         <div className='switch-container'>
           <FormControlLabel
             control={
@@ -113,6 +113,7 @@ export function DestinationCalculator() {
               />
             }
             label={isLightTheme ? 'Light Theme' : 'Dark Theme'}
+            sx={{ fontFamily: 'Poppins' }}
           />
         </div>
 
@@ -223,7 +224,7 @@ export function DestinationCalculator() {
         </div>
 
         {showCityInfo && (
-          <div className={`city-info-container ${isLightTheme ? 'day-theme' : 'night-theme'}`}>
+          <div className={`city-info-container ${isLightTheme ? 'light-theme' : 'dark-theme'}`}>
             <Box
               sx={{
                 borderRadius: 2,

@@ -78,8 +78,11 @@ export const apiCall = {
 
   //returns the distance and duration between two cities based on selected mode
   getDistDur: async (city1: string, city2: string, mode: string) => {
-    const startCoord = await fetchLocationCoordinates(city1);
-    const endCoord = await fetchLocationCoordinates(city2);
+    const startCoordResult = await fetchLocationCoordinates(city1);
+    const endCoordResult = await fetchLocationCoordinates(city2);
+
+    const startCoord = startCoordResult[0];
+    const endCoord = endCoordResult[0];
 
     let profile = 'driving-car';
     if (mode === 'Foot')
@@ -87,9 +90,9 @@ export const apiCall = {
     else if (mode === 'Car')
       profile = 'driving-car';
     else if (mode === 'Plane')
-      return calculateFlightDistance(startCoord, endCoord);
+      return calculateFlightDistance(startCoordResult, endCoordResult);
 
-    const data = await fetchRouteDirections(startCoord.lon, startCoord.lat, endCoord.lon, endCoord.lat, profile);
+    const data = await fetchRouteDirections(parseFloat(startCoord.lon), parseFloat(startCoord.lat), parseFloat(endCoord.lon), parseFloat(endCoord.lat), profile);
     const route = data.features[0].properties.segments[0];
 
     return {

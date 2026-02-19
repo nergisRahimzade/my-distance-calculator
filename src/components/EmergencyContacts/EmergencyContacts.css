@@ -2,10 +2,10 @@
   font-family: Poppins;
 }
 
-.numbers-container.day-theme {
+.numbers-container.light-theme {
   color: black;
 }
 
-.numbers-container.night-theme {
+.numbers-container.dark-theme {
   color: white;
 }

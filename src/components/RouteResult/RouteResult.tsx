@@ -7,7 +7,7 @@ import { apiCall } from '../../services/apiCalls.ts';
 import type { RouteResultProps } from "../../types/index.ts";
 import type { DistanceDataResult } from "../../types/apiResults/distanceDataResult.ts";
 
-export function RouteResult({ origin, destination, mode, clicked, isDayTime }: RouteResultProps) {
+export function RouteResult({ origin, destination, mode, clicked, isLightTheme }: RouteResultProps) {
   const [result, setResult] = useState<DistanceDataResult | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -29,21 +29,21 @@ export function RouteResult({ origin, destination, mode, clicked, isDayTime }: R
   return (
     <div className="cities-container">
 
-      {loading && <p aria-label='calculating' className="calculating-text">Calculating...</p>}
+      {loading && <p aria-label='Calculating distance and duration' className={`calculating-text ${isLightTheme ? 'light-theme' : 'dark-theme'}`}>Calculating...</p>}
       {!loading && result && (
         <div className="output-city-container">
           <div className="display-container">
-            <div className={"distance-duration-display-container" + (isDayTime ? ' day-theme' : ' night-theme')}>
-              <p className={"distance-display-item" + (isDayTime ? ' day-theme' : ' night-theme')}>Distance: {result.distanceKm} km</p>
-              <p className={"duration-display-item" + (isDayTime ? ' day-theme' : ' night-theme')}>Duration: {Math.floor(result.durationMinutes / 60)} hours {result.durationMinutes % 60} minutes </p>
+            <div className={"distance-duration-display-container" + (isLightTheme ? ' light-theme' : ' dark-theme')}>
+              <p className={"distance-display-item" + (isLightTheme ? ' light-theme' : ' dark-theme')}>Distance: {result.distanceKm} km</p>
+              <p className={"duration-display-item" + (isLightTheme ? ' light-theme' : ' dark-theme')}>Duration: {Math.floor(result.durationMinutes / 60)} hours {result.durationMinutes % 60} minutes </p>
             </div>
 
-            <div className={"weather-display-container" + (isDayTime ? ' day-theme' : ' night-theme')}>
+            <div className={"weather-display-container" + (isLightTheme ? ' light-theme' : ' dark-theme')}>
               <div className="weather-item">
-                <WeatherCard city={origin} clicked={clicked} isDayTime={isDayTime} />
+                <WeatherCard city={origin} clicked={clicked} isLightTheme={isLightTheme} />
               </div>
               <div className="weather-item">
-                <WeatherCard city={destination} clicked={clicked} isDayTime={isDayTime}  />
+                <WeatherCard city={destination} clicked={clicked} isLightTheme={isLightTheme}  />
               </div>
             </div>
 

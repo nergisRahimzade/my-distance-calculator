@@ -72,7 +72,7 @@ export function WeatherCard({ city, clicked, isLightTheme }: WeatherCardProps) {
     <div>
       {result && weatherIcon && (
         <div className="city-weather-info-container">
-          <div className={"city-weather-info" + (isLightTheme ? 'day-theme' : 'night-theme')}>
+          <div className={"city-weather-info" + (isLightTheme ? 'light-theme' : 'dark-theme')}>
             <p className="city-name"> {city} </p>
             <div className="weather-icon-container">
               <img className="weather-icon" aria-label='weather-icon' src={new URL(

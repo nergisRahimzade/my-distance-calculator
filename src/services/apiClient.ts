@@ -81,39 +81,44 @@ export const fetchAmadeusActivities = async (lat: number, lon: number, accessTok
 
 
 export const fetchLocationCoordinates = async (city: string) => {
-
-  const fetchPromise = (async () => {
-    try {
-      const url = `${API_BASE_URLS.openstreetmap}/search?q=${encodeURIComponent(city)}&format=json&limit=1`;
-      const response = await fetch(url, {
-        headers: {
-          'User-Agent': 'TravelDistanceApp/1.0'
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch coordinates for ${city}`);
+  try {
+    const url = `${API_BASE_URLS.openstreetmap}/search?q=${encodeURIComponent(city)}&format=json&limit=1`;
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'TravelDistanceApp/1.0'
       }
+    });
 
-      const data = await response.json();
-
-      if (!data || data.length === 0)
-        throw new Error(`City not found: ${city}`);
-
-      return data;
-    } catch (error) {
-      console.error('Error fetching lat lon from openstreetmap: ', error);
-      throw error;
+    if (!response.ok) {
+      throw new Error(`Failed to fetch coordinates for ${city}`);
     }
-  })();
 
-  return fetchPromise;
+    const data = await response.json();
+
+    if (!data || data.length === 0)
+      throw new Error(`City not found: ${city}`);
+
+    return data;
+  } catch (error) {
+    console.error('Error fetching lat lon from openstreetmap: ', error);
+    throw error;
+  }
+
 };
 
 export const fetchRouteDirections = async (startLon: number, startLat: number, endLon: number, endLat: number, profile: string) => {
   try {
-    const url = `${API_BASE_URLS.openrouteservice}/${profile}?api_key=${API_KEYS.openroute}&start=${startLon},${startLat}&end=${endLon},${endLat}`;
-    const response = await fetch(url);
+    const url = `${API_BASE_URLS.openrouteservice}/${profile}?api_key=${API_KEYS.openroute}`;
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        coordinates: [[startLon, startLat], [endLon, endLat]]
+      })
+    });
 
     if (!response.ok) {
       throw new Error(`OpenRouteService error: ${response.status}`);

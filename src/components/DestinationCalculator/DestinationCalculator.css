@@ -16,6 +16,10 @@ html, body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  width: 100%;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  font-family: Poppins;
 }
 
 .container {
@@ -29,23 +33,23 @@ html, body {
 }
 
 /* Day theme */
-.container.day-theme {
+.container.light-theme {
   background: linear-gradient(to bottom, #87CEEB, #f0f8ff);
   color: #333;
 }
 
-.day-theme .search-container {
+.light-theme .search-container {
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Night theme */
-.container.night-theme {
+.container.dark-theme {
   background: linear-gradient(180deg, #1e3a5f 0%, #0d1b2a 100%);
   color: #fff;
 }
 
-.night-theme .search-container {
+.dark-theme .search-container {
   background-color: rgba(0, 0, 0, 0.3);
   box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
 }
@@ -98,11 +102,11 @@ html, body {
   background-color: lightblue;
 }
 
-.city-info-container.night-theme {
+.city-info-container.dark-theme {
   background-color: rgba(0, 0, 0, 0.3);
   box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
 }
 
-.city-info-container.day-theme {
+.city-info-container.light-theme {
   background-color: white;
 }

@@ -3,7 +3,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import CheckIcon from '@mui/icons-material/Check';
 import { useState } from 'react';
 
-export function CopyButton({textToCopy, isDayTime}: {textToCopy: string, isDayTime: boolean}) {
+export function CopyButton({textToCopy, isLightTheme}: {textToCopy: string, isLightTheme: boolean}) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy= async () => {
@@ -17,7 +17,7 @@ export function CopyButton({textToCopy, isDayTime}: {textToCopy: string, isDayTi
       <Tooltip title={copied ? 'Copied!' : 'Copy'}>
         <IconButton 
           aria-label='Copy to clipboard'
-          sx={{ color: isDayTime ? 'black' : 'white' }} 
+          sx={{ color: isLightTheme ? 'black' : 'white' }} 
           onClick={handleCopy} 
           size='small'
         >

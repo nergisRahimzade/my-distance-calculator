@@ -12,10 +12,10 @@
   font-family: Poppins;
 }
 
-.attraction-name.day-theme {
+.attraction-name.light-theme {
   color: black
 }
 
-.attraction-name.night-theme {
+.attraction-name.dark-theme {
   color: white;
 }

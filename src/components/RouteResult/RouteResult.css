@@ -19,6 +19,10 @@
   font-family: Poppins;
 }
 
+.calculating-text .dark-theme {
+  color: white;
+}
+
 .display-container {
   display: grid;
   align-items: center;
@@ -35,17 +39,17 @@
   gap: 20px;
 }
 
-.distance-duration-display-container .day-theme {
+.distance-duration-display-container .light-theme {
   background-color: rgba(255, 245, 230, 0.9); /* Warm cream */
 }
 
-.distance-display-item .day-theme,
-.duration-display-item .day-theme {
+.distance-display-item .light-theme,
+.duration-display-item .light-theme {
   background-color: rgba(255, 245, 230, 0.9); /* Warm cream */
 }
 
-.distance-display-item .night-theme,
-.duration-display-item .night-theme {
+.distance-display-item .dark-theme,
+.duration-display-item .dark-theme {
   background-color: rgba(30, 58, 95, 0.6); /* Dark blue matching theme */
   color: #fff;
 }

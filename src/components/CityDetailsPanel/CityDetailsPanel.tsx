@@ -7,7 +7,7 @@ import type { CityDetailsPanelProps } from '../../types/index.ts';
 import type { Activity } from '../../types/activity.ts';
 import { CopyButton } from '../CopyButton/CopyButton.tsx';
 
-export function CityDetailsPanel({ city, clicked, isDayTime }: CityDetailsPanelProps) {
+export function CityDetailsPanel({ city, clicked, isLightTheme }: CityDetailsPanelProps) {
   const [info, setInfo] = useState<Activity[] | null>(null);
 
   //fetches city info (top 5 attractions) every time clicked changes
@@ -95,7 +95,7 @@ export function CityDetailsPanel({ city, clicked, isDayTime }: CityDetailsPanelP
                       >
                         {activity.bookingLink}
                       </a> 
-                      <CopyButton textToCopy={activity.bookingLink ? activity.bookingLink : ''} isDayTime={isDayTime} />
+                      <CopyButton textToCopy={activity.bookingLink ? activity.bookingLink : ''} isLightTheme={isLightTheme} />
                     </td>
                   </tr>
                 </tbody>

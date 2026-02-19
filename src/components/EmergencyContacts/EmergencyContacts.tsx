@@ -6,7 +6,7 @@ import type { EmergencyContactsProps } from "../../types/index.ts";
 
 import './EmergencyContacts.css';
 
-export function EmergencyContacts({ city, isDayTime, clicked }: EmergencyContactsProps) {
+export function EmergencyContacts({ city, isLightTheme, clicked }: EmergencyContactsProps) {
   const [numbersList, setNumbersList] = useState<any | null>(null);
 
   //fetches emergency contact numbers every time clicked changes
@@ -23,7 +23,7 @@ export function EmergencyContacts({ city, isDayTime, clicked }: EmergencyContact
   return (
     <div>
       {numbersList && (
-        <div className={`numbers-container ${isDayTime ? 'day-theme' : 'night-theme'}`}>
+        <div className={`numbers-container ${isLightTheme ? 'light-theme' : 'dark-theme'}`}>
           <p> Ambulance: {numbersList.ambulance} </p>
           <p> Fire: {numbersList.fire} </p>
           <p> Police: {numbersList.police} </p>
