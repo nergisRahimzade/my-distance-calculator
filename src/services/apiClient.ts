@@ -1,5 +1,6 @@
 import { API_BASE_URLS, API_KEYS } from "../types/constants/apiConstants.ts";
 
+//returns the weather data of a city using OpenWeatherMap API
 export const fetchCityWeather = async (cityName: string) => {
   try {
     const url = `${API_BASE_URLS.openweathermap}/data/2.5/weather?q=${cityName}&appid=${API_KEYS.openweathermap}&units=metric`;
@@ -16,6 +17,7 @@ export const fetchCityWeather = async (cityName: string) => {
   }
 };
 
+//returns the emergency contact numbers data of a city using an open source github API
 export const fetchEmergencyNumbers = async (code: string) => {
   try {
     const response = await fetch(`${API_BASE_URLS.emergencyNumbers}/${code}`);
@@ -31,6 +33,7 @@ export const fetchEmergencyNumbers = async (code: string) => {
   }
 };
 
+//returns access token to be used in Amadeus API calls
 export const fetchAmadeusAccessToken = async () => {
   try {
     const url = `${API_BASE_URLS.amadeus}/v1/security/oauth2/token`;
@@ -56,6 +59,7 @@ export const fetchAmadeusAccessToken = async () => {
   }
 };
 
+//returns the data of activities of a city using Amadeus API
 export const fetchAmadeusActivities = async (lat: number, lon: number, accessToken: string, radius = 10) => {
   try {
     const url = `${API_BASE_URLS.amadeus}/v1/shopping/activities?latitude=${lat}&longitude=${lon}&radius=${radius}`;
@@ -79,7 +83,7 @@ export const fetchAmadeusActivities = async (lat: number, lon: number, accessTok
   }
 };
 
-
+//returns the data of coordinates of a city using OpenStreetMap API
 export const fetchLocationCoordinates = async (city: string) => {
   try {
     const url = `${API_BASE_URLS.openstreetmap}/search?q=${encodeURIComponent(city)}&format=json&limit=1`;
@@ -106,6 +110,7 @@ export const fetchLocationCoordinates = async (city: string) => {
 
 };
 
+//returns the data of distance and duration between 2 cities using OpenRouteServie API
 export const fetchRouteDirections = async (startLon: number, startLat: number, endLon: number, endLat: number, profile: string) => {
   try {
     const url = `${API_BASE_URLS.openrouteservice}/${profile}?api_key=${API_KEYS.openroute}`;
@@ -131,10 +136,12 @@ export const fetchRouteDirections = async (startLon: number, startLat: number, e
   }
 };
 
+//returns the name of a city given coordinates as parameters, using OpenStreetMap API
 export const fetchCityName = async (lat: number, lon: number) => {
   try {
-    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
+    const response = await fetch(`${API_BASE_URLS.openstreetmap}/reverse?lat=${lat}&lon=${lon}&format=json`);
     const data = await response.json();
+    console.log(data.address.city || data.address.town || data.address.village);
 
     return data.address.city || data.address.town || data.address.village;
   } catch(error) {

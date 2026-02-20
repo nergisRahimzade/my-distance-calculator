@@ -11,7 +11,7 @@ export function RouteResult({ origin, destination, mode, clicked, isLightTheme }
   const [result, setResult] = useState<DistanceDataResult | null>(null);
   const [loading, setLoading] = useState(false);
 
-  //fethces distance and duration whenever clicked changes
+  //fetches distance and duration whenever clicked changes = whenever Calculate button is clicked
   useEffect(() => {
     setLoading(true);
     apiCall.getDistDur(origin, destination, mode)
@@ -34,8 +34,12 @@ export function RouteResult({ origin, destination, mode, clicked, isLightTheme }
         <div className="output-city-container">
           <div className="display-container">
             <div className={"distance-duration-display-container" + (isLightTheme ? ' light-theme' : ' dark-theme')}>
-              <p className={"distance-display-item" + (isLightTheme ? ' light-theme' : ' dark-theme')}>Distance: {result.distanceKm} km</p>
-              <p className={"duration-display-item" + (isLightTheme ? ' light-theme' : ' dark-theme')}>Duration: {Math.floor(result.durationMinutes / 60)} hours {result.durationMinutes % 60} minutes </p>
+              <p className={"distance-display-item" + (isLightTheme ? ' light-theme' : ' dark-theme')} aria-label='Distance in kilometers'>
+                Distance: {result.distanceKm} km
+              </p>
+              <p className={"duration-display-item" + (isLightTheme ? ' light-theme' : ' dark-theme')} aria-label='Duration in hours and minutes'>
+                Duration: {Math.floor(result.durationMinutes / 60)} hours {result.durationMinutes % 60} minutes 
+              </p>
             </div>
 
             <div className={"weather-display-container" + (isLightTheme ? ' light-theme' : ' dark-theme')}>

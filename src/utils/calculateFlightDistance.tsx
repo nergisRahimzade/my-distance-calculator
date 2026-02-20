@@ -1,5 +1,6 @@
 import type { DistanceDataResult } from "../types/apiResults/distanceDataResult.ts";
 
+//this function returns distance and duration between 2 cities if the mode is plane, using the Haversine formula
 export function calculateFlightDistance(origin: { lat: number, lon: number }, destination: { lat: number, lon: number }): DistanceDataResult {
     // Haversine formula for great circle distance
     const R = 6371; // Earth's radius in km

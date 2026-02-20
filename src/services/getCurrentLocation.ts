@@ -9,7 +9,7 @@ export function getCurrentLocation() {
           const lat = position.coords.latitude;
           const lon = position.coords.longitude;
 
-          return { lat, lon, permissionGranted };
+          return { lat, lon, permissionGranted: true };
         });
     } catch (error) {
       console.error('Error: ', error);

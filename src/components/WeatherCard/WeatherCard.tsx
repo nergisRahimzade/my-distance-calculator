@@ -15,7 +15,7 @@ import { matchWeatherIcon } from "../../utils/matchWeatherIcon.tsx";
 import type { WeatherCardProps } from "../../types/index.ts";
 import type { WeatherDataResult } from "../../types/apiResults/weatherDataResult.ts";
 
-import { DateTime } from "luxon";
+import { getLocalTime } from "../../utils/getLocalTime.tsx";
 import cities from '../../types/constants/cities.json';
 
 export function WeatherCard({ city, clicked, isLightTheme }: WeatherCardProps) {
@@ -30,43 +30,16 @@ export function WeatherCard({ city, clicked, isLightTheme }: WeatherCardProps) {
 
   const localTime = getLocalTime(timeZone ? timeZone : '');
 
-  //AI---
-
   useEffect(() => {
-    const localStorageKey = 'weatherResultsCache';
-    let weatherCache: Record<string, WeatherDataResult> = {};
-    try {
-      const stored = localStorage.getItem(localStorageKey);
-      if (stored) {
-        weatherCache = JSON.parse(stored);
-        if (weatherCache[city]) {
-          setResult(weatherCache[city]);
-          setWeatherIcon(matchWeatherIcon(weatherCache[city].icon));
-          return;
-        }
-      }
-    } catch (e) {
-      // Ignore JSON parse errors
-    }
-
     apiCall.getCityWeather(city)
       .then((res) => {
         setResult(res);
         setWeatherIcon(matchWeatherIcon(res.icon));
-        // Cache result in localStorage
-        weatherCache[city] = res;
-        try {
-          localStorage.setItem(localStorageKey, JSON.stringify(weatherCache));
-        } catch (e) {
-          // Ignore localStorage errors
-        }
       })
       .catch((error) => {
-        console.error('Error fetching weather: ', error);
+        console.error('Error fetching weather data: ', error);
       });
   }, [clicked, city]);
-
-  //---
 
   return (
     <div>
@@ -80,7 +53,8 @@ export function WeatherCard({ city, clicked, isLightTheme }: WeatherCardProps) {
                 import.meta.url
               ).href} alt={`${city} weather`} />
               <div className="local-time-container">
-                <img className="calendar-icon" aria-label='local-time-and-date' src={new URL('../../assets/other-icons/calendar.png', import.meta.url).href} /> <p> {localTime} </p>
+                <img className="calendar-icon" aria-label='local-time-and-date' src={new URL('../../assets/other-icons/calendar.png', import.meta.url).href} /> 
+                <p> {localTime} </p>
               </div>
             </div>
           </div>
@@ -90,12 +64,4 @@ export function WeatherCard({ city, clicked, isLightTheme }: WeatherCardProps) {
       )}
     </div>
   );
-}
-
-function getLocalTime(timeZone: string) {
-  if (!timeZone) return null;
-
-  return DateTime.now()
-    .setZone(timeZone)
-    .toFormat("EEEE, MMM d yyyy, HH:mm");
 }

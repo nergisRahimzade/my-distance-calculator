@@ -40,7 +40,7 @@ export const apiCall = {
 
   //returns top 5 attractions for given city
   getCityInfo: async (cityName: string) => {
-    //filters out activities without booking links and ranks by popularity
+    //returns top 5 activities by filtering out activities without booking links and ranks by popularity
     function getTopActivities(activities: Activity[]) {
       //rank by popularity
       const ranked = activities
@@ -55,25 +55,19 @@ export const apiCall = {
       return ranked;
     }
 
-    //returns list of top 5 activities for a city
-    async function generateItinerary(cityName: string) {
-      const result = await fetchLocationCoordinates(cityName);
-      const coord = {
-        lat: parseFloat(result[0].lat),
-        lon: parseFloat(result[0].lon)
-      };
 
-      const token = await fetchAmadeusAccessToken();
-      const data = await fetchAmadeusActivities(coord.lat, coord.lon, token);
-      const activities = data.data;
-      const famousActivities = getTopActivities(activities);
+    const result = await fetchLocationCoordinates(cityName);
+    const coord = {
+      lat: parseFloat(result[0].lat),
+      lon: parseFloat(result[0].lon)
+    };
 
-      return famousActivities;
-    }
+    const token = await fetchAmadeusAccessToken();
+    const data = await fetchAmadeusActivities(coord.lat, coord.lon, token);
+    const activities = data.data;
+    const famousActivities = getTopActivities(activities);
 
-    const res = await generateItinerary(cityName);
-    return res;
-
+    return famousActivities;
   },
 
   //returns the distance and duration between two cities based on selected mode

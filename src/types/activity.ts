@@ -1,5 +1,3 @@
-import type { Price } from "./price";
-
 export type Activity = {
   score: number;
   id: string;
@@ -13,5 +11,8 @@ export type Activity = {
   rating?: string;
   pictures?: string[];
   bookingLink?: string;
-  price?: Price;
+  price?: {
+    currencyCode: string;
+    amount: string;
+  };
 }

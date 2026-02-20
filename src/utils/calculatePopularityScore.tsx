@@ -1,5 +1,6 @@
 import type { Activity } from "../types/activity.ts";
 
+//returns the popularity score of an activity using a popularity formula
 export function calculatePopularityScore(activity: Activity): number {
   const rating = parseFloat(activity.rating || '0');
   const price = parseFloat(activity.price?.amount || '0');
