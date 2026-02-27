@@ -1,18 +1,31 @@
+.output-city-container {
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 40px 270px;
+}
+
 .cities-container {
   color: black;
-  background-color: yellow;
   margin-top: 20px;
 }
 
+.calculating-text {
+  font-size: 24px;
+  font-weight: 600;
+}
+
 .display-container {
-  background-color: gray;
   display: grid;
   align-items: center;
   justify-content: center;
+  font-family: Poppins;
 }
 
 .distance-duration-display-container {
-  background-color: lightpink;
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 1fr 1fr;
@@ -22,19 +35,18 @@
 }
 
 .distance-display-item {
-  background-color: bisque;
+  background-color: rgb(255, 221, 249);
   padding: 40px 60px;
   border-radius: 20px;
 }
 
 .duration-display-item {
-  background-color: bisque;
+  background-color: rgb(255, 221, 249);
   padding: 40px 60px;
   border-radius: 20px;
 }
 
 .weather-display-container {
-  background-color: lightblue;
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 1fr 1fr;
@@ -44,7 +56,7 @@
 }
 
 .weather-item {
-  background-color: bisque;
+  background-color: rgb(192, 225, 255);
   padding: 30px 60px;
   border-radius: 20px;
 }

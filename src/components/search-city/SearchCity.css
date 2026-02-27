@@ -1,13 +1,89 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding-top: 40px;
+  background-color: white;
+}
+
+/* Day theme */
+.container.day-theme {
+  background: linear-gradient(to bottom, #87CEEB, #f0f8ff);
+  color: #333;
+}
+
+.day-theme .search-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Night theme */
+.container.night-theme {
+  background: linear-gradient(180deg, #1e3a5f 0%, #0d1b2a 100%);
+  color: #fff;
+}
+
+.night-theme .search-container {
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+}
+
 .search-container {
   display: flex;
+  flex-direction: row;
+  align-items: stretch;
   gap: 16px;
   margin: 10px;
+  background-color: white;
+  padding: 34px;
+  border-radius: 20px;
 }
 
 .search-select-item {
   padding: 10px 60px;
 }
 
+.result-container {
+  margin-bottom: 40px;
+}
+
 .city-info-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
   margin: 10px;
+  background-color: white; 
+  border-radius: 20px;
+  padding: 20px 440px;
+}
+
+.city-guide-item {
+  background-color: lightblue;
+}
+
+.city-info-container.night-theme {
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+}
+
+.city-info-container.day-theme {
+  background-color: white;
 }

@@ -1,20 +1,12 @@
 import { useEffect, useState } from "react";
-import citiesData from '../../../search-city-list/cities.json';
 import './CityAttractionsInfo.css';
 
-type CityAttractionInfoProps = {
-  city: string
-};
+import { getAttractionsInfo } from "../../../../utils/getAttractionsInfo";
 
-const getAttractionsInfo = (cityName: string) => {
-  const cities = citiesData.cities;
+import type { CityAttractionInfoProps } from "../../../../assets/types/CityAttractionInfoProps";
+import { CopyButton } from "../../CopyButton";
 
-  const matchingCity = cities.find((city) => city.cityName === cityName);
-
-  return matchingCity?.attractions || [];
-};
-
-export function CityAttractionInfo({ city }: CityAttractionInfoProps) {
+export function CityAttractionInfo({ city, isDayTime }: CityAttractionInfoProps) {
   const [attractionsInfo, setAttractionsInfo] = useState<any[] | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -32,7 +24,8 @@ export function CityAttractionInfo({ city }: CityAttractionInfoProps) {
     <div>
       {attractionsInfo && attractionsInfo.map((attraction) => (
         <div key={crypto.randomUUID()} className="attraction-item">
-          <p> {attraction} </p>
+          <p className={`attraction-name ${isDayTime ? 'day-theme' : 'night-theme'}`}> {attraction} </p> 
+          <CopyButton textToCopy={attraction} isDayTime={isDayTime} />
         </div>
       ))}
     </div>

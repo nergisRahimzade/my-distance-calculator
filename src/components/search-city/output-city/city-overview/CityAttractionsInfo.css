@@ -1,3 +1,21 @@
-body {
+.attraction-item {
+  background-color: rgb(254, 254, 219);
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.attraction-name {
+  display: inline-block;
+  margin-right: 10px;
+  font-family: Poppins;
+}
+
+.attraction-name.day-theme {
+  color: white
+}
+
+.attraction-name.night-theme {
   color: black;
 }

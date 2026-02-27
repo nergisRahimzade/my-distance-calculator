@@ -1,42 +1,82 @@
-import { FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
-import { useState, type SyntheticEvent } from 'react';
+import { Button, Tab, Box, Autocomplete, TextField, ThemeProvider, CssBaseline } from '@mui/material';
+import { TabPanel, TabContext, TabList } from '@mui/lab';
+import { useEffect, useMemo, useState, type SyntheticEvent } from 'react';
 import citiesData from '../search-city-list/cities.json';
 import './SearchCity.css';
 import { OutputCity } from './output-city/OutputCity';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import TabPanel from '@mui/lab/TabPanel';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
+
 import { CityOverviewInfo } from './output-city/city-overview/CityOverviewInfo';
 import { CityAttractionInfo } from './output-city/city-overview/CityAttractionsInfo';
+import { CityEmergencyNumbersInfo } from './output-city/city-overview/CityEmergencyNumbersInfo';
+import { detectDayNight } from '../../services/currentLocation/detectDayNight';
+import { getTheme } from '../../utils/getTheme';
 
 export function SearchCity() {
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
   const [mode, setMode] = useState('');
   const [showOutput, setShowOutput] = useState(false);
-  const cities = citiesData.cities;
   const [tabValue, setTabValue] = useState('overview');
   const [showCityInfo, setShowCityInfo] = useState(false);
 
-  const handleOriginChange = (event: any) => {
-    setOrigin(event?.target.value)
+  const [clicked, setClicked] = useState(false);
+
+  const [originError, setOriginError] = useState('');
+  const [destinationError, setDestinationError] = useState('');
+  const [modeError, setModeError] = useState('');
+  const [matchingCityError, setMatchingCityError] = useState('');
+  const [isDayTime, setIsDayTime] = useState(true);
+
+  const theme = useMemo(() => getTheme(isDayTime), [isDayTime]);
+
+  const isValid = () => {
+    //reset & clear all errors
+    setOriginError('');
+    setDestinationError('');
+    setModeError('');
+    setMatchingCityError('');
+
+    if (origin === '')
+      setOriginError('Please enter an origin.');
+
+    if (destination === '')
+      setDestinationError('Please enter a destination.');
+
+    if (mode === '')
+      setModeError('Please enter a mode.');
+
+    if (destination === origin)
+      setMatchingCityError('Origin and destination cannot be the same.');
   };
 
-  const handleDestinationChange = (event: any) => {
-    setDestination(event.target.value);
-  };
+  const isDisabled = () => {
+    if (origin === '' || destination === '' || mode === '')
+      return true;
 
-  const handleModeChange = (event: any) => {
-    setMode(event.target.value);
-  };
+    if (origin === destination)
+      return true;
+
+    else
+      return false;
+  }
+
+  const cityList = useMemo(() => {
+    return citiesData.cities.map(city => city.cityName);
+  }, []);
+
+  useEffect(() => {
+    detectDayNight(setIsDayTime);
+  }, []);
 
   const handleClick = () => {
-    setShowOutput(true);
-    setShowCityInfo(true);
-    //const html = use(<OutputCity origin={origin} destination={destination} />);
+    isValid();
+
+    if (origin && destination && mode && origin != destination) {
+      setShowOutput(true);
+      setShowCityInfo(true);
+      setClicked(true);
+      setTimeout(() => setClicked(false), 2000);
+    }
   };
 
   const handleReset = () => {
@@ -47,104 +87,165 @@ export function SearchCity() {
     setMode('');
   };
 
-  const handleTabChange = (event: SyntheticEvent, newValue: string) => {
+  const handleTabChange = (_event: SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
   };
 
   return (
-    <div>
-      <div className='search-container'>
-        <FormControl className='search-select-container' fullWidth>
-          <InputLabel id='origin-select-label'>From...</InputLabel>
-          <Select
-            className='search-select-item'
-            labelId='simple-select-label'
-            id='simple-select'
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div className={`container ${isDayTime ? 'day-theme' : 'night-theme'}`}>
+        <div className='search-container'>
+
+          <Autocomplete
+            disablePortal
+            options={cityList}
             value={origin}
-            label='Select City'
-            onChange={handleOriginChange}
-          >
-            {cities.map((city) => {
-              return (
-                <MenuItem key={city.cityName} value={city.cityName}>{city.cityName}</MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
+            onChange={(_, newValue) => setOrigin(newValue || '')}
+            sx={{ width: 300, fontFamily: 'Poppins' }}
+            renderInput={(params: any) =>
+              <TextField
+                sx={{
+                  '& .MuiInputBase-root': {
+                    height: '100%',
+                    padding: '16px 14px',
+                    fontFamily: 'Poppins'
+                  }
+                }}
+                {...params}
+                label='From'
+                helperText={originError === '' ? '' : originError}
+              />
+            }
+          />
 
-        <FormControl className='search-select-container' fullWidth>
-          <InputLabel id='destination-select-label'>To...</InputLabel>
-          <Select
-            className='search-select-item'
-            labelId='simple-select-label'
-            id='simple-select'
+
+          <Autocomplete
+            disablePortal
+            options={cityList}
             value={destination}
-            label='Select City'
-            onChange={handleDestinationChange}
-          >
-            {cities.map((city) => (
-              <MenuItem key={city.cityName} value={city.cityName}>{city.cityName}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+            onChange={(_, newValue) => setDestination(newValue || '')}
+            sx={{ width: 300, fontFamily: 'Poppins' }}
+            renderInput={(params: any) =>
+              <TextField
+                sx={{
+                  '& .MuiInputBase-root': {
+                    height: '100%',
+                    padding: '16px 14px',
+                    fontFamily: 'Poppins'
+                  }
+                }}
+                {...params}
+                label='To'
+                helperText={(destinationError === '' ? '' : destinationError) || (matchingCityError === '' ? '' : matchingCityError)}
+              />
+            }
+          />
 
-        <FormControl className='search-select-container' fullWidth>
-          <InputLabel id='mode-select-label'>By...</InputLabel>
-          <Select
-            className='search-select-item'
-            labelId='simple-select-label'
-            id='simple-select'
+          <Autocomplete
+            disablePortal
+            options={['Foot', 'Car', 'Plane']}
             value={mode}
-            label='Select Mode'
-            onChange={handleModeChange}
+            onChange={(_, newValue) => setMode(newValue || '')}
+            sx={{ width: 300, fontFamily: 'Poppins' }}
+            renderInput={(params: any) =>
+              <TextField
+                sx={{
+                  '& .MuiInputBase-root': {
+                    height: '100%',
+                    padding: '16px 14px',
+                    fontFamily: 'Poppins'
+                  }
+                }}
+                {...params}
+                label='By'
+                helperText={modeError === '' ? '' : modeError}
+              />
+            }
+          />
+
+          <Button
+            onClick={handleClick}
+            sx={{ fontFamily: 'Poppins', fontSize: 20, backgroundColor: 'rgb(25, 118, 210)', color: 'white', padding: 2 }}
+            disabled={isDisabled()}
           >
-            <MenuItem value='foot'>Foot</MenuItem>
-            <MenuItem value='car'>Car</MenuItem>
-            <MenuItem value='plane'>Plane</MenuItem>
-          </Select>
-        </FormControl>
+            Calculate
+          </Button>
 
-        <Button
-          onClick={handleClick}
-        >
-          Calculate
-        </Button>
-
-        <Button
-          onClick={handleReset}
-        >
-          Reset
-        </Button>
+          <Button
+            onClick={handleReset}
+            sx={{ fontFamily: 'Poppins', fontSize: 20, padding: 2, borderWidth: 1, borderColor: 'rgb(25, 118, 210)' }}
+            variant='outlined'
+          >
+            Reset
+          </Button>
 
 
-      </div>
+        </div>
 
-      <div className='result-container'>
-        {showOutput && (
-          <OutputCity origin={origin} destination={destination} mode={mode} />
+        <div className='result-container'>
+          {showOutput && (
+            <OutputCity
+              origin={origin}
+              destination={destination}
+              mode={mode}
+              clicked={clicked}
+              setClicked={setClicked}
+            />
+          )}
+        </div>
+
+        {showCityInfo && (
+          <div className={`city-info-container ${isDayTime ? 'day-theme' : 'night-theme'}`}>
+            <Box
+              sx={{
+                borderRadius: 2,
+                padding: 2,
+              }}
+            >
+
+              <TabContext value={tabValue}>
+                <Box
+                  sx={{
+                    borderBottom: 1,
+                    borderColor: isDayTime ? '#e0e0e0' : 'rgba(144, 202, 249, 0.2)',
+                  }}
+                >
+                  <TabList onChange={handleTabChange}
+                    sx={{ // Match the Box background
+                      borderRadius: '8px 8px 0 0', // Optional: rounded top corners
+                      '& .MuiTab-root': {
+                        fontFamily: 'Poppins',
+                        color: isDayTime ? '#666' : '#90caf9',
+                        '&.Mui-selected': {
+                          color: isDayTime ? '#1976d2' : '#ffffff',
+                        },
+                      },
+                      '& .MuiTabs-indicator': {
+                        backgroundColor: isDayTime ? '#1976d2' : '#90caf9',
+                      }
+                    }}
+                  >
+                    <Tab sx={{ fontFamily: 'Poppins' }} label='Overview' value='overview' />
+                    <Tab sx={{ fontFamily: 'Poppins' }} label='Attractions' value='attractions' />
+                    <Tab sx={{ fontFamily: 'Poppins' }} label='Emergency' value='emergency' />
+                  </TabList>
+                </Box>
+                <TabPanel value='overview'>
+                  <CityOverviewInfo city={destination} clicked={clicked} isDayTime={isDayTime} />
+                </TabPanel>
+                <TabPanel value='attractions'>
+                  <CityAttractionInfo city={destination} isDayTime={isDayTime} />
+                </TabPanel>
+                <TabPanel value='emergency'>
+                  <CityEmergencyNumbersInfo city={destination} isDayTime={isDayTime} />
+                </TabPanel>
+              </TabContext>
+            </Box>
+          </div>
         )}
       </div>
+    </ThemeProvider>
 
-      {showCityInfo && (
-        <div className='city-info-container'>
-          <Box>
-            <TabContext value={tabValue}>
-              <Box>
-                <TabList onChange={handleTabChange}>
-                  <Tab label='Overview' value='overview' />
-                  <Tab label='Attractions' value='attractions' />
-                </TabList>
-              </Box>
-              <TabPanel value='overview'>
-                <CityOverviewInfo city={destination} />
-              </TabPanel>
-              <TabPanel value='attractions'> 
-                <CityAttractionInfo city={destination} />
-              </TabPanel>
-            </TabContext>
-          </Box>
-        </div>
-      )}
-    </div>
   );
 }
