@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import './AttractionsList.css';
 
-import { getAttractionsInfo } from "../../utils/getAttractionsInfo.tsx";
+import { getAttractionsInfo } from "../../utils/getAttractionsInfo.ts";
 
 import type { AttractionsListProps } from "../../types/index.ts";
 import { CopyButton } from "../CopyButton/CopyButton.tsx";

@@ -15,7 +15,7 @@ import { matchWeatherIcon } from "../../utils/matchWeatherIcon.tsx";
 import type { WeatherCardProps } from "../../types/index.ts";
 import type { WeatherDataResult } from "../../types/apiResults/weatherDataResult.ts";
 
-import { getLocalTime } from "../../utils/getLocalTime.tsx";
+import { getLocalTime } from "../../utils/getLocalTime.ts";
 import cities from '../../types/constants/cities.json';
 
 export function WeatherCard({ city, clicked, isLightTheme }: WeatherCardProps) {

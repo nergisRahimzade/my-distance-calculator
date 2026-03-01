@@ -8,7 +8,7 @@ import { RouteResult } from '../RouteResult/RouteResult.tsx';
 import { CityDetailsPanel } from '../CityDetailsPanel/CityDetailsPanel.tsx';
 import { AttractionsList } from '../AttractionsList/AttractionsList.tsx';
 import { EmergencyContacts } from '../EmergencyContacts/EmergencyContacts.tsx';
-import { getTheme } from '../../utils/getTheme.tsx';
+import { getTheme } from '../../utils/getTheme.ts';
 import { getCurrentLocation } from '../../services/getCurrentLocation.ts';
 import { fetchCityName } from '../../services/apiClient.ts';
 
