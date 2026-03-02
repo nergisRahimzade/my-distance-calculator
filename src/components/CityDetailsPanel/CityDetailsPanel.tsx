@@ -81,17 +81,11 @@ export function CityDetailsPanel({ city, clicked, isLightTheme }: CityDetailsPan
                       {activity.price?.amount} {findCurrencyIcon(activity.price?.currencyCode || '')}
                     </td>
 
-                    <td className='activity-booking-link' key={activity.id}>
-                      <a
+                    <td className='activity-booking-link-row' key={activity.id}>
+                      <a className='activity-booking-link'
                         href={activity.bookingLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{
-                          color: 'rgb(25, 118, 210)',
-                          textDecoration: 'underline',
-                          marginRight: '8px',
-                          wordBreak: 'break-all'
-                        }}
                       >
                         {activity.bookingLink}
                       </a> 

@@ -17,3 +17,10 @@ body {
   text-align: center;
   margin-bottom: 5px;
 }
+
+.activity-booking-link {
+  color: rgb(25, 118, 210);
+  text-decoration: underline;
+  margin-right: 8px;
+  word-break: break-all;
+}

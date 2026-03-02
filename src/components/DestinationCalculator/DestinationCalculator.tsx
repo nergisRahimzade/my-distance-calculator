@@ -1,4 +1,4 @@
-import { Button, Tab, Box, Autocomplete, TextField, ThemeProvider, CssBaseline, Switch, FormControlLabel } from '@mui/material';
+import { Button, Tab, Box, Autocomplete, TextField, ThemeProvider, CssBaseline, Switch, FormControlLabel, createTheme, type AutocompleteRenderInputParams } from '@mui/material';
 import { TabPanel, TabContext, TabList } from '@mui/lab';
 import { useEffect, useMemo, useState, type SyntheticEvent } from 'react';
 import citiesData from '../../types/constants/cities.json';
@@ -8,9 +8,66 @@ import { RouteResult } from '../RouteResult/RouteResult.tsx';
 import { CityDetailsPanel } from '../CityDetailsPanel/CityDetailsPanel.tsx';
 import { AttractionsList } from '../AttractionsList/AttractionsList.tsx';
 import { EmergencyContacts } from '../EmergencyContacts/EmergencyContacts.tsx';
-import { getTheme } from '../../utils/getTheme.ts';
 import { getCurrentLocation } from '../../services/getCurrentLocation.ts';
 import { fetchCityName } from '../../services/apiClient.ts';
+import styled from '@emotion/styled';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "Poppins"
+  },
+  components: {
+    MuiAutocomplete: {
+      styleOverrides: {
+        root: {
+          width: 300
+        }
+      }
+    }
+  }
+});
+
+const StyledTabList = styled(TabList)(({ isLightTheme }: { isLightTheme: boolean }) => ({
+  // Match the Box background
+  borderRadius: '8px 8px 0 0', // Optional: rounded top corners
+  fontFamily: 'Poppins',
+  color: isLightTheme ? '#666' : '#90caf9',
+  '&.Mui-selected': {
+    color: isLightTheme ? '#1976d2' : '#ffffff',
+  },
+
+  '& .MuiTabs-indicator': {
+    backgroundColor: isLightTheme ? '#1976d2' : '#90caf9',
+  }
+
+}));
+
+const StyledButton = styled(Button)(() => ({
+  fontFamily: 'Poppins',
+  fontSize: 20,
+  padding: 2,
+  borderWidth: 1,
+  borderColor: 'rgb(25, 118, 210)'
+}));
+
+const StyledTextField = styled(TextField)(() => ({
+  '& .MuiInputBase-root': {
+    height: '100%',
+    padding: '16px 14px',
+    fontFamily: 'Poppins'
+  }
+}));
+
+const StyledBox1 = styled(Box)(() => ({
+  borderRadius: 2,
+  padding: 2,
+}));
+
+const StyledBox2 = styled(Box)(({ isLightTheme }: { isLightTheme: boolean }) => ({
+  borderBottom: 1,
+  borderColor: isLightTheme ? '#e0e0e0' : 'rgba(144, 202, 249, 0.2)'
+}));
+
 
 export function DestinationCalculator() {
   const [origin, setOrigin] = useState('');
@@ -27,14 +84,12 @@ export function DestinationCalculator() {
   const [isLightTheme, setIsLightTheme] = useState(true);
   const [currentCity, setCurrentCity] = useState('');
 
-  const autoCompleteStyle = { width: 300, fontFamily: 'Poppins' };
-
   useEffect(() => {
     handleDefaultOrigin();
   }, []);
 
   //theme is used as the default value of ThemeProvider
-  const theme = useMemo(() => getTheme(isLightTheme), [isLightTheme]);  
+  //const theme = useMemo(() => getTheme(isLightTheme), [isLightTheme]);  
 
   //this function is used to check if Calculate button should be disabled or not
   const isDisabled = () => {
@@ -114,7 +169,6 @@ export function DestinationCalculator() {
               />
             }
             label={isLightTheme ? 'Light Theme' : 'Dark Theme'}
-            sx={{ fontFamily: 'Poppins' }}
           />
         </div>
 
@@ -126,16 +180,8 @@ export function DestinationCalculator() {
             options={cityList}
             value={currentCity !== '' ? currentCity : origin}
             onChange={(_, newValue) => setOrigin(newValue || '')}
-            sx={{ autoCompleteStyle }}
-            renderInput={(params: any) =>
-              <TextField
-                sx={{
-                  '& .MuiInputBase-root': {
-                    height: '100%',
-                    padding: '16px 14px',
-                    fontFamily: 'Poppins'
-                  }
-                }}
+            renderInput={(params: AutocompleteRenderInputParams) =>
+              <StyledTextField
                 {...params}
                 label='From'
               />
@@ -148,16 +194,8 @@ export function DestinationCalculator() {
             options={cityList}
             value={destination}
             onChange={(_, newValue) => setDestination(newValue || '')}
-            sx={{ autoCompleteStyle }}
-            renderInput={(params: any) =>
-              <TextField
-                sx={{
-                  '& .MuiInputBase-root': {
-                    height: '100%',
-                    padding: '16px 14px',
-                    fontFamily: 'Poppins'
-                  }
-                }}
+            renderInput={(params: AutocompleteRenderInputParams) =>
+              <StyledTextField
                 {...params}
                 label='To'
               />
@@ -170,39 +208,29 @@ export function DestinationCalculator() {
             options={['Foot', 'Car', 'Plane']}
             value={mode}
             onChange={(_, newValue) => setMode(newValue || '')}
-            sx={{ autoCompleteStyle }}
-            renderInput={(params: any) =>
-              <TextField
-                sx={{
-                  '& .MuiInputBase-root': {
-                    height: '100%',
-                    padding: '16px 14px',
-                    fontFamily: 'Poppins'
-                  }
-                }}
+            renderInput={(params: AutocompleteRenderInputParams) =>
+              <StyledTextField
                 {...params}
                 label='Mode'
               />
             }
           />
 
-          <Button
+          <StyledButton
             onClick={handleClick}
-            sx={{ fontFamily: 'Poppins', fontSize: 20, backgroundColor: 'rgb(25, 118, 210)', color: 'white', padding: 2 }}
             disabled={isDisabled()}
           >
             Calculate
-          </Button>
+          </StyledButton>
 
           {isVisible && (
-            <Button
+            <StyledButton
               onClick={handleReset}
-              sx={{ fontFamily: 'Poppins', fontSize: 20, padding: 2, borderWidth: 1, borderColor: 'rgb(25, 118, 210)' }}
               variant='outlined'
 
             >
               Reset
-            </Button>
+            </StyledButton>
           )}
 
 
@@ -223,40 +251,16 @@ export function DestinationCalculator() {
 
         {showCityInfo && (
           <div className={`city-info-container ${isLightTheme ? 'light-theme' : 'dark-theme'}`}>
-            <Box
-              sx={{
-                borderRadius: 2,
-                padding: 2,
-              }}
-            >
+            <StyledBox1>
 
               <TabContext value={tabValue}>
-                <Box
-                  sx={{
-                    borderBottom: 1,
-                    borderColor: isLightTheme ? '#e0e0e0' : 'rgba(144, 202, 249, 0.2)',
-                  }}
-                >
-                  <TabList onChange={handleTabChange}
-                    sx={{ // Match the Box background
-                      borderRadius: '8px 8px 0 0', // Optional: rounded top corners
-                      '& .MuiTab-root': {
-                        fontFamily: 'Poppins',
-                        color: isLightTheme ? '#666' : '#90caf9',
-                        '&.Mui-selected': {
-                          color: isLightTheme ? '#1976d2' : '#ffffff',
-                        },
-                      },
-                      '& .MuiTabs-indicator': {
-                        backgroundColor: isLightTheme ? '#1976d2' : '#90caf9',
-                      }
-                    }}
-                  >
-                    <Tab sx={{ fontFamily: 'Poppins' }} label='Overview' value='overview' />
-                    <Tab sx={{ fontFamily: 'Poppins' }} label='Attractions' value='attractions' />
-                    <Tab sx={{ fontFamily: 'Poppins' }} label='Emergency' value='emergency' />
-                  </TabList>
-                </Box>
+                <StyledBox2 isLightTheme={isLightTheme}>
+                  <StyledTabList isLightTheme={isLightTheme} onChange={handleTabChange}>
+                    <Tab label='Overview' value='overview' />
+                    <Tab label='Attractions' value='attractions' />
+                    <Tab label='Emergency' value='emergency' />
+                  </StyledTabList>
+                </StyledBox2>
                 <TabPanel value='overview'>
                   <CityDetailsPanel city={destination} clicked={clicked} isLightTheme={isLightTheme} />
                 </TabPanel>
@@ -267,7 +271,7 @@ export function DestinationCalculator() {
                   <EmergencyContacts city={destination} isLightTheme={isLightTheme} clicked={clicked} />
                 </TabPanel>
               </TabContext>
-            </Box>
+            </StyledBox1>
           </div>
         )}
       </div>

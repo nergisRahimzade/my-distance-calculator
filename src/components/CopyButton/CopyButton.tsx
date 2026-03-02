@@ -2,9 +2,14 @@ import { IconButton, Tooltip } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import CheckIcon from '@mui/icons-material/Check';
 import { useState } from 'react';
+import styled from '@emotion/styled';
 
 export function CopyButton({textToCopy, isLightTheme}: {textToCopy: string, isLightTheme: boolean}) {
   const [copied, setCopied] = useState(false);
+
+  const StyledIconButton = styled(IconButton)(() => ({
+    color: isLightTheme ? "black" : "white"
+  }));
 
   const handleCopy= async () => {
     await navigator.clipboard.writeText(textToCopy);
@@ -15,14 +20,13 @@ export function CopyButton({textToCopy, isLightTheme}: {textToCopy: string, isLi
   return (
     <>
       <Tooltip title={copied ? 'Copied!' : 'Copy'}>
-        <IconButton 
+        <StyledIconButton 
           aria-label='Copy to clipboard'
-          sx={{ color: isLightTheme ? 'black' : 'white' }} 
           onClick={handleCopy} 
           size='small'
         >
           {copied ? <CheckIcon color='success' /> : <ContentCopyIcon />}
-        </IconButton>
+        </StyledIconButton>
       </Tooltip>
     </>
   );
