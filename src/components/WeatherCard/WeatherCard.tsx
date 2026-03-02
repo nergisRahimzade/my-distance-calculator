@@ -10,7 +10,7 @@ import './WeatherCard.css';
 import '../../assets/other-icons/calendar.png';
 
 import { apiCall } from "../../services/apiCalls.ts";
-import { matchWeatherIcon } from "../../utils/matchWeatherIcon.tsx";
+import { matchWeatherIcon } from "../../utils/matchWeatherIcon.ts";
 
 import type { WeatherCardProps } from "../../types/index.ts";
 import type { WeatherDataResult } from "../../types/apiResults/weatherDataResult.ts";

@@ -110,6 +110,7 @@ export const fetchLocationCoordinates = async (city: string) => {
 
 };
 
+/*
 //returns the data of distance and duration between 2 cities using OpenRouteServie API
 export const fetchRouteDirections = async (startLon: number, startLat: number, endLon: number, endLat: number, profile: string) => {
   try {
@@ -135,6 +136,33 @@ export const fetchRouteDirections = async (startLon: number, startLat: number, e
     throw error;
   }
 };
+*/
+
+export const fetchRouteDirections = async (origin: string, destination: string, mode: string) => {
+  try {
+    const url = `http://localhost:3000/api/distance?origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&mode=${mode}`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+    
+    if(data.status !== 'OK') {
+      throw new Error(`Google Distance Matrix API returned this as a status: ${data.status}`);
+    }
+
+    const routeData = data.rows[0].elements[0];
+
+    if(routeData.status !== 'OK') {
+      throw new Error('Google Distance Matrix API in elements returned this as a status: ', routeData.status);
+    }
+
+    return {
+      distance: routeData.distance.text,
+      duration: routeData.duration.text
+    };
+  } catch (error) {
+    console.error('Error when fetching data from Google Distance Matrix API: ', error);
+  }
+};
 
 //returns the name of a city given coordinates as parameters, using OpenStreetMap API
 export const fetchCityName = async (lat: number, lon: number) => {
@@ -144,7 +172,7 @@ export const fetchCityName = async (lat: number, lon: number) => {
     console.log(data.address.city || data.address.town || data.address.village);
 
     return data.address.city || data.address.town || data.address.village;
-  } catch(error) {
+  } catch (error) {
     console.error('Error fetching city name from coordinates: ', error);
   }
 };

@@ -2,7 +2,7 @@ import { fetchCityWeather, fetchEmergencyNumbers, fetchAmadeusAccessToken, fetch
 import citiesData from '../types/constants/cities.json';
 import type { Activity } from "../types/activity.ts";
 import { calculatePopularityScore } from "../utils/calculatePopularityScore.ts";
-import { calculateFlightDistance } from "../utils/calculateFlightDistance.tsx";
+import { calculateFlightDistance } from "../utils/calculateFlightDistance.ts";
 
 export const apiCall = {
   //returns weather data for given city
@@ -71,27 +71,22 @@ export const apiCall = {
   },
 
   //returns the distance and duration between two cities based on selected mode
-  getDistDur: async (city1: string, city2: string, mode: string) => {
-    const startCoordResult = await fetchLocationCoordinates(city1);
-    const endCoordResult = await fetchLocationCoordinates(city2);
+  getDistDur: async (origin: string, destination: string, mode: string) => {
+    const startCoordResult = await fetchLocationCoordinates(origin);
+    const endCoordResult = await fetchLocationCoordinates(destination);
 
-    const startCoord = startCoordResult[0];
-    const endCoord = endCoordResult[0];
-
-    let profile = 'driving-car';
-    if (mode === 'Foot')
-      profile = 'foot-walking';
-    else if (mode === 'Car')
-      profile = 'driving-car';
+    if(mode === 'Car')
+      mode = 'driving'
+    else if(mode === 'Foot')
+      mode = 'walking'
     else if (mode === 'Plane')
       return calculateFlightDistance(startCoordResult, endCoordResult);
 
-    const data = await fetchRouteDirections(parseFloat(startCoord.lon), parseFloat(startCoord.lat), parseFloat(endCoord.lon), parseFloat(endCoord.lat), profile);
-    const route = data.features[0].properties.segments[0];
+    const data = await fetchRouteDirections(origin, destination, mode.toLowerCase());
 
     return {
-      distanceKm: (route.distance / 1000).toFixed(2),
-      durationMinutes: Math.round(route.duration / 60)
+      distanceKm: (data?.distance / 1000).toFixed(2),
+      durationMinutes: Math.round(data?.duration / 60)
     };
   }
 };

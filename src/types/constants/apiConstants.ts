@@ -4,7 +4,8 @@ export const API_KEYS = {
   amadeus: {
     key: import.meta.env.VITE_AMADEUS_API_KEY,
     secret: import.meta.env.VITE_AMADEUS_API_SECRET
-  }
+  },
+  google: import.meta.env.VITE_GOOGLE_API_KEY
 };
 
 export const API_BASE_URLS = {
