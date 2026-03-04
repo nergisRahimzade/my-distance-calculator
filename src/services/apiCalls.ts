@@ -1,5 +1,5 @@
 import { fetchCityWeather, fetchEmergencyNumbers, fetchAmadeusAccessToken, fetchAmadeusActivities, fetchLocationCoordinates, fetchRouteDirections } from "./apiClient.ts";
-import citiesData from '../types/constants/cities.json';
+import citiesData from '../constants/cities.json';
 import type { Activity } from "../types/activity.ts";
 import { calculatePopularityScore } from "../utils/calculatePopularityScore.ts";
 import { calculateFlightDistance } from "../utils/calculateFlightDistance.ts";

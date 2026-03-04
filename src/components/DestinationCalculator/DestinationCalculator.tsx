@@ -1,16 +1,19 @@
 import { Button, Tab, Box, Autocomplete, TextField, ThemeProvider, CssBaseline, Switch, FormControlLabel, createTheme, type AutocompleteRenderInputParams } from '@mui/material';
 import { TabPanel, TabContext, TabList } from '@mui/lab';
-import { useEffect, useMemo, useState, type SyntheticEvent } from 'react';
-import citiesData from '../../types/constants/cities.json';
+import { useEffect, useState, type SyntheticEvent } from 'react';
 import './DestinationCalculator.css';
 import { RouteResult } from '../RouteResult/RouteResult.tsx';
 
 import { CityDetailsPanel } from '../CityDetailsPanel/CityDetailsPanel.tsx';
 import { AttractionsList } from '../AttractionsList/AttractionsList.tsx';
 import { EmergencyContacts } from '../EmergencyContacts/EmergencyContacts.tsx';
-import { getCurrentLocation } from '../../services/getCurrentLocation.ts';
+import { getCurrentLocation } from '../../utils/getCurrentLocation.ts';
 import { fetchCityName } from '../../services/apiClient.ts';
 import styled from '@emotion/styled';
+import { useCityList } from '../../hooks/useCityList.ts';
+import { useThemeToggle } from '../../hooks/useThemeToggle.ts';
+import { useCurrentCity } from '../../hooks/useCurrentCity.ts';
+import { useCalculatorForm } from '../../hooks/useCalculatorForm.ts';
 
 const theme = createTheme({
   typography: {
@@ -70,90 +73,26 @@ const StyledBox2 = styled(Box)(({ isLightTheme }: { isLightTheme: boolean }) => 
 
 
 export function DestinationCalculator() {
-  const [origin, setOrigin] = useState('');
-  const [destination, setDestination] = useState('');
-  const [mode, setMode] = useState('');
-  const [showOutput, setShowOutput] = useState(false);
-  const [tabValue, setTabValue] = useState('overview');
-  const [showCityInfo, setShowCityInfo] = useState(false);
-
-  const [clicked, setClicked] = useState(false);
-
-  const [isVisible, setIsVisible] = useState(false);
-
-  const [isLightTheme, setIsLightTheme] = useState(true);
   const [currentCity, setCurrentCity] = useState('');
+  const {isLightTheme, toggleTheme} = useThemeToggle();
+  const {
+    origin, setOrigin,
+    destination, setDestination,
+    mode, setMode,
+    showOutput,
+    tabValue,
+    showCityInfo,
+    clicked, setClicked,
+    isVisible,
+    isDisabled,
+    handleClick,
+    handleReset,
+    handleTabChange
+  } = useCalculatorForm();
 
   useEffect(() => {
-    handleDefaultOrigin();
+    useCurrentCity().then(setCurrentCity);
   }, []);
-
-  //theme is used as the default value of ThemeProvider
-  //const theme = useMemo(() => getTheme(isLightTheme), [isLightTheme]);  
-
-  //this function is used to check if Calculate button should be disabled or not
-  const isDisabled = () => {
-    if (origin === '' || destination === '' || mode === '')
-      return true;
-
-    if (origin === destination)
-      return true;
-
-    else
-      return false;
-  }
-
-  const cityList = useMemo(() => {
-    return citiesData.cities.map(city => city.cityName);
-  }, []);
-
-  //this function is called when Calculate button is clicked
-  const handleClick = () => {
-    //isValid();
-
-    //setting showOutput to true opens RouteResult component
-    //setting showCityInfo to true opens city info panel with tabs
-    //changing value of clicked to fetch the distance and duration api results
-    //setting isVisible to true shows Reset button
-    if (origin && destination && mode && origin != destination) {
-      setShowOutput(true);
-      setShowCityInfo(true);
-      setClicked(!clicked);
-      setIsVisible(true);
-    }
-  };
-
-  //this function is called when Reset button is clicked
-  //resetting all states to empty autocomplete fields and hiding output
-  const handleReset = () => {
-    setShowOutput(false);
-    setShowCityInfo(false);
-    setOrigin('');
-    setDestination('');
-    setMode('');
-    setIsVisible(false);
-  };
-
-  //this function is called when a tab is changed in the city info panel
-  const handleTabChange = (_event: SyntheticEvent, newValue: string) => {
-    setTabValue(newValue);
-  };
-
-  //this function is called when the theme switch is toggled
-  //it toggles between light and dark themes
-  const handleSwitchChange = () => {
-    setIsLightTheme(!isLightTheme);
-  };
-
-  //this function is called when the page first mounts
-  //it is used to get the user's current location and set it as the default value of the origin city
-  const handleDefaultOrigin = async () => {
-    const current = getCurrentLocation();
-    if (current?.permissionGranted === true) {
-      const city = await fetchCityName(current.lat, current.lon);
-      setCurrentCity(city);
-    }
-  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -164,7 +103,7 @@ export function DestinationCalculator() {
             control={
               <Switch
                 checked={isLightTheme}
-                onChange={handleSwitchChange}
+                onChange={() => toggleTheme()}
                 slotProps={{ input: { 'aria-label': 'Switch theme' } }}
               />
             }
@@ -177,7 +116,7 @@ export function DestinationCalculator() {
           <Autocomplete
             aria-label='Choose origin city'
             disablePortal
-            options={cityList}
+            options={useCityList()}
             value={currentCity !== '' ? currentCity : origin}
             onChange={(_, newValue) => setOrigin(newValue || '')}
             renderInput={(params: AutocompleteRenderInputParams) =>
@@ -191,7 +130,7 @@ export function DestinationCalculator() {
           <Autocomplete
             aria-label='Choose destination city'
             disablePortal
-            options={cityList}
+            options={useCityList()}
             value={destination}
             onChange={(_, newValue) => setDestination(newValue || '')}
             renderInput={(params: AutocompleteRenderInputParams) =>

@@ -1,12 +1,12 @@
 import './App.css';
-import { DestinationCalculator } from './components/DestinationCalculator/DestinationCalculator.tsx';
+import { Home } from './pages/Home.tsx';
 
 function App() {
 
   return (
-    <>
-     <DestinationCalculator />
-    </>
+    <div>
+     <Home />
+    </div>
   )
 }
 

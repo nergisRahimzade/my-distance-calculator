@@ -30,3 +30,8 @@ export type WeatherCardProps = {
   clicked: boolean,
   isLightTheme: boolean,
 };
+
+export type UseThemeToggleProps = {
+  isLightTheme: boolean,
+  setIsLightTheme: (value: React.SetStateAction<boolean>) => void
+}

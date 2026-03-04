@@ -16,7 +16,7 @@ import type { WeatherCardProps } from "../../types/index.ts";
 import type { WeatherDataResult } from "../../types/apiResults/weatherDataResult.ts";
 
 import { getLocalTime } from "../../utils/getLocalTime.ts";
-import cities from '../../types/constants/cities.json';
+import cities from '../../constants/cities.json';
 
 export function WeatherCard({ city, clicked, isLightTheme }: WeatherCardProps) {
   const [result, setResult] = useState<WeatherDataResult | null>(null);

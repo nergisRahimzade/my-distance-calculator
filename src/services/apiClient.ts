@@ -1,4 +1,4 @@
-import { API_BASE_URLS, API_KEYS } from "../types/constants/apiConstants.ts";
+import { API_BASE_URLS, API_KEYS } from "../constants/apiConstants.ts";
 
 //returns the weather data of a city using OpenWeatherMap API
 export const fetchCityWeather = async (cityName: string) => {
