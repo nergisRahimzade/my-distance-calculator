@@ -35,3 +35,19 @@ export type UseThemeToggleProps = {
   isLightTheme: boolean,
   setIsLightTheme: (value: React.SetStateAction<boolean>) => void
 }
+
+export type CopyButtonProps = {
+  textToCopy: string,
+  isLightTheme: boolean
+}
+
+export type CityRecord = {
+  cityName: string,
+  country: string
+}
+
+export type EmergencyNumbers = {
+  ambulance: number | string,
+  fire: number | string,
+  police: number | string
+}

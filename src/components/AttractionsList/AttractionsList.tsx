@@ -7,7 +7,7 @@ import type { AttractionsListProps } from "../../types/index.ts";
 import { CopyButton } from "../CopyButton/CopyButton.tsx";
 
 export function AttractionsList({ city, isLightTheme, clicked }: AttractionsListProps) {
-  const [attractionsInfo, setAttractionsInfo] = useState<any[] | null>(null);
+  const [attractionsInfo, setAttractionsInfo] = useState<string[] | null>(null);
   const [loading, setLoading] = useState(true);
 
   //fetches attractions info every time clicked changes

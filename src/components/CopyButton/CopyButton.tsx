@@ -3,8 +3,9 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import CheckIcon from '@mui/icons-material/Check';
 import { useState } from 'react';
 import styled from '@emotion/styled';
+import type { CopyButtonProps } from '../../types';
 
-export function CopyButton({textToCopy, isLightTheme}: {textToCopy: string, isLightTheme: boolean}) {
+export function CopyButton({textToCopy, isLightTheme}: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const StyledIconButton = styled(IconButton)(() => ({

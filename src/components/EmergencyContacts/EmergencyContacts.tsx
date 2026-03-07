@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 
 import { apiCall } from "../../services/apiCalls.ts";
 
-import type { EmergencyContactsProps } from "../../types/index.ts";
+import type { EmergencyContactsProps, EmergencyNumbers } from "../../types/index.ts";
 
 import './EmergencyContacts.css';
 
 export function EmergencyContacts({ city, isLightTheme, clicked }: EmergencyContactsProps) {
-  const [numbersList, setNumbersList] = useState<any | null>(null);
+  const [numbersList, setNumbersList] = useState<EmergencyNumbers | null>(null);
 
   //fetches emergency contact numbers every time clicked changes
   useEffect(() => {

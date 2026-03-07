@@ -3,6 +3,7 @@ import citiesData from '../constants/cities.json';
 import type { Activity } from "../types/activity.ts";
 import { calculatePopularityScore } from "../utils/calculatePopularityScore.ts";
 import { calculateFlightDistance } from "../utils/calculateFlightDistance.ts";
+import type { CityRecord } from "../types/index.ts";
 
 export const apiCall = {
   //returns weather data for given city
@@ -19,7 +20,7 @@ export const apiCall = {
   //returns emergency contact numbers for given city
   getEmergencyNumber: async (cityName: string) => {
     const cities = citiesData.cities;
-    const matchingCity = cities.find((city: any) => city.cityName === cityName);
+    const matchingCity = cities.find((city: CityRecord) => city.cityName === cityName);
     const code = matchingCity?.country;
     const data = await fetchEmergencyNumbers(code ? code : '');
 
