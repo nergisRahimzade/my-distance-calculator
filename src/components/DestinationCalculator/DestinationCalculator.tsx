@@ -1,18 +1,16 @@
 import { Button, Tab, Box, Autocomplete, TextField, ThemeProvider, CssBaseline, Switch, FormControlLabel, createTheme, type AutocompleteRenderInputParams } from '@mui/material';
 import { TabPanel, TabContext, TabList } from '@mui/lab';
-import { useEffect, useState, type SyntheticEvent } from 'react';
+import { useEffect, useState } from 'react';
 import './DestinationCalculator.css';
 import { RouteResult } from '../RouteResult/RouteResult.tsx';
 
 import { CityDetailsPanel } from '../CityDetailsPanel/CityDetailsPanel.tsx';
 import { AttractionsList } from '../AttractionsList/AttractionsList.tsx';
 import { EmergencyContacts } from '../EmergencyContacts/EmergencyContacts.tsx';
-import { getCurrentLocation } from '../../utils/getCurrentLocation.ts';
-import { fetchCityName } from '../../services/apiClient.ts';
 import styled from '@emotion/styled';
 import { useCityList } from '../../hooks/useCityList.ts';
 import { useThemeToggle } from '../../hooks/useThemeToggle.ts';
-import { useCurrentCity } from '../../hooks/useCurrentCity.ts';
+import { useCurrentCity } from '../../utils/getCurrentCity.ts';
 import { useCalculatorForm } from '../../hooks/useCalculatorForm.ts';
 
 const theme = createTheme({
@@ -204,7 +202,7 @@ export function DestinationCalculator() {
                   <CityDetailsPanel city={destination} clicked={clicked} isLightTheme={isLightTheme} />
                 </TabPanel>
                 <TabPanel value='attractions'>
-                  <AttractionsList city={destination} isLightTheme={isLightTheme} clicked={clicked} />
+                  <AttractionsList city={destination} isLightTheme={isLightTheme} />
                 </TabPanel>
                 <TabPanel value='emergency'>
                   <EmergencyContacts city={destination} isLightTheme={isLightTheme} clicked={clicked} />

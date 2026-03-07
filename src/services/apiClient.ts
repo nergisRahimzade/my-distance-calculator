@@ -152,7 +152,7 @@ export const fetchRouteDirections = async (origin: string, destination: string, 
     const routeData = data.rows[0].elements[0];
 
     if(routeData.status !== 'OK') {
-      throw new Error('Google Distance Matrix API in elements returned this as a status: ', routeData.status);
+      throw new Error(`Google Distance Matrix API in elements returned this as a status: ${routeData.status}`);
     }
 
     return {
@@ -169,7 +169,6 @@ export const fetchCityName = async (lat: number, lon: number) => {
   try {
     const response = await fetch(`${API_BASE_URLS.openstreetmap}/reverse?lat=${lat}&lon=${lon}&format=json`);
     const data = await response.json();
-    console.log(data.address.city || data.address.town || data.address.village);
 
     return data.address.city || data.address.town || data.address.village;
   } catch (error) {

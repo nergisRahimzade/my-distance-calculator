@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import './AttractionsList.css';
 
 import { getAttractionsInfo } from "../../utils/getAttractionsInfo.ts";
@@ -6,20 +5,12 @@ import { getAttractionsInfo } from "../../utils/getAttractionsInfo.ts";
 import type { AttractionsListProps } from "../../types/index.ts";
 import { CopyButton } from "../CopyButton/CopyButton.tsx";
 
-export function AttractionsList({ city, isLightTheme, clicked }: AttractionsListProps) {
-  const [attractionsInfo, setAttractionsInfo] = useState<string[] | null>(null);
-  const [loading, setLoading] = useState(true);
+export function AttractionsList({ city, isLightTheme }: AttractionsListProps) {
+  const attractionsInfo = getAttractionsInfo(city);
 
-  //fetches attractions info every time clicked changes
-  useEffect(() => {
-    setLoading(true);
-    const res = getAttractionsInfo(city);
-    setAttractionsInfo(res);
-    setLoading(false);
-  }, [clicked]);
-
-  if (loading) return <p>Loading attractions...</p>;
-  if (!attractionsInfo?.length) return <p>No attractions found.</p>;
+  if(!attractionsInfo || attractionsInfo.length === 0) {
+    return <p>No attractions found.</p>;
+  }
 
   return (
     <div>

@@ -1,7 +1,6 @@
 export type AttractionsListProps = {
   city: string,
-  isLightTheme: boolean,
-  clicked: boolean
+  isLightTheme: boolean
 };
 
 export type EmergencyContactsProps = {

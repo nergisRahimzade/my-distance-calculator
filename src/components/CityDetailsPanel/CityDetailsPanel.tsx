@@ -19,7 +19,7 @@ export function CityDetailsPanel({ city, clicked, isLightTheme }: CityDetailsPan
       .catch((error) => {
         console.error('Error fetching overview info: ', error);
       });
-  }, [clicked]);
+  }, [city, clicked]);
 
   const findCurrencyIcon = (currencyCode: string) => {
     if (currencyCode === 'USD') return '$';
@@ -69,19 +69,19 @@ export function CityDetailsPanel({ city, clicked, isLightTheme }: CityDetailsPan
                 </thead>
                 <tbody>
                   <tr>
-                    <td className='activity-name' key={activity.id}>
+                    <td className='activity-name'>
                       {activity.name}
                     </td>
 
-                    <td className='activity-short-desc' key={activity.id}>
+                    <td className='activity-short-desc'>
                       {activity.shortDescription}
                     </td>
 
-                    <td className='activity-price' key={activity.id}>
+                    <td className='activity-price'>
                       {activity.price?.amount} {findCurrencyIcon(activity.price?.currencyCode || '')}
                     </td>
 
-                    <td className='activity-booking-link-row' key={activity.id}>
+                    <td className='activity-booking-link-row'>
                       <a className='activity-booking-link'
                         href={activity.bookingLink}
                         target="_blank"
