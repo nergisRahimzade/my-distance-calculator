@@ -192,6 +192,10 @@ export function DestinationCalculator() {
                 isLightTheme={isLightTheme}
                 {...params}
                 label='Mode'
+                onKeyDown={(event) => {
+                  if(event.key === 'Enter') 
+                    handleClick();
+                }}
               />
             }
           />
