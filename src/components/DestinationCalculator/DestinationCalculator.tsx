@@ -51,11 +51,17 @@ const StyledButton = styled(Button)(() => ({
   borderColor: 'rgb(25, 118, 210)'
 }));
 
-const StyledTextField = styled(TextField)(() => ({
+const StyledTextField = styled(TextField)(({ isLightTheme }: { isLightTheme: boolean }) => ({
   '& .MuiInputBase-root': {
     height: '100%',
     padding: '16px 14px',
     fontFamily: 'Poppins'
+  },
+  '& .MuiInputLabel-root': {
+    color: isLightTheme ? '#757575' : '#fff',
+  },
+  '& .MuiInputLabel-root.Mui-focused': {
+    color: isLightTheme ? '#1976d2' : '#90caf9',
   }
 }));
 
@@ -69,10 +75,41 @@ const StyledBox2 = styled(Box)(({ isLightTheme }: { isLightTheme: boolean }) => 
   borderColor: isLightTheme ? '#e0e0e0' : 'rgba(144, 202, 249, 0.2)'
 }));
 
+const StyledAutocomplete = styled(Autocomplete<string>)(({ isLightTheme }: { isLightTheme: boolean }) => ({
+  '& .MuiOutlinedInput-root': {
+    color: isLightTheme ? '#000' : '#fff',
+    '& fieldset': {
+      borderColor: isLightTheme ? '#bdbdbd' : 'rgba(144, 202, 249, 0.5)',
+    },
+    '&:hover fieldset': {
+      borderColor: isLightTheme ? '#616161' : '#90caf9',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: isLightTheme ? '#1976d2' : '#90caf9',
+    },
+  },
+  '& .MuiAutocomplete-listbox': {
+    backgroundColor: isLightTheme ? '#fff' : '#121212',
+    color: isLightTheme ? '#000' : '#fff',
+  },
+  '& .MuiAutocomplete-option': {
+    backgroundColor: isLightTheme ? '#fff' : '#1e1e1e',
+    '&[aria-selected="true"]': {
+      backgroundColor: isLightTheme ? '#bbdefb' : '#1565c0',
+    },
+    '&:hover': {
+      backgroundColor: isLightTheme ? '#e3f2fd' : '#0d47a1',
+    },
+  },
+  '& .MuiInputBase-input::placeholder': {
+    color: isLightTheme ? '#9e9e9e' : '#bdbdbd',
+    opacity: 1,
+  }
+}));
 
 export function DestinationCalculator() {
   const [currentCity, setCurrentCity] = useState('');
-  const {isLightTheme, toggleTheme} = useThemeToggle();
+  const { isLightTheme, toggleTheme } = useThemeToggle();
   const {
     origin, setOrigin,
     destination, setDestination,
@@ -111,7 +148,8 @@ export function DestinationCalculator() {
 
         <div className='search-container'>
 
-          <Autocomplete
+          <StyledAutocomplete
+            isLightTheme={isLightTheme}
             aria-label='Choose origin city'
             disablePortal
             options={useCityList()}
@@ -119,13 +157,15 @@ export function DestinationCalculator() {
             onChange={(_, newValue) => setOrigin(newValue || '')}
             renderInput={(params: AutocompleteRenderInputParams) =>
               <StyledTextField
+                isLightTheme={isLightTheme}
                 {...params}
                 label='From'
               />
             }
           />
 
-          <Autocomplete
+          <StyledAutocomplete
+            isLightTheme={isLightTheme}
             aria-label='Choose destination city'
             disablePortal
             options={useCityList()}
@@ -133,13 +173,15 @@ export function DestinationCalculator() {
             onChange={(_, newValue) => setDestination(newValue || '')}
             renderInput={(params: AutocompleteRenderInputParams) =>
               <StyledTextField
+                isLightTheme={isLightTheme}
                 {...params}
                 label='To'
               />
             }
           />
 
-          <Autocomplete
+          <StyledAutocomplete
+            isLightTheme={isLightTheme}
             aria-label='Choose mode of transportation'
             disablePortal
             options={['Foot', 'Car', 'Plane']}
@@ -147,6 +189,7 @@ export function DestinationCalculator() {
             onChange={(_, newValue) => setMode(newValue || '')}
             renderInput={(params: AutocompleteRenderInputParams) =>
               <StyledTextField
+                isLightTheme={isLightTheme}
                 {...params}
                 label='Mode'
               />
@@ -202,7 +245,7 @@ export function DestinationCalculator() {
                 <TabPanel value='overview'>
                   <CityDetailsPanel city={destination} clicked={clicked} isLightTheme={isLightTheme} />
                 </TabPanel>
-                
+
                 <TabPanel value='attractions'>
                   <AttractionsList city={destination} isLightTheme={isLightTheme} />
                 </TabPanel>
