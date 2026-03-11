@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import './DestinationCalculator.css';
 import { RouteResult } from '../RouteResult/RouteResult.tsx';
 
-import { CityDetailsPanel } from '../CityDetailsPanel/CityDetailsPanel.tsx';
 import { AttractionsList } from '../AttractionsList/AttractionsList.tsx';
 import { EmergencyContacts } from '../EmergencyContacts/EmergencyContacts.tsx';
 import styled from '@emotion/styled';
@@ -12,6 +11,7 @@ import { useCityList } from '../../hooks/useCityList.ts';
 import { useThemeToggle } from '../../hooks/useThemeToggle.ts';
 import { useCurrentCity } from '../../utils/getCurrentCity.ts';
 import { useCalculatorForm } from '../../hooks/useCalculatorForm.ts';
+import { CityDetailsPanel } from '../../components/CityDetailsPanel/CityDetailsPanel.tsx';
 
 const theme = createTheme({
   typography: {
@@ -115,7 +115,7 @@ export function DestinationCalculator() {
             aria-label='Choose origin city'
             disablePortal
             options={useCityList()}
-            value={currentCity !== '' ? currentCity : origin}
+            value={origin}
             onChange={(_, newValue) => setOrigin(newValue || '')}
             renderInput={(params: AutocompleteRenderInputParams) =>
               <StyledTextField
@@ -198,9 +198,11 @@ export function DestinationCalculator() {
                     <Tab label='Emergency' value='emergency' />
                   </StyledTabList>
                 </StyledBox2>
+
                 <TabPanel value='overview'>
                   <CityDetailsPanel city={destination} clicked={clicked} isLightTheme={isLightTheme} />
                 </TabPanel>
+                
                 <TabPanel value='attractions'>
                   <AttractionsList city={destination} isLightTheme={isLightTheme} />
                 </TabPanel>

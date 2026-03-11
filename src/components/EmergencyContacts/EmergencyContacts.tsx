@@ -1,24 +1,23 @@
 import { useEffect, useState } from "react";
 
-import { apiCall } from "../../services/apiCalls.ts";
-
-import type { EmergencyContactsProps, EmergencyNumbers } from "../../types/index.ts";
-
+import type { EmergencyContactsProps } from "../../types/index.ts";
+import type { EmergencyNumbers } from "../../types/interfaces.ts";
+import citiesList from '../../constants/cities.json';
 import './EmergencyContacts.css';
 
-export function EmergencyContacts({ city, isLightTheme, clicked }: EmergencyContactsProps) {
+export function EmergencyContacts({ isLightTheme }: EmergencyContactsProps) {
   const [numbersList, setNumbersList] = useState<EmergencyNumbers | null>(null);
 
   //fetches emergency contact numbers every time clicked changes
   useEffect(() => {
-    apiCall.getEmergencyNumber(city)
-      .then((res) => {
-        setNumbersList(res);
-      })
-      .catch((error) => {
-        console.error('Error fetching emergency numbers : ', error);
+    citiesList.cities.forEach((city) => {
+      setNumbersList({
+        ambulance: city.emergencyNumbers.ambulance,
+        fire: city.emergencyNumbers.fire,
+        police: city.emergencyNumbers.police
       });
-  }, [clicked]);
+    });
+  }, []);
 
   return (
     <div>

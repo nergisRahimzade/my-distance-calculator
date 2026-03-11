@@ -20,13 +20,14 @@ export const fetchCityWeather = async (cityName: string) => {
 //returns the emergency contact numbers data of a city using an open source github API
 export const fetchEmergencyNumbers = async (code: string) => {
   try {
-    const response = await fetch(`${API_BASE_URLS.emergencyNumbers}/${code}`);
+    const response = await fetch(`https://raw.githubusercontent.com/EmergencyNumberAPI/emergency_number/master/data/${code}.json`);
+    const data = await response.json();
 
     if (!response.ok) {
       throw new Error(`Failed to fetch emergency numbers`);
     }
 
-    return response.json();
+    return data;
   } catch (error) {
     console.error('Error fetching emergency numbers: ', error);
     throw error;
@@ -38,12 +39,19 @@ export const fetchAmadeusAccessToken = async () => {
   try {
     const url = `${API_BASE_URLS.amadeus}/v1/security/oauth2/token`;
 
+    console.log('API_KEYS.amadeus.key: ', API_KEYS.amadeus.key);
+    console.log('API_KEYS.amadeus.secret: ', API_KEYS.amadeus.secret);
+
     const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      body: `grant_type=client_credentials&client_id=${API_KEYS.amadeus.key}&client_secret=${API_KEYS.amadeus.secret}`
+      body: new URLSearchParams({
+        grant_type: 'client_credentials',
+        client_id: API_KEYS.amadeus.key,
+        client_secret: API_KEYS.amadeus.secret,
+      })
     });
 
     if (!response.ok) {
@@ -138,30 +146,20 @@ export const fetchRouteDirections = async (startLon: number, startLat: number, e
 };
 */
 
-export const fetchRouteDirections = async (origin: string, destination: string, mode: string) => {
-  try {
-    const url = `http://localhost:3000/api/distance?origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&mode=${mode}`;
+export const fetchRouteDirections = async (originLat: number, originLon: number, destinationLat: number, destinationLon: number, profile: string) => {
+  const url = `https://router.project-osrm.org/route/v1/${profile}/${originLon},${originLat};${destinationLon},${destinationLat}?overview=false`;
 
-    const response = await fetch(url);
-    const data = await response.json();
-    
-    if(data.status !== 'OK') {
-      throw new Error(`Google Distance Matrix API returned this as a status: ${data.status}`);
-    }
-
-    const routeData = data.rows[0].elements[0];
-
-    if(routeData.status !== 'OK') {
-      throw new Error(`Google Distance Matrix API in elements returned this as a status: ${routeData.status}`);
-    }
-
-    return {
-      distance: routeData.distance.text,
-      duration: routeData.duration.text
-    };
-  } catch (error) {
-    console.error('Error when fetching data from Google Distance Matrix API: ', error);
+  const response = await fetch(url);
+  if(!response.ok) {
+    throw new Error(`OSRM request failed: ${response.status}`);
   }
+
+  const data = await response.json();
+
+  return {
+    distance: data.routes[0].distance,
+    duration: data.routes[0].duration
+  };
 };
 
 //returns the name of a city given coordinates as parameters, using OpenStreetMap API
@@ -173,5 +171,21 @@ export const fetchCityName = async (lat: number, lon: number) => {
     return data.address.city || data.address.town || data.address.village;
   } catch (error) {
     console.error('Error fetching city name from coordinates: ', error);
+  }
+};
+
+export const fetchAttractions = async (lat: number, lon: number) => {
+  try {
+    const url = `https://api.geoapify.com/v2/places?categories=tourism.sights,tourism.attraction&filter=circle:${lon},${lat},5000&limit=10&apiKey=${import.meta.env.VITE_GEOAPIFY_KEY}`;
+
+    const response = await fetch(url);
+    if (!response.ok)
+      throw new Error('Failed to fetch activities using Geoapify Places API.');
+
+    const data = await response.json();
+    return data;
+
+  } catch (error) {
+    console.error('Error fetching data from Geoapify Places API: ', error);
   }
 };

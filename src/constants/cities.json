@@ -1,45 +1,107 @@
 {
   "cities": [
-    { "cityName": "Istanbul", "country": "TR", "timeZone": "Europe/Istanbul", "attractions": ["Hagia Sophia","Blue Mosque","Topkapi Palace","Grand Bazaar","Basilica Cistern","Galata Tower","Dolmabahçe Palace","Bosphorus Strait","Süleymaniye Mosque","Spice Bazaar"] },
-    { "cityName": "Paris", "country": "FR", "timeZone": "Europe/Paris", "attractions": ["Eiffel Tower","Louvre Museum","Notre-Dame Cathedral","Arc de Triomphe","Sacré-Cœur","Versailles Palace","Champs-Élysées","Musée d'Orsay","Sainte-Chapelle","Luxembourg Gardens"] },
-    { "cityName": "London", "country": "GB", "timeZone": "Europe/London", "attractions": ["Big Ben","Tower of London","Buckingham Palace","British Museum","London Eye","Tower Bridge","Westminster Abbey","Trafalgar Square","St Paul's Cathedral","Hyde Park"] },
-    { "cityName": "Rome", "country": "IT", "timeZone": "Europe/Rome", "attractions": ["Colosseum","Vatican Museums","Sistine Chapel","Trevi Fountain","Pantheon","Roman Forum","St. Peter's Basilica","Spanish Steps","Piazza Navona","Castel Sant'Angelo"] },
-    { "cityName": "Barcelona", "country": "ES", "timeZone": "Europe/Madrid", "attractions": ["Sagrada Familia","Park Güell","Casa Batlló","La Rambla","Gothic Quarter","Camp Nou","Casa Milà","Magic Fountain","Barcelona Cathedral","Montjuïc"] },
-    { "cityName": "Madrid", "country": "ES", "timeZone": "Europe/Madrid", "attractions": ["Prado Museum","Royal Palace of Madrid","Retiro Park","Plaza Mayor","Reina Sofía Museum","Puerta del Sol","Gran Vía","Temple of Debod","Thyssen-Bornemisza Museum","Santiago Bernabéu Stadium"] },
-    { "cityName": "Amsterdam", "country": "NL", "timeZone": "Europe/Amsterdam", "attractions": ["Rijksmuseum","Van Gogh Museum","Anne Frank House","Canal Ring","Vondelpark","Dam Square","Royal Palace Amsterdam","Jordaan District","Heineken Experience","Bloemenmarkt"] },
-    { "cityName": "Berlin", "country": "DE", "timeZone": "Europe/Berlin", "attractions": ["Brandenburg Gate","Berlin Wall Memorial","Reichstag Building","Museum Island","Pergamon Museum","Checkpoint Charlie","Memorial to the Murdered Jews","Berlin Cathedral","Charlottenburg Palace","East Side Gallery"] },
-    { "cityName": "Vienna", "country": "AT", "timeZone": "Europe/Vienna", "attractions": ["Schönbrunn Palace","St. Stephen's Cathedral","Hofburg Palace","Belvedere Palace","Vienna State Opera","Prater","Kunsthistorisches Museum","Ringstrasse","Naschmarkt","Karlskirche"] },
-    { "cityName": "Prague", "country": "CZ", "timeZone": "Europe/Prague", "attractions": ["Prague Castle","Charles Bridge","Old Town Square","Astronomical Clock","St. Vitus Cathedral","Jewish Quarter","Wenceslas Square","Petřín Tower","Vyšehrad","Dancing House"] },
+    { "cityName": "Istanbul", "country": "TR", "timeZone": "Europe/Istanbul",
+      "emergencyNumbers": { "police": "155", "ambulance": "112", "fire": "110" },
+      "attractions": ["Hagia Sophia","Blue Mosque","Topkapi Palace","Grand Bazaar","Basilica Cistern","Galata Tower","Dolmabahçe Palace","Bosphorus Strait","Süleymaniye Mosque","Spice Bazaar"] },
 
-    { "cityName": "New York City", "country": "NY, US", "timeZone": "America/New_York", "attractions": ["Statue of Liberty","Central Park","Times Square","Empire State Building","Brooklyn Bridge","Metropolitan Museum of Art","One World Trade Center","Rockefeller Center","Broadway","9/11 Memorial"] },
-    { "cityName": "Los Angeles", "country": "CA, US", "timeZone": "America/Los_Angeles", "attractions": ["Hollywood Sign","Universal Studios","Griffith Observatory","Getty Center","Santa Monica Pier","Venice Beach","Rodeo Drive","Hollywood Walk of Fame","Disneyland","The Grove"] },
-    { "cityName": "San Francisco", "country": "CA, US", "timeZone": "America/Los_Angeles", "attractions": ["Golden Gate Bridge","Alcatraz Island","Fisherman's Wharf","Cable Cars","Lombard Street","Golden Gate Park","Pier 39","Chinatown","Palace of Fine Arts","Twin Peaks"] },
-    { "cityName": "Chicago", "country": "IL, US", "timeZone": "America/Chicago", "attractions": ["Millennium Park","Navy Pier","Willis Tower","Art Institute of Chicago","Cloud Gate","Magnificent Mile","Museum of Science and Industry","Shedd Aquarium","Grant Park","360 Chicago"] },
-    { "cityName": "Miami", "country": "FL, US", "timeZone": "America/New_York", "attractions": ["South Beach","Art Deco District","Vizcaya Museum","Wynwood Walls","Everglades National Park","Bayside Marketplace","Little Havana","Miami Seaquarium","Jungle Island","Pérez Art Museum"] },
+    { "cityName": "Paris", "country": "FR", "timeZone": "Europe/Paris",
+      "emergencyNumbers": { "police": "17", "ambulance": "15", "fire": "18" },
+      "attractions": ["Eiffel Tower","Louvre Museum","Notre-Dame Cathedral","Arc de Triomphe","Sacré-Cœur","Versailles Palace","Champs-Élysées","Musée d'Orsay","Sainte-Chapelle","Luxembourg Gardens"] },
 
-    { "cityName": "Tokyo", "country": "JP", "timeZone": "Asia/Tokyo", "attractions": ["Senso-ji Temple","Tokyo Skytree","Meiji Shrine","Shibuya Crossing","Tokyo Tower","Imperial Palace","Tsukiji Outer Market","Akihabara","Ueno Park","Harajuku"] },
-    { "cityName": "Osaka", "country": "JP", "timeZone": "Asia/Tokyo", "attractions": ["Osaka Castle","Dotonbori","Universal Studios Japan","Shitennō-ji Temple","Osaka Aquarium","Sumiyoshi Taisha","Umeda Sky Building","Kuromon Market","Tsūtenkaku Tower","Namba"] },
-    { "cityName": "Seoul", "country": "KR", "timeZone": "Asia/Seoul", "attractions": ["Gyeongbokgung Palace","N Seoul Tower","Bukchon Hanok Village","Myeongdong","Changdeokgung Palace","Dongdaemun Design Plaza","Insadong","Lotte World","Jogyesa Temple","Han River"] },
-    { "cityName": "Beijing", "country": "CN", "timeZone": "Asia/Shanghai", "attractions": ["Great Wall of China","Forbidden City","Temple of Heaven","Summer Palace","Tiananmen Square","Beihai Park","Lama Temple","798 Art District","Jingshan Park","Ming Tombs"] },
-    { "cityName": "Shanghai", "country": "CN", "timeZone": "Asia/Shanghai", "attractions": ["The Bund","Yu Garden","Oriental Pearl Tower","Shanghai Tower","Nanjing Road","Jade Buddha Temple","French Concession","People's Square","Zhujiajiao Water Town","Shanghai Museum"] },
-    { "cityName": "Hong Kong", "country": "HK", "timeZone": "Asia/Hong_Kong", "attractions": ["Victoria Peak","Hong Kong Disneyland","Tian Tan Buddha","Victoria Harbour","Temple Street Night Market","Star Ferry","Wong Tai Sin Temple","Tsim Sha Tsui Promenade","Ocean Park","Lantau Island"] },
+    { "cityName": "London", "country": "GB", "timeZone": "Europe/London",
+      "emergencyNumbers": { "police": "999", "ambulance": "999", "fire": "999" },
+      "attractions": ["Big Ben","Tower of London","Buckingham Palace","British Museum","London Eye","Tower Bridge","Westminster Abbey","Trafalgar Square","St Paul's Cathedral","Hyde Park"] },
 
-    { "cityName": "Bangkok", "country": "TH", "timeZone": "Asia/Bangkok", "attractions": ["Grand Palace","Wat Arun","Wat Pho","Chatuchak Market","Khao San Road","Jim Thompson House","Lumpini Park","Wat Saket","Asiatique","Chao Phraya River"] },
-    { "cityName": "Singapore", "country": "SG", "timeZone": "Asia/Singapore", "attractions": ["Marina Bay Sands","Gardens by the Bay","Sentosa Island","Universal Studios Singapore","Merlion Park","Singapore Zoo","Chinatown","Little India","Orchard Road","Singapore Flyer"] },
+    { "cityName": "Rome", "country": "IT", "timeZone": "Europe/Rome",
+      "emergencyNumbers": { "police": "112", "ambulance": "118", "fire": "115" },
+      "attractions": ["Colosseum","Vatican Museums","Sistine Chapel","Trevi Fountain","Pantheon","Roman Forum","St. Peter's Basilica","Spanish Steps","Piazza Navona","Castel Sant'Angelo"] },
 
-    { "cityName": "Dubai", "country": "AE", "timeZone": "Asia/Dubai", "attractions": ["Burj Khalifa","Dubai Mall","Palm Jumeirah","Dubai Marina","Burj Al Arab","Dubai Fountain","Gold Souk","Dubai Frame","Jumeirah Beach","Dubai Creek"] },
-    { "cityName": "Abu Dhabi", "country": "AE", "timeZone": "Asia/Dubai", "attractions": ["Sheikh Zayed Grand Mosque","Louvre Abu Dhabi","Emirates Palace","Yas Island","Ferrari World","Corniche Beach","Qasr Al Watan","Warner Bros. World","Mangrove National Park","Heritage Village"] },
-    { "cityName": "Doha", "country": "QA", "timeZone": "Asia/Qatar", "attractions": ["Museum of Islamic Art","Souq Waqif","The Pearl-Qatar","Katara Cultural Village","Corniche Doha","National Museum of Qatar","Al Zubarah Fort","Aspire Park","Villaggio Mall","Doha Fort"] },
+    { "cityName": "Barcelona", "country": "ES", "timeZone": "Europe/Madrid",
+      "emergencyNumbers": { "police": "112", "ambulance": "112", "fire": "112" },
+      "attractions": ["Sagrada Familia","Park Güell","Casa Batlló","La Rambla","Gothic Quarter","Camp Nou","Casa Milà","Magic Fountain","Barcelona Cathedral","Montjuïc"] },
 
-    { "cityName": "Sydney", "country": "AU", "timeZone": "Australia/Sydney", "attractions": ["Sydney Opera House","Sydney Harbour Bridge","Bondi Beach","Darling Harbour","The Rocks","Royal Botanic Garden","Taronga Zoo","Manly Beach","SEA LIFE Sydney Aquarium","Luna Park"] },
-    { "cityName": "Melbourne", "country": "AU", "timeZone": "Australia/Melbourne", "attractions": ["Federation Square","Royal Botanic Gardens","Queen Victoria Market","Melbourne Cricket Ground","St Kilda Beach","National Gallery of Victoria","Eureka Tower","Flinders Street Station","Brighton Beach","Great Ocean Road"] },
+    { "cityName": "Madrid", "country": "ES", "timeZone": "Europe/Madrid",
+      "emergencyNumbers": { "police": "112", "ambulance": "112", "fire": "112" },
+      "attractions": ["Prado Museum","Royal Palace of Madrid","Retiro Park","Plaza Mayor","Reina Sofía Museum","Puerta del Sol","Gran Vía","Temple of Debod","Thyssen-Bornemisza Museum","Santiago Bernabéu Stadium"] },
 
-    { "cityName": "Rio de Janeiro", "country": "BR", "timeZone": "America/Sao_Paulo", "attractions": ["Christ the Redeemer","Sugarloaf Mountain","Copacabana Beach","Ipanema Beach","Maracanã Stadium","Tijuca National Park","Lapa Arches","Santa Teresa","Botanical Garden","Escadaria Selarón"] },
-    { "cityName": "São Paulo", "country": "BR", "timeZone": "America/Sao_Paulo", "attractions": ["Ibirapuera Park","São Paulo Museum of Art","Paulista Avenue","Municipal Market","São Paulo Cathedral","Football Museum","Pinacoteca","Jardins District","Batman Alley","Latin America Memorial"] },
-    { "cityName": "Buenos Aires", "country": "AR", "timeZone": "America/Argentina/Buenos_Aires", "attractions": ["Recoleta Cemetery","Casa Rosada","Plaza de Mayo","La Boca","Teatro Colón","Palermo","San Telmo Market","Obelisco","Puerto Madero","Ateneo Grand Splendid"] },
+    { "cityName": "Amsterdam", "country": "NL", "timeZone": "Europe/Amsterdam",
+      "emergencyNumbers": { "police": "112", "ambulance": "112", "fire": "112" },
+      "attractions": ["Rijksmuseum","Van Gogh Museum","Anne Frank House","Canal Ring","Vondelpark","Dam Square","Royal Palace Amsterdam","Jordaan District","Heineken Experience","Bloemenmarkt"] },
 
-    { "cityName": "Cairo", "country": "EG", "timeZone": "Africa/Cairo", "attractions": ["Pyramids of Giza","Great Sphinx","Egyptian Museum","Khan el-Khalili","Citadel of Cairo","Mosque of Muhammad Ali","Al-Azhar Mosque","Coptic Cairo","Cairo Tower","Nile River Cruise"] },
-    { "cityName": "Cape Town", "country": "ZA", "timeZone": "Africa/Johannesburg", "attractions": ["Table Mountain","Robben Island","V&A Waterfront","Cape Point","Kirstenbosch Gardens","Boulders Beach","Bo-Kaap","Chapman's Peak Drive","Castle of Good Hope","Signal Hill"] },
-    { "cityName": "Marrakesh", "country": "MA", "timeZone": "Africa/Casablanca", "attractions": ["Jemaa el-Fnaa","Majorelle Garden","Bahia Palace","Koutoubia Mosque","Saadian Tombs","Marrakesh Souk","Ben Youssef Madrasa","El Badi Palace","Menara Gardens","Marrakesh Museum"] }
+    { "cityName": "Berlin", "country": "DE", "timeZone": "Europe/Berlin",
+      "emergencyNumbers": { "police": "110", "ambulance": "112", "fire": "112" },
+      "attractions": ["Brandenburg Gate","Berlin Wall Memorial","Reichstag Building","Museum Island","Pergamon Museum","Checkpoint Charlie","Memorial to the Murdered Jews","Berlin Cathedral","Charlottenburg Palace","East Side Gallery"] },
+
+    { "cityName": "Vienna", "country": "AT", "timeZone": "Europe/Vienna",
+      "emergencyNumbers": { "police": "133", "ambulance": "144", "fire": "122" },
+      "attractions": ["Schönbrunn Palace","St. Stephen's Cathedral","Hofburg Palace","Belvedere Palace","Vienna State Opera","Prater","Kunsthistorisches Museum","Ringstrasse","Naschmarkt","Karlskirche"] },
+
+    { "cityName": "Prague", "country": "CZ", "timeZone": "Europe/Prague",
+      "emergencyNumbers": { "police": "158", "ambulance": "155", "fire": "150" },
+      "attractions": ["Prague Castle","Charles Bridge","Old Town Square","Astronomical Clock","St. Vitus Cathedral","Jewish Quarter","Wenceslas Square","Petřín Tower","Vyšehrad","Dancing House"] },
+
+    { "cityName": "New York City", "country": "NY, US", "timeZone": "America/New_York",
+      "emergencyNumbers": { "police": "911", "ambulance": "911", "fire": "911" },
+      "attractions": ["Statue of Liberty","Central Park","Times Square","Empire State Building","Brooklyn Bridge","Metropolitan Museum of Art","One World Trade Center","Rockefeller Center","Broadway","9/11 Memorial"] },
+
+    { "cityName": "Los Angeles", "country": "CA, US", "timeZone": "America/Los_Angeles",
+      "emergencyNumbers": { "police": "911", "ambulance": "911", "fire": "911" },
+      "attractions": ["Hollywood Sign","Universal Studios","Griffith Observatory","Getty Center","Santa Monica Pier","Venice Beach","Rodeo Drive","Hollywood Walk of Fame","Disneyland","The Grove"] },
+
+    { "cityName": "San Francisco", "country": "CA, US", "timeZone": "America/Los_Angeles",
+      "emergencyNumbers": { "police": "911", "ambulance": "911", "fire": "911" },
+      "attractions": ["Golden Gate Bridge","Alcatraz Island","Fisherman's Wharf","Cable Cars","Lombard Street","Golden Gate Park","Pier 39","Chinatown","Palace of Fine Arts","Twin Peaks"] },
+
+    { "cityName": "Chicago", "country": "IL, US", "timeZone": "America/Chicago",
+      "emergencyNumbers": { "police": "911", "ambulance": "911", "fire": "911" },
+      "attractions": ["Millennium Park","Navy Pier","Willis Tower","Art Institute of Chicago","Cloud Gate","Magnificent Mile","Museum of Science and Industry","Shedd Aquarium","Grant Park","360 Chicago"] },
+
+    { "cityName": "Miami", "country": "FL, US", "timeZone": "America/New_York",
+      "emergencyNumbers": { "police": "911", "ambulance": "911", "fire": "911" },
+      "attractions": ["South Beach","Art Deco District","Vizcaya Museum","Wynwood Walls","Everglades National Park","Bayside Marketplace","Little Havana","Miami Seaquarium","Jungle Island","Pérez Art Museum"] },
+
+    { "cityName": "Tokyo", "country": "JP", "timeZone": "Asia/Tokyo",
+      "emergencyNumbers": { "police": "110", "ambulance": "119", "fire": "119" },
+      "attractions": ["Senso-ji Temple","Tokyo Skytree","Meiji Shrine","Shibuya Crossing","Tokyo Tower","Imperial Palace","Tsukiji Outer Market","Akihabara","Ueno Park","Harajuku"] },
+
+    { "cityName": "Osaka", "country": "JP", "timeZone": "Asia/Tokyo",
+      "emergencyNumbers": { "police": "110", "ambulance": "119", "fire": "119" },
+      "attractions": ["Osaka Castle","Dotonbori","Universal Studios Japan","Shitennō-ji Temple","Osaka Aquarium","Sumiyoshi Taisha","Umeda Sky Building","Kuromon Market","Tsūtenkaku Tower","Namba"] },
+
+    { "cityName": "Seoul", "country": "KR", "timeZone": "Asia/Seoul",
+      "emergencyNumbers": { "police": "112", "ambulance": "119", "fire": "119" },
+      "attractions": ["Gyeongbokgung Palace","N Seoul Tower","Bukchon Hanok Village","Myeongdong","Changdeokgung Palace","Dongdaemun Design Plaza","Insadong","Lotte World","Jogyesa Temple","Han River"] },
+
+    { "cityName": "Beijing", "country": "CN", "timeZone": "Asia/Shanghai",
+      "emergencyNumbers": { "police": "110", "ambulance": "120", "fire": "119" },
+      "attractions": ["Great Wall of China","Forbidden City","Temple of Heaven","Summer Palace","Tiananmen Square","Beihai Park","Lama Temple","798 Art District","Jingshan Park","Ming Tombs"] },
+
+    { "cityName": "Shanghai", "country": "CN", "timeZone": "Asia/Shanghai",
+      "emergencyNumbers": { "police": "110", "ambulance": "120", "fire": "119" },
+      "attractions": ["The Bund","Yu Garden","Oriental Pearl Tower","Shanghai Tower","Nanjing Road","Jade Buddha Temple","French Concession","People's Square","Zhujiajiao Water Town","Shanghai Museum"] },
+
+    { "cityName": "Hong Kong", "country": "HK", "timeZone": "Asia/Hong_Kong",
+      "emergencyNumbers": { "police": "999", "ambulance": "999", "fire": "999" },
+      "attractions": ["Victoria Peak","Hong Kong Disneyland","Tian Tan Buddha","Victoria Harbour","Temple Street Night Market","Star Ferry","Wong Tai Sin Temple","Tsim Sha Tsui Promenade","Ocean Park","Lantau Island"] },
+
+    { "cityName": "Bangkok", "country": "TH", "timeZone": "Asia/Bangkok",
+      "emergencyNumbers": { "police": "191", "ambulance": "1669", "fire": "199" },
+      "attractions": ["Grand Palace","Wat Arun","Wat Pho","Chatuchak Market","Khao San Road","Jim Thompson House","Lumpini Park","Wat Saket","Asiatique","Chao Phraya River"] },
+
+    { "cityName": "Singapore", "country": "SG", "timeZone": "Asia/Singapore",
+      "emergencyNumbers": { "police": "999", "ambulance": "995", "fire": "995" },
+      "attractions": ["Marina Bay Sands","Gardens by the Bay","Sentosa Island","Universal Studios Singapore","Merlion Park","Singapore Zoo","Chinatown","Little India","Orchard Road","Singapore Flyer"] },
+
+    { "cityName": "Dubai", "country": "AE", "timeZone": "Asia/Dubai",
+      "emergencyNumbers": { "police": "999", "ambulance": "998", "fire": "997" },
+      "attractions": ["Burj Khalifa","Dubai Mall","Palm Jumeirah","Dubai Marina","Burj Al Arab","Dubai Fountain","Gold Souk","Dubai Frame","Jumeirah Beach","Dubai Creek"] },
+
+    { "cityName": "Abu Dhabi", "country": "AE", "timeZone": "Asia/Dubai",
+      "emergencyNumbers": { "police": "999", "ambulance": "998", "fire": "997" },
+      "attractions": ["Sheikh Zayed Grand Mosque","Louvre Abu Dhabi","Emirates Palace","Yas Island","Ferrari World","Corniche Beach","Qasr Al Watan","Warner Bros. World","Mangrove National Park","Heritage Village"] },
+
+    { "cityName": "Doha", "country": "QA", "timeZone": "Asia/Qatar",
+      "emergencyNumbers": { "police": "999", "ambulance": "999", "fire": "999" },
+      "attractions": ["Museum of Islamic Art","Souq Waqif","The Pearl-Qatar","Katara Cultural Village","Corniche Doha","National Museum of Qatar","Al Zubarah Fort","Aspire Park","Villaggio Mall","Doha Fort"] }
   ]
 }

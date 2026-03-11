@@ -3,6 +3,13 @@ body {
   font-family: Poppins, Arial;
 }
 
+.loading-text {
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'Poppins';
+  color: black;
+}
+
 .activity-container {
   background-color: rgb(254, 254, 219);
   border-radius: 20px;
